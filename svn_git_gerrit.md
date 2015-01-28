@@ -21,9 +21,9 @@ git clone ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/manifest.git .re
 * 2. 解压原始包到此目录下，根下面的文件放到build、build/core下，在default.xml中添加Makefile的copy动作。  
 * 3. 从4.2中copy .repo/manifests/default.xml，根据4.4实际情况添减仓库，并修改仓库主地址，然后创建base分支并上传default.xml。   
 * 4. 上传代码：repo build -r android-xx/hisi3798-xx/manifest  -x .repo/manifests/default.xml -d .  
-  *1)在bootable/bootloader中提前touch .gitignore, 另外还有frameworks/mff  
-  *2)创建device/sunniwell 仓库并touch文件  
-  *3)git init && git add . && git commit -m 'project platform/frameworks/mff initialized' && git checkout -b base && ssh gerrit.sys.sunniwell.net gerrit create-project android-xx/hisi3798-xx/platform/frameworks/mff --parent android-xx/hisi3798-xx/manifest -b 'base' -d "'create project platform/frameworks/mff'" && git remote add sunniwell ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/platform/frameworks/mff.git && git push --all sunniwell   
+  * 1)在bootable/bootloader中提前touch .gitignore, 另外还有frameworks/mff  
+  * 2)创建device/sunniwell 仓库并touch文件  
+  * 3)git init && git add . && git commit -m 'project platform/frameworks/mff initialized' && git checkout -b base && ssh gerrit.sys.sunniwell.net gerrit create-project android-xx/hisi3798-xx/platform/frameworks/mff --parent android-xx/hisi3798-xx/manifest -b 'base' -d "'create project platform/frameworks/mff'" && git remote add sunniwell ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/platform/frameworks/mff.git && git push --all sunniwell   
 * 5. gerrit下载方法：  
 repo init -u ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/manifest.git -b base  
 ==================================分割线=======================================  
@@ -57,7 +57,7 @@ repo init -u ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/manifest.git 
 ==================================分割线=======================================  
 * 6. 新建develop分支，方式跟普通git一样，git  branch develop;git push sunniwell develop;   在.repo/manifests仓库中同样新建develop分支，并修改xml中默认分支。  
 repo init -u ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/manifest.git -b develop  
-*7. merge base 到develop，push的时候用git push sunniwell HEAD:refs/for/develop会上传不上去，《git pull 之后！》直接上传即可：git checkout develop; git pull; git merge base; git push sunniwell develop;  
+* 7. merge base 到develop，push的时候用git push sunniwell HEAD:refs/for/develop会上传不上去，《git pull 之后！》直接上传即可：git checkout develop; git pull; git merge base; git push sunniwell develop;  
 * 8. 打补丁：repo forall -c 'pwd; git add .; git commit -m "modify:patch_xxxxxxxxxxxxxxxxxxxxxxxxxxx"; git push sunniwell HEAD:refs/for/base'  
 * 9. 批量删除文件：git rm `git st |awk '{FS="deleted:"}/deleted:/{print $2}' `  
 
@@ -121,8 +121,8 @@ sunhuasheng@ubuntu:~/projects_code/sub_system_8040C/iptvmw$ git br -a
 sunhuasheng@ubuntu:~/projects_code/sub_system_8040C/platform/release$ git br -a  
 \* master  
   remotes/m/8040C-emmc-zj-cu  
-  remotes/platform/8000A-emmc-zj-ctc  
-  remotes/platform/master  
+  remotes/**platform**/8000A-emmc-zj-ctc  
+  remotes/**platform**/master  
 #####二：新建空仓库  
 mkdir on-project       
 git init .  
