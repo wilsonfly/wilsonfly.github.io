@@ -1,3 +1,20 @@
+
+
+
+
+
+
+
+
+one link of baidu:
+[baidu](http://baidu.com)
+
+one picture:
+![pic](res/tmp/qq.jpg)
+
+
+
+
 #Just one test article
 ##title one
 Hello ...
@@ -13,3 +30,4 @@ Hello ...
 ##tile two
 
 This is good!
+
