@@ -2,6 +2,106 @@
 
 
 
+####git提交日志格式定制：  
+git config commit.template .gitmessage.txt  //配置commit格式模板
+git config --global core.editor vim  //配置commit编辑器
+
+####批量操作，拯救base分支：  
+repo forall -c "pwd;git push sunniwell master:base"  
+repo forall -c "pwd;git add -A ."  
+repo forall -c "pwd;git commit -m 'modify:patch Hixx056'"  
+repo forall -c "pwd;git push sunniwell HEAD:refs/for/base"  
+
+
+####(android_4.4 3798m)创建gerrit仓库：
+*1. repo仓库  
+git clone ssh://git@svn.sys.sunniwell.net/xx/git-repo -b master .repo/repo  
+git clone ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/manifest.git .repo/manifests  
+*2. 解压原始包到此目录下，根下面的文件放到build、build/core下，在default.xml中添加Makefile的copy动作。  
+*3. 从4.2中copy .repo/manifests/default.xml，根据4.4实际情况添减仓库，并修改仓库主地址，然后创建base分支并上传default.xml。   
+*4. 上传代码：repo build -r android-xx/hisi3798-xx/manifest  -x .repo/manifests/default.xml -d .  
+  *1)在bootable/bootloader中提前touch .gitignore, 另外还有frameworks/mff  
+  *2)创建device/sunniwell 仓库并touch文件  
+  *3)git init && git add . && git commit -m 'project platform/frameworks/mff initialized' && git checkout -b base && ssh gerrit.sys.sunniwell.net gerrit create-project android-xx/hisi3798-xx/platform/frameworks/mff --parent android-xx/hisi3798-xx/manifest -b 'base' -d "'create project platform/frameworks/mff'" && git remote add sunniwell ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/platform/frameworks/mff.git && git push --all sunniwell   
+*5. gerrit下载方法：  
+repo init -u ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/manifest.git -b base  
+==================================分割线=======================================  
+*6. 新建develop分支，方式跟普通git一样，git  branch develop;git push sunniwell develop;   在.repo/manifests仓库中同样新建develop分支，并修改xml中默认分支。  
+repo init -u ssh://gerrit.sys.sunniwell.net/android-xxx/hisi3798-xx/manifest.git -b develop  
+
+
+
+####新添加仓库：
+git init && touch .gitignore && git add . && git commit -m 'project platform/device/sunniwell initialized' && git checkout -b base && ssh gerrit.sys.sunniwell.net gerrit create-project android-xx/hisi3798-xx/platform/device/sunniwell --parent android-xx/hisi3798-xx/manifest -b 'base' -d "'create project platform/device/sunniwell'" && git remote add sunniwell ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/platform/device/sunniwell.git && git push --all sunniwell
+
+
+####(android_4.4/3798c)创建gerrit仓库：
+*1. 创建repo仓库  
+git clone ssh://git@svn.sys.sunniwell.net/xx/git-repo -b master .repo/repo  
+git clone ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/manifest.git .repo/manifests  
+*2. 新下一套代码，删除.git 删除根目录下config.mk Makefile  mk-ics.sh，然后copy至新仓库下  
+*3. 从4.2中copy .repo/manifests/default.xml，根据4.4实际情况添减仓库，并修改仓库主地址。  
+*4. 上传代码：repo build -r android-xx/hisi3798-xx/manifest  -x .repo/manifests/default.xml -d .  
+上传时候空仓库会报错，添加任意文件；上传仓库只有空目录没有报错，但仓库没有创建成功，repo sync下载时候会报仓库未找到，须在空目录下创建任意人家重新repo  build ...  
+遗憾的是此时仍然没有ok  
+查看repo build 实际执行下列一串操作：  
+git init && git add . && git commit -m 'project platform/external initialized' && git checkout -b base && ssh gerrit.sys.sunniwell.net gerrit create-project android-xx/hisi3798-xx/platform/external --parent android-xx/hisi3798-xx/manifest -b 'base' -d "'create project platform/external'" && git remote add sunniwell ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/platform/external.git && git push --all sunniwell  
+此时手动执行报错：fatal: git checkout: branch base already exists  
+可以试一下是这句的结果：  
+ git checkout -b base && ssh gerrit.sys.sunniwell.net gerrit create-project android-xx/hisi3798-xx/platform/external --parent android-xx/hisi3798-xx/manifest -b 'base' -d "'create project platform/external'"   
+跳过此句，执行下句上传完成：  
+git remote add sunniwell ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/platform/external.git && git push --all sunniwell  
+*5. gerrit下载方法：  
+repo init -u ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/manifest.git -b base  
+==================================分割线=======================================  
+*6. 新建develop分支，方式跟普通git一样，git  branch develop;git push sunniwell develop;   在.repo/manifests仓库中同样新建develop分支，并修改xml中默认分支。  
+repo init -u ssh://gerrit.sys.sunniwell.net/android-xx/hisi3798-xx/manifest.git -b develop  
+*7. merge base 到develop，push的时候用git push sunniwell HEAD:refs/for/develop会上传不上去，《git pull 之后！》直接上传即可：git checkout develop; git pull; git merge base; git push sunniwell develop;  
+*8. 打补丁：repo forall -c 'pwd; git add .; git commit -m "modify:patch_xxxxxxxxxxxxxxxxxxxxxxxxxxx"; git push sunniwell HEAD:refs/for/base'  
+*9. 批量删除文件：git rm `git st |awk '{FS="deleted:"}/deleted:/{print $2}' `  
+
+
+
+####(60/90 sdk)创建gerrit仓库：
+*1. 创建repo仓库  
+git clone ssh://git@svn.sys.sunniwell.net/linux-sunniwell.git/git-repo -b master .repo/repo  
+git clone ssh://gerrit.sys.sunniwell.net/linux-xx/Hi3xx090/manifest.git .repo/manifests  
+编辑.repo/manifests/default.xml  
+.repo/manifests$ git branch develop  
+.repo/manifests$ git push origin develop  
+.repo/manifests$ git checkout develop  
+.repo/manifests$ git add default.xml  
+.repo/manifests$ git commit -m "add: init default.xml,reviewid:no" default.xml  
+.repo/manifests$ git push  
+上传代码（default.xml中分支不要用master，要不然会报fatal: git checkout: branch master already exists）：  
+*2. 创建git仓库，并上传测试文件  
+mkdir  Hi37xx090; touch  Hi37xx090/.gitignore  
+repo build -r linux-xx/Hi37xx090/manifest -x .repo/manifests/default.xml -d .  
+*3. 至此仓库搭建ok，将代码清理干净（revert掉本地修改，删掉非仓库文件，删除.svn/.git）在git仓库中上传即可。  
+*4. git仓库地址：  
+ssh://gerrit.sys.sunniwell.net/linux-xx/Hixx90/Hi37xx090.git  
+*5. gerrit下载方法：  
+repo init -u ssh://gerrit.sys.sunniwell.net/linux-xx/Hixx90/manifest.git -b develop  
+repo init -u ssh://gerrit.sys.sunniwell.net/linux-xx/Hixx60/manifest.git -b develop  
+
+
+
+####gerrit上传代码操作：
+更新命令 : git pull 改为git pull 仓库别名 分支名  
+上传命令 : 1、git add  上传文件  
+   2、 git commit -am "提交信息"  
+   3、 git push 仓库别名 HEAD:refs/for/分支名  
+   之后就进入gerrit评审阶段， 待评审通过, 代码就会真正上传. 
+实例：  
+git add component/pm/c51/src/base.h  component/pm/c51/src/main.c  msp/drv/pm/drv_pmoc_intf.c  
+git commit -am "modify:set gpio5 gpio mode before suspend"  
+git push sunniwell HEAD:refs/for/develop  
+
+sunhuasheng@ubuntu:~/projects_code/android_3719M_60/device/hisilicon/bigfish/sdk/source$ git br -a  
+\* develop  
+  remotes/m/develop -> sunniwell/develop  
+
+
 
 ####创建远端分支：
 #####一：以当前分支为基础
