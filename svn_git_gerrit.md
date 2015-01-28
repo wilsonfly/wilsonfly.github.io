@@ -12,13 +12,13 @@ git push  remote-branch-name   new-branch-name
 //说明：一般会给远端分支起了个简短的别名，可以从 .repo/manifest.xml中remote name 看到，举例如下：   
 例一：  
 sunhuasheng@ubuntu:~/projects_code/sub_system_8040C/iptvmw$ git br -a  
-* 8040C-emmc-zj-cu  
+\* 8040C-emmc-zj-cu  
   remotes/**iptvmw**/2530-base  
   remotes/**iptvmw**/2540B_ChinaMobile  
   remotes/**iptvmw**/8000A-emmc-base  
 例二：  
 sunhuasheng@ubuntu:~/projects_code/sub_system_8040C/platform/release$ git br -a  
-* master  
+\* master  
   remotes/m/8040C-emmc-zj-cu  
   remotes/platform/8000A-emmc-zj-ctc  
   remotes/platform/master  
