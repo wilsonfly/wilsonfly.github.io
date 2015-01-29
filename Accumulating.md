@@ -1,7 +1,84 @@
 
 
 
+####挂载调试
+mount -o nolock 172.16.6.116:/nfs/visionetics/rootfs/usr/   /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716MV300_vietnam/rootfs/usr/   /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716BesTV_ctc30_base/rootfs/usr/   /usr  
+mount -o nolock 172.16.6.116:/nfs/B500_Hi3716MV300_GUANGDONG_ranger30_dolby/rootfs/usr/ /usr  
+mount -o nolock 172.16.11.120:/nfs/sunhuasheng/8000A  /tmp  
+mount -o nolock 172.16.6.116:/nfs/B500_Hi3716C_BEIJING_unicom/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/ctc30_sichuan_hi3716MV300/rootfs/usr /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716M_ranger/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716MV300_vietnam/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/3716C_public/ZHEJIANG_ranger/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/B500_Hi3716MV300_GUANGDONG_ranger30/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716BesTV_ctc30_base/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716M_TM/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716MV300_ctc30_base/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716C_STC/rootfs/usr /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716MV200_ctc30_base/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/flytv/rootfs/usr/ /usr  
+mount -o nolock 172.16.11.216:/nfs/b500_guangdong_ranger30/rootfs/usr /usr  
+mount -o nolock 172.16.6.116:/nfs/ST_recovery/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/rootfs_full/usr /usr  
+mount -o nolock 172.16.6.116:/nfs/stc7405/rootfs/usr /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716C_ctc30_base/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/xinjiang_hd/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716C/ZHEJIANG/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716C/ZHEJIANG_ranger/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.108:/nfs/hi3716C/ZHEJIANG/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716c_app/ /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716C_ranger/rootfs/usr /usr  
+mount -o nolock 172.16.6.108:/nfs/hi3716C_ranger/rootfs/usr /usr  
+mount -o nolock 172.16.6.116:/nfs/7321b/rootfs/usr /usr  
+mount -o nolock 172.16.6.116:/nfs/B500_Hi3716M_GUANGDONG/rootfs/usr /usr  
+mount -o nolock 172.16.6.116:/nfs/b500_7208_DMX/rootfs/usr /usr  
+mount -o nolock 172.16.6.116:/nfs/ptcl_3560e_ranger/rootfs/usr /usr  
+mount -o nolock 172.16.6.116:/nfs/bcm7405/rootfs/usr /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716C/ZHEJIANG_ranger/rootfs/usr/ /usr  
+mount -o nolock 172.16.6.116:/nfs/hi3716C/ZHEJIANG_ranger/rootfs/usr/local/bin/named/var /var  
+mount -o nolock 172.16.6.116:/nfs/hi3716C/ZHEJIANG_ranger/rootfs/usr/local/bin/named/etc/ /etc  
 
+
+
+####配置环境变量，调试库文件
+export LD_LIBRARY_PATH=':/mnt/hd/lib:/tmp:/tmp/lib:/usr/local/lib:/usr/lib:/lib'  
+export LD_LIBRARY_PATH=':/mnt/hd/lib:/tmp:/tmp/lib:/usr/hisi:/usr/lib:/lib'  
+export LD_LIBRARY_PATH=':/mnt/hd/lib:/tmp:/usr/flashlite:/usr/lib_dir:/usr/lib:/usr:/lib'  
+
+####STB monitor 常用命令  
+172.16.6.117 upgradesoft [file_url]  /f  
+172.16.6.117 setpara mac "00:07:56:0C:7F:E8" /s  
+172.16.6.117 getpara mac  
+172.16.6.117 setpara log_level 0 /s  
+
+
+####IPTV播放常用命令
+sw_log_set_level 0  
+sw_browser_show 0    
+sw_graphics_print_info   
+sw_parameter_set defaultnetmode "static"  
+sw_parameter_set("lan_ip","172.16.6.117")  
+sw_parameter_set("lan_gateway","172.16.6.1")  
+sw_parameter_set("lan_mask","255.255.255.0")  
+sw_parameter_set_readonly "mac" 0  
+sw_parameter_set("mac","00:07:56:0C:7F:E8")  
+sw_parameter_save  
+sw_browser_open_url file:////usr/local/etc/LocalPlayer/index.html  
+sw_parameter_set_readonly "kernel_dram_size"  0  
+sw_parameter_set_int "kernel_dram_size" 84  
+sw_parameter_set_int "kernel_dram_size" 458  
+sw_parameter_get "kernel_dram_size" ?? 16  
+//rtsp  
+sw_media_start rtsp://172.16.11.90/88888888/16/20130117/beijing/beijing.ts  
+sw_media_start rtsp://172.16.11.90/88888888/16/20130117/h264_aac/test_h264_aac.ts  
+
+
+####配置ip
+ifconfig eth0 172.16.6.117 broadcast 172.16.6.255 netmask 255.255.255.0  
+route add default gw 172.16.6.1 dev eth0  
+ifconfig eth0 hw ether 00:07:56:0C:7F:E8  
 
 
 ### 有关烧写镜像
