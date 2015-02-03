@@ -3,6 +3,9 @@
 
 
 
+
+
+
 ####挂载调试
 mount -o nolock 172.16.6.116:/nfs/visionetics/rootfs/usr/   /usr  
 mount -o nolock 172.16.6.116:/nfs/hi3716MV300_vietnam/rootfs/usr/   /usr  
