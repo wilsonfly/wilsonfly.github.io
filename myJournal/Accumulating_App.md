@@ -56,4 +56,4 @@ ctrl+e   打开的文件列表，切换文件
 ####1. 运行时候弹框Your project contains error(s)，please fix them before running your application.  
 具体报错：A resource exists with a different case  
 --如下，报名包含了跟目录名相同的字段：BitmapShader1，修改包名后ok 
-![[app_001](res/Accumulating_App/app_001.png)
+![app_001](res/Accumulating_App/app_001.png)
