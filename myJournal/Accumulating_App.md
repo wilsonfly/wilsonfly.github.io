@@ -3,6 +3,8 @@
 
 
 
+####15. layout 文件不能有大写字母，只能是a-z, 0-9, or _.  
+
 ####14. 有关不同类中方法重名
 抛异常信息：java.lang.ClassCastException: android.view.ViewGroup$LayoutParams cannot be cast to android.widget.Gallery$LayoutParams
 像imgview.setLayoutParams(new Gallery.LayoutParams(200, 150));
