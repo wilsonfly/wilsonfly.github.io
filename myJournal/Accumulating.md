@@ -2,9 +2,63 @@
 
 
 
+####8840A镜像
+mksquashfs rootfs/ rootfs.img  
+setenv bootargs 'mem=306M vmalloc=600M console=ttyMTD,blackbox console=ttyAMA0,115200 androidboot.console=ttyAMA0 hardwareID=8840A pcie0_sel=x1  initrd=0x82500000,0x2800000 mmz=ddr,0,0x93200000,110M root=/dev/ram'  
+mmc read 0 0x82000000 18800 2800;mmc read 0 0x82500000 1b000 14000;bootm 0x82000000  
+mmc read 0 0x82000000 18800 18000;mmc read 0 0x82500000 1b000 14000;bootm 0x82000000  
 
+####DNS server调试
+dig -t NS .
+/usr/sbin/ss -l
+netstat -l -t -n
+host www.baidu.com
+dig baidu.com @localhost
+dig baidu.com @172.16.6.117
+ping 220.181.111.86
 
+####切片
+ping 128.63.2.53
+./segmenter64 udp://224.1.1.11:1234 /tmp/ts/ hs hs.m3u8 5 5 5 1
+./segmenter64 ./ccir3311.ts /tmp/ts/ hs hs.m3u8 5 5 5 1
+mount  -t tmpfs -o size=120m  tmpfs /mnt/tmp  
+ffplay http://xxx.xxx.xx.xxx/test/CCTV-1/index.m3u8  
 
+####iptv 串口调试
+sw_media_play file:///tmp/udisk1/alice_bmp08Mbps_notag.mpg  
+sw_media_start rtsp://172.16.11.96/racecar_300.wmv 1 0  
+sw_media_play mms://172.16.11.96/racecar_300.wmv   
+sw_media_play rtsp://172.16.11.96/racecar_300.wmv  
+sw_log_set_level 0  
+sw_browser_show 0  
+sw_parameter_set_readonly "kernel_dram_size"  0  
+sw_parameter_set_int "kernel_dram_size" 84  
+sw_parameter_set_int "kernel_dram_size" 458  
+sw_parameter_get "kernel_dram_size" ?? 16 
+export force_vsync=y  
+sw_graphics_print_info  
+sw_parameter_set defaultnetmode "static"  
+sw_parameter_set("lan_ip","172.16.6.117")  
+sw_parameter_set("lan_gateway","172.16.6.1")  
+sw_parameter_set("lan_mask","255.255.255.0")  
+sw_parameter_set_readonly "mac" 0  
+sw_parameter_set("mac","00:07:56:0C:7F:E8")  
+sw_parameter_save  
+sw_browser_open_url file:////usr/local/etc/LocalPlayer/index.html  
+
+####bcm 播放及录制调试
+igmp://224.1.1.11:1234
+./playpump_ip -d 224.1.1.11 -p 1234 -s 188 -v 4 -t 0  
+./settop brutus --exec  
+killall -9 brutus  
+./testrec file:///tmp/udisk1/test1/  
+
+####broadcom cfe设置
+write_eeprom 290 6 00 07 63 0C 84 F5  
+write_eeprom 290 6 00 07 69 0B 57 24  
+write_eeprom 2d5 1 0       boot1  
+write_eeprom 2d5 1 1       boot2  
+write_eeprom 28a 1 1       app  (1 0 app1) (1 1 app2)  
 
 ####挂载调试
 mount -o nolock 172.16.6.116:/nfs/visionetics/rootfs/usr/   /usr  
