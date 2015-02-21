@@ -2,6 +2,31 @@
 
 
 
+
+####ttnet：
+开机按遥控器蓝色键进入小系统，按数字键1 进行u盘升级  
+mkconfig_ttnet.exe 根据项目编译出来的镜像生成config.ini  
+在u盘目录下：/upgrade/DN355_pub_1234 放config.ini 及升级包  
+高安kernel签名：  
+./swsign -f /mnt/hgfs/share/uImage -s sunniwell_rsa_priv.txt -t kernel -e 0 -b 256  
+
+####打开stbmonitor控制开关：
+swboot/swboot_nmp.c  
+-#ifndef SUPPORT_SECURELINE  
++//#ifndef SUPPORT_SECURELINE  
+     sw_nmp_init();  
+-#endif  
++//#endif  
+
+
+####广东v3版本安全红线关闭：
+export SUPPORT_SECURELINE=n  
+export SUPPORT_SECURERECTIFICATION=n  
+删除参数 delpara log_targets  
+然后保存下： savepara  
+重启就好了  
+
+
 ####8840A镜像
 mksquashfs rootfs/ rootfs.img  
 setenv bootargs 'mem=306M vmalloc=600M console=ttyMTD,blackbox console=ttyAMA0,115200 androidboot.console=ttyAMA0 hardwareID=8840A pcie0_sel=x1  initrd=0x82500000,0x2800000 mmz=ddr,0,0x93200000,110M root=/dev/ram'  
