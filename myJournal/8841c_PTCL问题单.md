@@ -9,10 +9,10 @@ hdcp制式， 60-ntsc  50-pal  cvbs是否不需要切制式
 
 78. TODO: 本地播放cvbs一直有声音，海思提供接口可以关掉cvbs的声音，已初步验证代码未合入：  
     HI_UNF_SND_INTERFACE_S interface;  
-    LOGD("[%s,%d] close cvbs audio output\n",__FUNCTION__,__LINE__);
-    HI_UNF_SND_GetInterface(HI_UNF_SND_0, &interface);
-    interface.bEnable = HI_FALSE;
-    HI_UNF_SND_SetInterface(HI_UNF_SND_0, &interface);
+    LOGD("[%s,%d] close cvbs audio output\n",__FUNCTION__,__LINE__);  
+    HI_UNF_SND_GetInterface(HI_UNF_SND_0, &interface);  
+    interface.bEnable = HI_FALSE;  
+    HI_UNF_SND_SetInterface(HI_UNF_SND_0, &interface);  
 
 77. 目前工厂在TNI测试50 PCS PTCL  Android 8841C时发现如下两个问题：  
     *  MAC：000763C16919 待机后无法唤醒  
