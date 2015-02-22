@@ -41,8 +41,7 @@ hdcp制式， 60-ntsc  50-pal  cvbs是否不需要切制式
 ----启动了一次launcher  
 am start -n net.sunniwell.launcher.swlauncher.huawei/.Launcher  
 
-70. 设置页面：接上U盘，查看Card and STB Memory 结果设置应用崩溃，不响应焦点移动。提示：USBupgrade is not respongding,would you like to close it ? 高概率。有日志提供。----李龙武、孙华胜  
-    ----  
+70. 设置页面：接上U盘，查看Card and STB Memory 结果设置应用崩溃，不响应焦点移动。提示：USBupgrade is not respongding,would you like to close it ? 高概率。有日志提供。--李龙武、孙华胜   
 
 69. PTCL_本地播放SEEK操作待机唤醒后卡死在starting  
     ----片源问题，海思提供补丁解决  
@@ -105,7 +104,7 @@ cmdline中添加loglevel=0可节省2s不到的时间。
 55. 【本地媒体和应用】视频、图片缩略图生成速度太慢    ----李贺：无法再优化，请底层优化一下吧  
     ----  
 
-54.【设置】恢复出厂设置后擦除data分区失败，提示“data wipe failed”  
+54. 【设置】恢复出厂设置后擦除data分区失败，提示“data wipe failed”  
     ----未复现  
 
 53. 恢复出厂设置，在recovery界面异常了，显示E:unknown volume for path [/sdcard]   E:unknown volume "/sdcard"   Data wipe failed.  
