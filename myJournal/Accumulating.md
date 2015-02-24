@@ -5,110 +5,111 @@
 
 
 
-                                                       ANDROID
 
 
-putty作串口工具出现过不能输入情况，换用secreCRT就ok，wtf！
 
-属性设置失败：
--rw-rw-rw- root     root         2909 2014-11-18 18:01 build.prop
-属性设置成功：
--rw-r--r-- root     root         2909 2014-11-18 18:01 build.prop
+####putty作串口工具出现过不能输入情况，换用secreCRT就ok，wtf！
 
-查看某个进程内存使用情况：
-procmem  one_pid
+####build.prop 本身的属性会影响属性的解析
+属性设置失败：  
+-rw-rw-rw- root     root         2909 2014-11-18 18:01 build.prop  
+属性设置成功：  
+-rw-r--r-- root     root         2909 2014-11-18 18:01 build.prop  
 
-查看进程中具体某个线程占cpu：
-top -t -m 5
+####查看某个进程内存使用情况：
+procmem  one_pid  
 
-cts，provider项：
-run cts -p android.provider
+####查看进程中具体某个线程占cpu：
+top -t -m 5  
 
-logcat抓取日志，剔除某个tag的日志：
-logcat |grep -v SettingsProvide
+####cts，provider项：
+run cts -p android.provider  
+
+####logcat抓取日志，剔除某个tag的日志：
+logcat |grep -v SettingsProvide  
 grep -v 'Copy_Project_Images_Files\|Rm_unnecessary_files' project_priv.sh
 
-安全红线查找权限超规格文件：
-1、adb shell
-2、busybox find \( -perm -04000 -o -perm -02000 \) -exec busybox ls -ld {} \; > /data/finds.txt
-3、退出adb，执行adb pull /data/finds.txt d:\finds.txt，检查此txt文件中内容
+####安全红线查找权限超规格文件：
+1、adb shell  
+2、busybox find \( -perm -04000 -o -perm -02000 \) -exec busybox ls -ld {} \; > /data/finds.txt  
+3、退出adb，执行adb pull /data/finds.txt d:\finds.txt，检查此txt文件中内容  
 
-网络部分朝歌自己代码：
-ethernet/java/android/net/ethernet/EthernetManager.java
-ethernet/java/android/net/ethernet/EthernetManager.java
-core/java/android/net/EthernetDataTracker.java
+####网络部分朝歌自己代码：
+ethernet/java/android/net/ethernet/EthernetManager.java  
+ethernet/java/android/net/ethernet/EthernetManager.java  
+core/java/android/net/EthernetDataTracker.java  
 
-bootanimation.zip 压缩:
- zip -r -X -Z store ../bootanimation.zip  part*/*.png desc.txt
+####bootanimation.zip 压缩:
+ zip -r -X -Z store ../bootanimation.zip  part*/*.png desc.txt  
 
-wifi mac:
-iwpriv wlan0 efuse_set mac,00076322334a
-iwpriv wlan0 efuse_get mac
+####wifi mac:
+iwpriv wlan0 efuse_set mac,00076322334a  
+iwpriv wlan0 efuse_get mac  
 
-hisi usb3.0：
-关闭usb3.0的方法：在device\hisilicon\bigfish\sdk\source\kernel\linux-3.10.y目录 device drivers-->usb support--->xhci hcd
---对应xhci-hcd.ko
+####hisi usb3.0：
+关闭usb3.0的方法：在device\hisilicon\bigfish\sdk\source\kernel\linux-3.10.y目录 device drivers-->usb support--->xhci hcd  
+--对应xhci-hcd.ko  
 
-网口半双工/全双工配置：
- 查询命令：
-ethtool eth0
-全双工、100M、不自动协商
-ethtool -s eth0 autoneg off speed 100 duplex full
-半双工、100M、不自动协商
-ethtool -s eth0 autoneg off speed 100 duplex half
-全双工、10M、不自动协商
-ethtool -s eth0 autoneg off speed 10 duplex full
-半双工、10M、不自动协商
-ethtool -s eth0 autoneg off speed 10 duplex half
-自动协商
-ethtool -s eth0 autoneg on
+####网口半双工/全双工配置：
+ 查询命令：  
+ethtool eth0  
+全双工、100M、不自动协商  
+ethtool -s eth0 autoneg off speed 100 duplex full    
+半双工、100M、不自动协商  
+ethtool -s eth0 autoneg off speed 100 duplex half  
+全双工、10M、不自动协商  
+ethtool -s eth0 autoneg off speed 10 duplex full  
+半双工、10M、不自动协商  
+ethtool -s eth0 autoneg off speed 10 duplex half  
+自动协商  
+ethtool -s eth0 autoneg on  
 
-获取设备vendor、product：
-root@android:/ # cat /proc/bus/input/devices                                  
-I: Bus=0000 Vendor=0001 Product=0001 Version=0100
-可以对应到
+####获取设备vendor、product：
+root@android:/ # cat /proc/bus/input/devices                                    
+I: Bus=0000 Vendor=0001 Product=0001 Version=0100  
+可以对应到  
 
-Linux/Android库的识别方法：
-识别Android/Linux版本
-服务器或者Linux单板使用命令
-strings -a  libHA.AUDIO.DOLBYPLUS.decode.so  | grep GCC:
-Android单板使用命令：
-busybox strings -a  libHA.AUDIO.DOLBYPLUS.decode.so  | grep GCC:
-识别方法（依据使用的编译器类型）：
-    1、Android版本组件库打印：
-       GCC: (GNU) 4.6.x-google 20120106 (prerelease)  （字符出现google相关编译器信息）
-    2、Linux版本组件库打印：
-       GCC: (Hisilicon_v200(gcc4.4-290+glibc-2.11+eabi+nptl)) 4.4.1  （字符出现Hisilicon相关编译器信息）     
+####Linux/Android库的识别方法：
+识别Android/Linux版本  
+服务器或者Linux单板使用命令  
+strings -a  libHA.AUDIO.DOLBYPLUS.decode.so  | grep GCC:  
+Android单板使用命令：  
+busybox strings -a  libHA.AUDIO.DOLBYPLUS.decode.so  | grep GCC:  
+识别方法（依据使用的编译器类型）：  
+    1、Android版本组件库打印：  
+       GCC: (GNU) 4.6.x-google 20120106 (prerelease)  （字符出现google相关编译器信息）  
+    2、Linux版本组件库打印：  
+       GCC: (Hisilicon_v200(gcc4.4-290+glibc-2.11+eabi+nptl)) 4.4.1  （字符出现Hisilicon相关编译器信息）       
 
-3716Mv300非高安烧录器寄存器配置：
+####3716Mv300非高安烧录器寄存器配置：
 烧录器需要将179置为0x38，将177置为0x01
 
-c30 备忘：
-1. system_ok=3 打开串口
-2. 现在的版本带上了数字签名校验，CI版本才有数字签名的，如果你自己编译的版本升级不上去，你就设置一下参数upgrade_signature=0\
-3. 删掉log_targets参数，打印出media部分日志
+####c30 备忘：
+1. system_ok=3 打开串口  
+2. 现在的版本带上了数字签名校验，CI版本才有数字签名的，如果你自己编译的版本升级不上去，你就设置一下参数upgrade_signature=0\  
+3. 删掉log_targets参数，打印出media部分日志  
 
-3719M-C10 中间件编译：
-ip ： 10.10.2.67
-user: root
-passwd: xws123
-基线android中间件路径： /root/android_middleware/android_middleware_develop/swiptvmw_android
-环境变量：android_c10_base.env
+####3719M-C10 中间件编译：  
+ip ： 10.10.2.67  
+user: root  
+passwd: xws123  
+基线android中间件路径： /root/android_middleware/android_middleware_develop/swiptvmw_android  
+环境变量：android_c10_base.env  
 
-3719M-C10 epg设置：
-帐号: 887788 密码:1
-统一管理工具可以设置
-或者使用串口命令：
-swgetlog
-addcmd
-sw_parameter_set "home_page" "http://10.10.10.120:33200/EPG/jsp/AuthenticationURL"
+####3719M-C10 epg设置：
+帐号: 887788 密码:1  
+统一管理工具可以设置  
+或者使用串口命令：  
+swgetlog  
+addcmd  
+sw_parameter_set "home_page" "http://10.10.10.120:33200/EPG/jsp/AuthenticationURL"  
 sw_parameter_save
 
-强制卸载（当设备busy不能卸载）：
-busybox fuser -k -m /mnt/sdb/sdb1
-umount  /mnt/sdb/sdb1
+####强制卸载（当设备busy不能卸载）：
+busybox fuser -k -m /mnt/sdb/sdb1  
+umount  /mnt/sdb/sdb1  
 
-串口修改misc：
+####串口修改misc：
 echo "boot-recovery" >/dev/block/platform/hi_mci.1/by-name/misc
 
 ####生产测试之Wifi:
@@ -182,6 +183,7 @@ mmc read 0 82000000 0 1000; tftp 0x82000000 loader_fromuser.bin 200000
 ####8841C 烧写mac
     ----版本：Scanner-gaoan  
     ----配置：举例如下，关键是位数  
+![pic_002](res/Accumulating/accumulating_002.png)  
 
 
 ####3716C 寄存器：
