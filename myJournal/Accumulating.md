@@ -52,6 +52,34 @@
 而在boot下，c51的数据是存在的：  
 ![pic_003](res/Accumulating/accumulating_003.png)  
 
+
+####(1231)有关sizeof(更多详情见 [sizeof，终极无惑（上）](http://blog.csdn.net/freefalcon/article/details/54839))
+编译器的pack指令，它是用来调整结构体对齐方式的，不同编译器名称和用法略有不同，VC6中通过`#pragma pack`实现，也可以直接修改/Zp编译开关。#pragma pack的基本用法为：`#pragma pack( n )`，n为字节对齐数，其取值为1、2、4、8、16，默认是8，如果这个值比结构体成员的sizeof值小，那么该成员的偏移量应该以此值为准，即是说，结构体成员的偏移量应该取二者的最小值，公式如下：
+offsetof( item ) = min( n, sizeof( item ) )
+再看示例：
+
+    #pragma pack(push) // 将当前pack设置压栈保存
+    #pragma pack(2) // 必须在结构体定义之前使用
+    struct S1
+    {
+    char c;
+    int i;
+    };
+    struct S3
+    {
+    char c1;
+    S1 s;
+    char c2
+    };
+    #pragma pack(pop) // 恢复先前的pack设置
+       
+计算sizeof(S1)时，min(2, sizeof(i))的值为2，所以i的偏移量为2，加上sizeof(i)等于6，能够被2整除，所以整个S1的大小为6。  
+同样，对于sizeof(S3)，s的偏移量为2，c2的偏移量为8，加上sizeof(c2)等于9，不能被2整除，添加一个填充字节，所以sizeof(S3)等于10。  
+还有一点要注意，“空结构体”（不含数据成员）的大小不为0，而是1。试想一个“不占空间”的变量如何被取地址、两个不同的“空结构体”变量又如何得以区分呢？于是，“空结构体”变量也得被存储，这样编译器也就只能为其分配一个字节的空间用于占位了。如下：  
+
+	struct S5 { };
+    sizeof( S5 ); // 结果为1
+
   
 ####putty作串口工具出现过不能输入情况，换用secreCRT就ok，wtf！
 
