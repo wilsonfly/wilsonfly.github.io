@@ -44,6 +44,15 @@
 测试建议:
   
   
+####3798M单板待机调试
+1、直接在串口上配置himm 0xf80000bc 0x80510001，看是否能进入待机（不会有suspend的打印，可以量一下电压有没有），是否能唤醒；  
+2、在串口上配置himm 0xf840e520 0x11111111，同样看看是否可以进入待机，是否能唤醒 
+提供的朝歌的镜像烧写到demo1a的高安单板上，发现同样无法唤醒。进一步定位发现，android系统启动后，c51里的代码全部被擦除了：   
+![pic_004](res/Accumulating/accumulating_004.png)  
+而在boot下，c51的数据是存在的：  
+![pic_003](res/Accumulating/accumulating_003.png)  
+
+  
 ####putty作串口工具出现过不能输入情况，换用secreCRT就ok，wtf！
 
 ####build.prop 本身的属性会影响属性的解析
