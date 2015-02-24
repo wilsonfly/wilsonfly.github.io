@@ -111,7 +111,6 @@ c1f228de1ddd9686b4b442feeff6bd44 /home/sunhuasheng/project_code/sub_system_8m330
 1d49449afa9caa3d4b4bf2151f6cdad7  /home/sunhuasheng/opt/hisi/3798m/download_user/device/hisilicon/bigfish/external/sqlite/prebuilt/libsqlite.so
 1d49449afa9caa3d4b4bf2151f6cdad7  /home/sunhuasheng/project_code/android_3798M_kk_develop/device/hisilicon/bigfish/external/sqlite/prebuilt/libsqlite.so
 1d49449afa9caa3d4b4bf2151f6cdad7  /home/sunhuasheng/project_code/android_3798M_kk_develop/out/target/product/Hi3798MV100/system/lib/libsqlite.so
-
 --libsqlite.so 狂打印SettingProvider打印跟快速启动有关，关掉快速启动后用最新库亦没有问题。
 
 70. 升级完后这次开机启动没有开机广播  
