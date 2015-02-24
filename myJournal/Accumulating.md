@@ -111,303 +111,297 @@ umount  /mnt/sdb/sdb1
 串口修改misc：
 echo "boot-recovery" >/dev/block/platform/hi_mci.1/by-name/misc
 
-生产测试之Wifi:
-iwconfig
-ping -I wlan0 192.168.1.1
-netcfg
-netcfg eth0 down
-iwlist wlan0 scanning
-wpa_cli    ??
-ping -c 6 192.168.1.1
-tcpdump -s0 -i wlan0 &
-tcpdump -s0 -i wlan0 -w /data/aa.cap  &
-busybox route add default gw 192.168.1.1 dev wlan0
+####生产测试之Wifi:
+iwconfig  
+ping -I wlan0 192.168.1.1  
+netcfg  
+netcfg eth0 down  
+iwlist wlan0 scanning  
+wpa_cli    ??  
+ping -c 6 192.168.1.1  
+tcpdump -s0 -i wlan0 &   
+tcpdump -s0 -i wlan0 -w /data/aa.cap  &  
+busybox route add default gw 192.168.1.1 dev wlan0  
 
-伪 随机流 脚本：
-while :
-do
-monkey -p com.android.launcher -v 5000
-monkey -p com.android.settings -v 1000
-monkey -p net.sunniwell.app.swsettings -v 1000
-done
+####伪 随机流 脚本：
+while :  
+do  
+monkey -p com.android.launcher -v 5000  
+monkey -p com.android.settings -v 1000  
+monkey -p net.sunniwell.app.swsettings -v 1000  
+done  
 
-8600/M8043/256M三星flash/   --linux /北京联通项目/
 
-手动启动launcher：
-I/ActivityManager( 1308): START {act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10200000 cmp=net.sunniwell.launcher.swlauncher.huawei/.Launcher} from pid 1308
- ----手动：am start -n net.sunniwell.launcher.swlauncher.huawei/.Launcher
+####手动启动launcher：
+I/ActivityManager( 1308): START {act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10200000 cmp=net.sunniwell.launcher.swlauncher.huawei/.Launcher} from pid 1308   
+ ----手动：am start -n net.sunniwell.launcher.swlauncher.huawei/.Launcher  
 
-TestVideo.apk  sh下输入URL
+####TestVideo.apk  sh下输入URL
 input text "file:///mnt/sda/sda1/Videos/6ch_voices_id_7_dd_h264.trp"
 
-查看堆限制，每个进程可用内存数：
-getprop | grep dalvik.vm.heapgrowthlimit 
+####查看堆限制，每个进程可用内存数：
+getprop | grep dalvik.vm.heapgrowthlimit   
 
-Linux 盒子cmdline：
-bootargs=mem=230M console=ttyAMA0,115200  root=/dev/romblock8 rootfstype=cramfs ro  mtdparts=hinand:1M(fastboot),1M(partition),6M(boot1),64M(app),1M(logo1),1M(param1),1M(playlist),6M(boot2),64M(app2),1M(logo2),1M(param2),1M(playlist2),108M(swfs),256M@0M(whole) mmz=ddr,0,0x8e600000,282M LogBufSize=0x80000 extra_ref=2 extra_disp=0
-部分代码：
-sprintf(g_cmdline+strlen(g_cmdline), " mmz=ddr,0,0x%x,%dM LogBufSize=0x%x extra_ref=2 extra_disp=0", (m_kernel_size << 20)+0x80000000,(m_chipsize-m_kernel_size), LOGBUFSIZE );
+####Linux 盒子cmdline：
+bootargs=mem=230M console=ttyAMA0,115200  root=/dev/romblock8 rootfstype=cramfs ro  mtdparts=hinand:1M(fastboot),1M(partition),6M(boot1),64M(app),1M(logo1),1M(param1),1M(playlist),6M(boot2),64M(app2),1M(logo2),1M(param2),1M(playlist2),108M(swfs),256M@0M(whole) mmz=ddr,0,0x8e600000,282M LogBufSize=0x80000 extra_ref=2 extra_disp=0  
+部分代码：  
+sprintf(g_cmdline+strlen(g_cmdline), " mmz=ddr,0,0x%x,%dM LogBufSize=0x%x extra_ref=2 extra_disp=0", (m_kernel_size << 20)+0x80000000,(m_chipsize-m_kernel_size), LOGBUFSIZE );  
 由此可见：mem=230M为分配给内核控制的内存大小，mmz=ddr,0,0x8e000000,282M 即mmz地址为可用内存起始地址0x80000000 加上分配给内核控制的内存大小0xe600000(230M)最终结果为0x8e600000, mmz的大小则为内存总大小512减去分配给内核的230M最终结果为282M。
 
 
-马电flash：
-samsung 240
+####马电flash：
+samsung 240  
 KLM4G1FE3B-B001
 
-测试flash读写速度：
+####测试flash读写速度：
 time dd if=/dev/zero of=test.dbf bs=8k count=300000
 
-8D40A/8C40G(3719M CPU)寄存器：
-复用寄存器基地址： 0xF8A21000
-gpio7_2复用   0xf8a210cc  1
-gpio5_0复用   0xf8000044  0x00000120
-gpio2_5复用   0xf8a21054  0x1
-
-gpio 配置地址：
-gpio2 0xf8b22000
-gpio7 0xf8b27000
-gpio5 0xf8004000
-
-/*************** new ******************/
-gpio16_2复用 
-/*************** new ******************/
-
+####8D40A/8C40G(3719M CPU)寄存器：
+复用寄存器基地址： 0xF8A21000  
+gpio7_2复用   0xf8a210cc  1  
+gpio5_0复用   0xf8000044  0x00000120  
+gpio2_5复用   0xf8a21054  0x1  
+gpio 配置地址：  
+gpio2 0xf8b22000  
+gpio7 0xf8b27000  
+gpio5 0xf8004000  
+/*************** new ******************/  
+gpio16_2复用   
+/*************** new ******************/  
 TODO: 非高安uImage编译并同步到小系统、ptcl/马电高安bootimg在小系统中做、平台管控
 
-ptcl 读取loader
-setenv ipaddr 172.16.6.117;setenv serverip 172.16.6.115;setenv netmask 255.255.255.0;
-//boot区
-mw.b 0x82000000 0xff 200000
-mmc bootread 0 82000000 0 1000; tftp 82000000 loader_read_no8.bin 200000
-//非高安的话，没有boot区，则需要读写mmcblk0 的前2M数据（跳过512字节MBR）
-mw.b 0x82000000 0xff 200000
-mmc read 0 82000000 0 1000; tftp 0x82000000 loader_fromuser.bin 200000
+####ptcl 读取loader
+setenv ipaddr 172.16.6.117;setenv serverip 172.16.6.115;setenv netmask 255.255.255.0;  
+//boot区  
+mw.b 0x82000000 0xff 200000  
+mmc bootread 0 82000000 0 1000; tftp 82000000 loader_read_no8.bin 200000  
+//非高安的话，没有boot区，则需要读写mmcblk0 的前2M数据（跳过512字节MBR）  
+mw.b 0x82000000 0xff 200000   
+mmc read 0 82000000 0 1000; tftp 0x82000000 loader_fromuser.bin 200000   
 
-8841C 烧写mac
-    ----版本：Scanner-gaoan
-    ----配置：举例如下，关键是位数
+####8841C 烧写mac
+    ----版本：Scanner-gaoan  
+    ----配置：举例如下，关键是位数  
 
 
-3716C 寄存器：
-gpio5_0/1/2/3/4/5/7 模式，基地址：0xF8000000  偏移地址: 044, 数值0x00000001(gpio5_0/1)
-复用寄存器基地址：0xF8A21000
-gpio1_5 模式：偏移地址/数值 034/0
-gpio8_4 模式：偏移地址/数值 0F0/1
-gpio17_0 模式：偏移地址/数值 200/0
-gpio 高低电平配置地址：
-gpio1 基地址：0xF8B21000
-gpio5 基地址：0xF8004000
-gpio8 基地址：0xF8B28000
-gpio17 基地址：0xF8B31000
+####3716C 寄存器：
+gpio5_0/1/2/3/4/5/7 模式，基地址：0xF8000000  偏移地址: 044, 数值0x00000001(gpio5_0/1)  
+复用寄存器基地址：0xF8A21000      
+gpio1_5 模式：偏移地址/数值 034/0  
+gpio8_4 模式：偏移地址/数值 0F0/1  
+gpio17_0 模式：偏移地址/数值 200/0  
+gpio 高低电平配置地址：  
+gpio1 基地址：0xF8B21000  
+gpio5 基地址：0xF8004000  
+gpio8 基地址：0xF8B28000  
+gpio17 基地址：0xF8B31000  
 
-制作各种镜像文件：
-# 550 * 1024 * 1024 = 576716800
-$ANDROID_BUILD_TOP/out/host/linux-x86/bin/make_ext4fs -s -l 576716800 -a user_app ./user_app.img ./user_app
-$ANDROID_BUILD_TOP/out/host/linux-x86/bin/simg2img user_app.img user_app.ics.ext4
-# 248 * 1024 * 1024 = 260046848
-$ANDROID_BUILD_TOP/out/host/linux-x86/bin/make_ext4fs -s -l 260046848 -a backup ./backup.img ./backup
-$ANDROID_BUILD_TOP/out/host/linux-x86/bin/simg2img backup.img backup.ics.ext4
+####制作各种镜像文件：
+ 550 * 1024 * 1024 = 576716800  
+$ANDROID_BUILD_TOP/out/host/linux-x86/bin/make_ext4fs -s -l 576716800 -a user_app ./user_app.img ./user_app  
+$ANDROID_BUILD_TOP/out/host/linux-x86/bin/simg2img user_app.img user_app.ics.ext4  
+ 248 * 1024 * 1024 = 260046848  
+$ANDROID_BUILD_TOP/out/host/linux-x86/bin/make_ext4fs -s -l 260046848 -a backup ./backup.img ./backup  
+$ANDROID_BUILD_TOP/out/host/linux-x86/bin/simg2img backup.img backup.ics.ext4  
 
-HDCP:
-从不支持HDCP频道切换到支持HDCP的频道，做了两件事，a、开启HDCP,设置HDCP属性后由芯片逻辑和电视自行完成认证，软件无法干预；b、切换制式；
+####HDCP:
+从不支持HDCP频道切换到支持HDCP的频道，做了两件事：  
+a、开启HDCP,设置HDCP属性后由芯片逻辑和电视自行完成认证，软件无法干预；  
+b、切换制式；
 
-马电盒子mac：
+####马电盒子测试账号mac：
 000763e3a13d
 
-iptv 账号：
+####iptv 账号：
 10807/1
 
-马电HyppTV配置：
-IPTV Settings :
-    Primary Address:  http://10.10.10.68:33200/EPG/jsp/index.jsp
-Date and Time:
-    NTP server address:  10.10.10.80
-Account:
-    4455/1
-ott Account: 201345/1
+####马电HyppTV配置：
+IPTV Settings :  
+    Primary Address:  http://10.10.10.68:33200/EPG/jsp/index.jsp  
+Date and Time:  
+    NTP server address:  10.10.10.80  
+Account:  
+    4455/1  
+ott Account: 201345/1  
 
 
 
-数据库操作(浙江联通epg地址)：
-cd  /data/data/com.android.providers.settings/databases
-sqlite3 settings.db
-select * from secure;
-select * from secure where name='tvos_home_page';
-update secure set value='http://101.69.250.135:8082/EDS/jsp/AuthenticationURL'  where name='tvos_home_page';
+####数据库操作(浙江联通epg地址)：
+cd  /data/data/com.android.providers.settings/databases  
+sqlite3 settings.db  
+select * from secure;  
+select * from secure where name='tvos_home_page';  
+update secure set value='http://101.69.250.135:8082/EDS/jsp/AuthenticationURL'  where name='tvos_home_page';  
 
-网卡4mA、8mA鉴别：
-himd.l 0x10200068
-himd.l 0x10200070
-两个寄存器都需要查看，如果是0x102则是4mA,0x106为8mA
-单网卡只需关注68寄存器
-3716M上需要配置此网卡能力，3716C不需要
+####网卡4mA、8mA鉴别：
+himd.l 0x10200068  
+himd.l 0x10200070  
+两个寄存器都需要查看，如果是0x102则是4mA,0x106为8mA  
+单网卡只需关注68寄存器  
+3716M上需要配置此网卡能力，3716C不需要  
 
 
-浙江移动(添加四个参考帧)：
+####浙江移动(添加四个参考帧)：
 mkbootimg --kernel uImage --ramdisk ramdisk.img   --cmdline  "mem=307M vmalloc=400M console=ttyAMA0,115200 extra_ref=4 extra_disp=0 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0x9D600000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img
 
-马电融合版本新内存分配（307M）：
-//打开串口的bootimg：
-除了需要将cmdline中的console=ttyAMA0,115200  androidboot.console=ttyAMA0, 还需要init.rc中去掉sw_monitor的启动，顺便打开一下adb
-//ramdisk.img
-mkbootfs out/target/product/godbox/root | minigzip > ramdisk.img
-//boot.img-->boot-for-factoryimg.img
-mkbootimg --kernel kernel/arch/arm/boot/uImage --ramdisk ramdisk.img   --cmdline  "mem=307M vmalloc=400M console=NULL  lpj=5996758 mtddev=blackbox androidboot.console=NULL mmz=ddr,0,0x9BA00000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img
-（swbootsign:device/hisilicon/godbox/prebuilt/swboot_sign/swsign -f boot_1.img_test -s device/hisilicon/godbox/prebuilt/swboot_sign/sunniwell_rsa_priv.txt -t kernel -e 0）
-//boot.img-->boot-for-updatezip.img
-mkbootimg --kernel BOOT/uImage --ramdisk ramdisk.img   --cmdline  "mem=307M vmalloc=400M console=NULL  lpj=5996758 mtddev=blackbox androidboot.console=NULL mmz=ddr,0,0x9BA00000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot_update.img
-（swbootsign:device/hisilicon/godbox/prebuilt/swboot_sign/swsign -f boot_1.img_test -s device/hisilicon/godbox/prebuilt/swboot_sign/sunniwell_rsa_priv.txt -t kernel -e 1）
-//打开串口版本：boot.img-->boot-for-updatezip.img
-mkbootimg --kernel BOOT/uImage --ramdisk ramdisk.img   --cmdline  "mem=307M vmalloc=400M console=ttyAMA0,115200  lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0x9BA00000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot_update.img
-（swbootsign:device/hisilicon/godbox/prebuilt/swboot_sign/swsign -f boot_1.img_test -s device/hisilicon/godbox/prebuilt/swboot_sign/sunniwell_rsa_priv.txt -t kernel -e 1）
+####马电融合版本新内存分配（307M）：
+//打开串口的bootimg：  
+除了需要将cmdline中的console=ttyAMA0,115200  androidboot.console=ttyAMA0,   还需要init.rc中去掉sw_monitor的启动，顺便打开一下adb  
+//ramdisk.img  
+mkbootfs out/target/product/godbox/root | minigzip > ramdisk.img  
+//boot.img-->boot-for-factoryimg.img  
+mkbootimg --kernel kernel/arch/arm/boot/uImage --ramdisk ramdisk.img   --cmdline  "mem=307M vmalloc=400M console=NULL  lpj=5996758 mtddev=blackbox androidboot.console=NULL mmz=ddr,0,0x9BA00000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img  
+（swbootsign:device/hisilicon/godbox/prebuilt/swboot_sign/swsign -f boot_1.img_test -s device/hisilicon/godbox/prebuilt/swboot_sign/sunniwell_rsa_priv.txt -t kernel -e 0）  
+//boot.img-->boot-for-updatezip.img  
+mkbootimg --kernel BOOT/uImage --ramdisk ramdisk.img   --cmdline  "mem=307M vmalloc=400M console=NULL  lpj=5996758 mtddev=blackbox androidboot.console=NULL mmz=ddr,0,0x9BA00000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot_update.img  
+（swbootsign:device/hisilicon/godbox/prebuilt/swboot_sign/swsign -f boot_1.img_test -s device/hisilicon/godbox/prebuilt/swboot_sign/sunniwell_rsa_priv.txt -t kernel -e 1）  
+//打开串口版本：boot.img-->boot-for-updatezip.img  
+mkbootimg --kernel BOOT/uImage --ramdisk ramdisk.img   --cmdline  "mem=307M vmalloc=400M console=ttyAMA0,115200  lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0x9BA00000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot_update.img  
+（swbootsign:device/hisilicon/godbox/prebuilt/swboot_sign/swsign -f boot_1.img_test -s device/hisilicon/godbox/prebuilt/swboot_sign/sunniwell_rsa_priv.txt -t kernel -e 1）  
 
 
-浙江联通8040c（EMMC）制作镜像：
-mkbootfs out/target/product/godbox/root | minigzip > ramdisk.img
-mkbootimg  --kernel kernel/arch/arm/boot/uImage --ramdisk ramdisk.img  --cmdline "mem=335M vmalloc=400M console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0x9D600000,42M mtdparts=hi_emmc:"  --base 0x80000000 --output boot.img
-///////////////有待验证/////////////////
-mkbootfs out/target/product/godbox/recovery/root/ | minigzip  > ramdisk-recovery.img
-mkbootimg --kernel kernel/arch/arm/boot/uImage --ramdisk ramdisk-recovery.img --cmdline "mem=452 console=ttyAMA0,115200 mmz=ddr,0,0x9c400000,60M mtdparts=hi_emmc:" --base 0x80000000 --output recovery.img
-///////////////有待验证/////////////////
+####浙江联通8040c（EMMC）制作镜像：
+mkbootfs out/target/product/godbox/root | minigzip > ramdisk.img  
+mkbootimg  --kernel kernel/arch/arm/boot/uImage --ramdisk ramdisk.img  --cmdline "mem=335M vmalloc=400M console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0x9D600000,42M mtdparts=hi_emmc:"  --base 0x80000000 --output boot.img  
+///////////////有待验证/////////////////  
+mkbootfs out/target/product/godbox/recovery/root/ | minigzip  > ramdisk-recovery.img  
+mkbootimg --kernel kernel/arch/arm/boot/uImage --ramdisk ramdisk-recovery.img --cmdline "mem=452  console=ttyAMA0,115200 mmz=ddr,0,0x9c400000,60M mtdparts=hi_emmc:" --base 0x80000000 --output recovery.img  
+///////////////有待验证/////////////////  
  
-git 建分支：
-git branch  8040C-emmc-base
-git checkout 8040C-emmc-base
-git remote -v
-git push platform  8040C-emmc-bas
 
-串口寄存器设置（gpio7_1）：
-himm 0x10203130 0x01
-himd.l 0x101ed400
-himm 0x101ed400 0xc2
-himd.l 0x101ed3fc
-himm 0x101ed3fc 0xfd （关）
-himm 0x101ed3fc 0xff （开）
+####串口寄存器设置（gpio7_1）：
+himm 0x10203130 0x01  
+himd.l 0x101ed400  
+himm 0x101ed400 0xc2  
+himd.l 0x101ed3fc         
+himm 0x101ed3fc 0xfd （关）  
+himm 0x101ed3fc 0xff （开）  
 
-stb管理工具：
+####stb管理工具：
  huawei/.287aW
 
-backup 分区：
+####backup 分区：
 mount -t ext4 /dev/block/mmcblk0p5  /backup
 
-PTCL（1G内存）制作镜像：
-制作ramdisk
-mkbootfs out/target/product/godbox/root | minigzip > ramdisk.img
-添加播放控制参数：extra_ref=6 extra_disp=0，vdec增大24M，mem相应减小24M
-==== mkbootimg --kernel  kernel/arch/arm/boot/uImage --ramdisk ramdisk.img --cmdline "mem=731M vmalloc=600M  extra_ref=6 extra_disp=0 console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 loglevel=0  mmz=ddr,0,0xBAA00000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img
-====init.godbox.sh对应参数：/system/busybox/sbin/insmod /system/lib/modules/hi_mmz.ko mmz=vdec,0,0xB1B00000,69M:jpeg,0,0xB6000000,12M:ddr,0,0xB6C00000,52M
-添加播放控制参数：extra_ref=12 extra_disp=0，vdec增大48M，mem相应减小48M
-====mkbootimg --kernel kernel/arch/arm/boot/uImage --ramdisk ramdisk.img --cmdline "mem=707M vmalloc=600M  extra_ref=12 extra_disp=0 console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 loglevel=0  mmz=ddr,0,0xB9200000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img
-====init.godbox.sh对应参数：/system/busybox/sbin/insmod /system/lib/modules/hi_mmz.ko mmz=vdec,0,0xB0300000,93M:jpeg,0,0xB6000000,12M:ddr,0,0xB6C00000,52M
-添加loglevel版本mkbootimg:
-====mkbootimg --kernel kernel/arch/arm/boot/uImage --ramdisk ramdisk.img --cmdline "mem=755M vmalloc=600M console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 loglevel=0 mmz=ddr,0,0xBC200000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img
+####PTCL（1G内存）制作镜像：
+制作ramdisk  
+mkbootfs out/target/product/godbox/root | minigzip > ramdisk.img  
+添加播放控制参数：extra_ref=6 extra_disp=0，vdec增大24M，mem相应减小24M   
+==== mkbootimg --kernel  kernel/arch/arm/boot/uImage --ramdisk ramdisk.img --cmdline "mem=731M vmalloc=600M  extra_ref=6 extra_disp=0 console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 loglevel=0  mmz=ddr,0,0xBAA00000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img  
+====init.godbox.sh对应参数：/system/busybox/sbin/insmod /system/lib/modules/hi_mmz.ko mmz=vdec,0,0xB1B00000,69M:jpeg,0,0xB6000000,12M:ddr,0,0xB6C00000,52M  
+添加播放控制参数：extra_ref=12 extra_disp=0，vdec增大48M，mem相应减小48M  
+====mkbootimg --kernel kernel/arch/arm/boot/uImage --ramdisk ramdisk.img --cmdline "mem=707M vmalloc=600M  extra_ref=12 extra_disp=0 console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 loglevel=0  mmz=ddr,0,0xB9200000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img  
+====init.godbox.sh对应参数：/system/busybox/sbin/insmod /system/lib/modules/hi_mmz.ko mmz=vdec,0,0xB0300000,93M:jpeg,0,0xB6000000,12M:ddr,0,0xB6C00000,52M  
+添加loglevel版本mkbootimg:  
+====mkbootimg --kernel kernel/arch/arm/boot/uImage --ramdisk ramdisk.img --cmdline "mem=755M vmalloc=600M console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 loglevel=0 mmz=ddr,0,0xBC200000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img  
 ====init.godbox.sh对应参数：/system/busybox/sbin/insmod /system/lib/modules/hi_mmz.ko mmz=vdec,0,0xB3300000,45M:jpeg,0,0xB6000000,12M:ddr,0,0xB6C00000,52M
-编译mkbootimg（ddr增大20M方案）
+编译mkbootimg（ddr增大20M方案）  
 mkbootimg --kernel kernel/arch/arm/boot/uImage --ramdisk ramdisk.img --cmdline "mem=755M vmalloc=600M console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0xBC200000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img
-编译mkbootimg（hisi推荐内存分配方案）
+编译mkbootimg（hisi推荐内存分配方案）  
 mkbootimg --kernel kernel/arch/arm/boot/uImage --ramdisk ramdisk.img --cmdline "mem=775M vmalloc=600M console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0xBD600000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img
 
-sdk完整名称：
-HiSTBAndroidV400R001C00SPC050B012
-打51补丁：
-HiSTBAndroidV400R001C00SPC051
+####sdk完整名称：
+HiSTBAndroidV400R001C00SPC050B012  
+打51补丁：  
+HiSTBAndroidV400R001C00SPC051  
 
-通过apache模拟ott：
-修改一个m3u8文件，只带一个切片即所需测试的ts文件。
-启动iptv后 swgetlog
-sw_media_start http://10.10.4.31/ott/dd.m3u8
+####通过apache模拟ott：
+修改一个m3u8文件，只带一个切片即所需测试的ts文件。  
+启动iptv后 swgetlog  
+sw_media_start http://10.10.4.31/ott/dd.m3u8  
 
-misc.img信息：
-udisk_factory_burn
-boot-recovery
-mmc read 0 82000000 3000 1000（2M/除512）
-tftp 82000000 misc_8040c.img 200000（2M/未除512）
+####misc.img信息：
+udisk_factory_burn  
+boot-recovery  
+mmc read 0 82000000 3000 1000（2M/除512）  
+tftp 82000000 misc_8040c.img 200000（2M/未除512）  
 
-8840C(EMMC)编译system.img,system.ics.ext4
-make_ext4fs -s -l 335544320 -a system out/target/product/godbox/obj/PACKAGING/systemimage_intermediates/system.img out/target/product/godbox/system
-cd out/target/product/godbox; ./mksystemext4  （使用out/target/product/godbox下的system.img）
+####8840C(EMMC)编译system.img,system.ics.ext4
+make_ext4fs -s -l 335544320 -a system out/target/product/godbox/obj/PACKAGING/systemimage_intermediates/system.img out/target/product/godbox/system  
+cd out/target/product/godbox; ./mksystemext4  （使用out/target/product/godbox下的system.img）  
 
-shell指令工具：
-disp getfmt
+####hdmi输出调试工具：
+disp getfmt  
+disp --help
 
-LOGE配置：
-#include <cutils/logd.h>
-#include <cutils/logprint.h>
-#define LOG_TAG "wilsonflying_hisisample"
-Android.mk 添加log库的链接:
-LOCAL_SHARED_LIBRARIES += \
+####LOGE配置：
+    #include <cutils/logd.h>
+    #include <cutils/logprint.h>
+    #define LOG_TAG "wilsonflying_hisisample"
+    Android.mk 添加log库的链接:
+    LOCAL_SHARED_LIBRARIES += \
                                libcutils \
                                libutils \
                                liblog
 
-8000E 和 8000A硬件设计相同
+####8000E 和 8000A硬件设计相同
 
-马电8040E 分区及镜像烧写
+####马电8040E 分区及镜像烧写
 setenv ipaddr 172.16.6.56;setenv serverip 172.16.6.55;
 setenv ipaddr 10.10.4.35;setenv serverip 10.10.4.31
 tftp 82000000 *.img
 
-tftp  方式烧写emmc镜像
-下载：tftp 82000000 misc.img
-recovery.img
-mmc write 0 82000000 4000 8000
-boot.img
-mmc write 0 82000000 10000 4000
-misc
-mmc write 0 82000000 3000 1000
-logo
-mmc write 0 82000000 c000 4000
-deviceinfo
-mmc write 0 82000000 2000 1000
+####tftp  方式烧写emmc镜像
+下载：tftp 82000000 misc.img  
+recovery.img    
+mmc write 0 82000000 4000 8000  
+boot.img  
+mmc write 0 82000000 10000 4000  
+misc    
+mmc write 0 82000000 3000 1000  
+logo  
+mmc write 0 82000000 c000 4000  
+deviceinfo  
+mmc write 0 82000000 2000 1000  
 
-马电ott-iptv手动编译bootimg（支持串口版本）：
+####马电ott-iptv手动编译bootimg（支持串口版本）：
  mkbootimg --kernel device/hisilicon/godbox/prebuilt/Image/uImage --ramdisk ../../tmp/ramdisk.img_rong   --cmdline  "mem=317M vmalloc=400M console=ttyAMA0,115200  lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0x9C400000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img_317_serial
 
-马电ott-iptv手动编译bootimg：
+####马电ott-iptv手动编译bootimg：
 mkbootimg --kernel device/hisilicon/godbox/prebuilt/Image/uImage --ramdisk ../../tmp/ramdisk.img_rong   --cmdline  "mem=317M vmalloc=400M console=NULL  lpj=5996758 mtddev=blackbox androidboot.console=NULL mmz=ddr,0,0x9C400000,42M mtdparts=hi_emmc:" --base 0x80000000 --output boot.img_317
 
-马电ott手动编译bootimg（支持串口版本）：
+####马电ott手动编译bootimg（支持串口版本）：
 mkbootimg  --kernel device/hisilicon/godbox/prebuilt/Image/uImage --ramdisk /home/sunhuasheng/tmp/ramdisk.img_rong  --cmdline "mem=335M vmalloc=400M console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0x9D600000,42M mtdparts=hi_emmc:"  --base 0x80000000 --output boot.img_335_serial
 
-马电ott手动编译bootimg：
+####马电ott手动编译bootimg：
 mkbootimg  --kernel device/hisilicon/godbox/prebuilt/Image/uImage --ramdisk /home/sunhuasheng/tmp/ramdisk.img_rong  --cmdline "mem=335M vmalloc=400M console=NULL lpj=5996758 mtddev=blackbox androidboot.console=NULL mmz=ddr,0,0x9D600000,42M mtdparts=hi_emmc:"  --base 0x80000000 --output boot.img_335
 
-tftp 下载:
-setenv ipaddr 10.10.4.35;setenv serverip 10.10.4.31
-nand read 82000000 1800000 800000
-tftp 82000000 misc_normal.img 800000
+####tftp 下载镜像到pc:
+setenv ipaddr 10.10.4.35;setenv serverip 10.10.4.31  
+nand read 82000000 1800000 800000  
+tftp 82000000 misc_normal.img 800000  
+![pic_001](res/Accumulating/accumulating_001.png)  
 
-浙江联通fastboot中打开日志（去掉loglevel=0）：
-setenv bootargs 'mem=335M vmalloc=400M console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0x9D600000,42M mtdparts=hinand:8M(fastboot),8M(partition),8M(deviceinfo),8M(misc),16M(recovery),8M(logo),16M(boot),248M(backup),48M(swdb),224M(cache),320M(system),384M(userdata),256M(data_dalvik),1024M(user_app),1520M(sdcard) androidboot.mac=00:07:63:00:00:00 androidboot.standard=1080i_50Hz androidboot.serialno=0010010900100000A000000000000000'
+####浙江联通fastboot中打开日志（去掉loglevel=0）：
+setenv bootargs 'mem=335M vmalloc=400M console=ttyAMA0,115200 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0x9D600000,42M mtdparts=hinand:8M(fastboot),8M(partition),8M(deviceinfo),8M(misc),16M(recovery),8M(logo),16M(boot),248M(backup),48M(swdb),224M(cache),320M(system),384M(userdata),256M(data_dalvik),1024M(user_app),1520M(sdcard) androidboot.mac=00:07:63:00:00:00 androidboot.standard=1080i_50Hz  androidboot.serialno=0010010900100000A000000000000000'  
+nand read 82000000 3800000 800000;bootimg 0x82000000  
 
-nand read 82000000 3800000 800000;bootimg 0x82000000
+####有关logo：
+Fastplay.exe打出logo.img后放到小系统 resouce/Images/logo.img  
+小系统中main.mk中有INSTALLED_LOGO_TARGET 控制是否打入logo的img  
 
-有关logo：
-Fastplay.exe打出logo.img后放到小系统 resouce/Images/logo.img
-小系统中main.mk中有INSTALLED_LOGO_TARGET 控制是否打入logo的img
+####有关android内置命令：
+sw_cp ; toolbox rm;swch_mod;  
 
-有关android内置命令：
-sw_cp ; toolbox rm;swch_mod;
+####有关bootimg：
+device/hisilicon/godbox/BoardConfig.mk 修改boot.img中的cmdline  
+需要把kernel 编译出来了的uImage  放到device/hisilicon/godbox/prebuilt/Image/  
+根目录下make bootimage  
 
-有关bootimg：
-device/hisilicon/godbox/BoardConfig.mk 修改boot.img中的cmdline
-需要把kernel 编译出来了的uImage  放到device/hisilicon/godbox/prebuilt/Image/
-根目录下make bootimage
+####深圳wifi
+TP_LINK_1234/0987654321  
+TP_LINK_123/075582883008  
 
- 深圳wifi
-TP_LINK_1234/0987654321
-TP_LINK_123/075582883008
+####手动制作升级包：  
+把打开串口的boot.img 压缩到zip包里  
+cd enable_serial; zip -qry  ../enable-serial.zip   ./*   
+然后签名：  
+java  -jar  signapk.jar  -w  testkey.x509.pem  testkey.pk8  save-stb-serial.zip  save-stb-serial-signed.zip  
 
-制作升级包：
-把打开串口的boot.img 压缩到zip包里
-cd enable_serial; zip -qry  ../enable-serial.zip   ./*
-然后签名：
-java  -jar  signapk.jar  -w  testkey.x509.pem  testkey.pk8  save-stb-serial.zip  save-stb-serial-signed.zip
-
-logcat 打印时间：
+####logcat 打印时间：
 logcat -v time
 
-生产测试版本
+####生产测试版本
 先烧fastboot、ptable、misc、recovery，然后在开机时候升级其他部分
 
 ####调试技巧
