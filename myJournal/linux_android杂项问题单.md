@@ -3,6 +3,23 @@
 
 
 
+
+
+4. 8040c更换新flash，软件修改  
+----实测结果目前代码兼容  
+
+3. Android4.2 安装应用到/mnt/asec研究  
+     ----文档完成,见res/linux_android杂项问题单/docs/  
+
+2. 8040c湖北移动生产测试  
+     ----scanner9.0.5 sw_tool9.0.5  
+![pic_003](res/linux_android杂项问题单/linux_android_003.png)  
+
+1. 在android 4.0及4.2都发现一个问题，在切换hdmi的制式时候cvbs也会有黑屏但没有相应切换到与hdmi相同扫描频率的制式上（一直是PAL）。  
+    ----hisi提供补丁解决  
+
+
+
 4. 8840C上3d应用  
     ----将libEGL.so、egl.cfg等3d相关的东西替换进去，3d游戏还是不能启动  
     ----/system/etc/3dapp.whitelist 中添加游戏对应的apk名称，能使得游戏启动。此时cpu占用90%，应该是GPU尚未正常工作。  
