@@ -840,3 +840,8 @@ setenv bootargs 'mem=128M console=ttyAMA0,115200  root=/dev/romblock3 rootfstype
 烧写：flash -noheader 172.16.6.115:cfe.bin flash0.loader  
       flash -noheader 172.16.6.115:sbox_boot_7700_97208B0_7133002-463M.img flash0.boot1  
       flash -noheader 172.16.6.115:sbox_app_7700_97208B0.img flash0.app  
+
+####新装的Ubuntu出现vmtools无法安装问题，弹如下内容的错误框：
+VMware Tools installation cannot be started manually while Easy Install is in progress.  
+如下修改，重启即可  
+![pic_005](res/Accumulating/accumulating_005.png)  
