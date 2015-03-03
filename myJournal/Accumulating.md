@@ -571,6 +571,9 @@ adb push 驱动文件 /system/lib/modules/
 
 
 
+
+####代码可以完全做到不包含头文件，但出于便于阅读还是写好头文件。详见[C语言的头文件是必须的吗？](http://blog.chinaunix.net/uid-24774106-id-3291005.html)
+
 ####HMS点播发流方法:
 HMS server ip： 172.16.11.90
 login_name:  xx
