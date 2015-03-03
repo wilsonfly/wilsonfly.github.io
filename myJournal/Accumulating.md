@@ -90,6 +90,17 @@ python 如果嫌每次都要键入这东西麻烦的话，可以把上边这行�
 export PYTHONSTARTUP=~/.pythonstartup.py
 这就会每次启动 python 都先执行了
 
+
+####(1126)有关data分区概率性变成只读问题
+目前在测试过程中出现一台盒子data分区变成ro(目前使用的ext4文件系统格式化策略是出现冲突等异常后,只读挂载分区,用于保护用户数据)。这个问题在反复上下电的情况下,比较容易出现  
+讨论后处理方法:  
+1.在后台卸载userdata分区,使用e2fsck进行修复,再重新挂载.但是userdata卸载以后,launcher/ 虚拟机等进程会出现异常   
+2.每次开机后都对userdata进行检查并修复  
+选用第二种方法，并且在修复后仍然挂载不上的情况将data分区格式化掉。  
+![pic_007](res/Accumulating/accumulating_007.png)    
+![pic_008](res/Accumulating/accumulating_008.png)    
+
+
 ####putty作串口工具出现过不能输入情况，换用secreCRT就ok，wtf！
 
 ####build.prop 本身的属性会影响属性的解析
