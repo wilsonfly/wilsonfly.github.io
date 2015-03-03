@@ -81,6 +81,15 @@ offsetof( item ) = min( n, sizeof( item ) )
     sizeof( S5 ); // 结果为1
 
   
+
+####(1214)python 自动补全
+python可以Tab键补全，可以在启动python后，执行下
+import readline, rlcompleter; readline.parse_and_bind("tab: complete")
+这就可以按 Tab 键补全了。  
+python 如果嫌每次都要键入这东西麻烦的话，可以把上边这行写到 ~/.pythonstartup.py ，在 ~/.bashrc 里加一个环境变量
+export PYTHONSTARTUP=~/.pythonstartup.py
+这就会每次启动 python 都先执行了
+
 ####putty作串口工具出现过不能输入情况，换用secreCRT就ok，wtf！
 
 ####build.prop 本身的属性会影响属性的解析
