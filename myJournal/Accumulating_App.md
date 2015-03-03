@@ -59,3 +59,6 @@ ctrl+e   打开的文件列表，切换文件
 具体报错：A resource exists with a different case  
 --如下，报名包含了跟目录名相同的字段：BitmapShader1，修改包名后ok   
 ![app_001](res/Accumulating_App/app_001.png)
+
+####0. 运行eclipse报错Fail to create the java Virtual Machine
+见[解决Fail to create the java Virtual Machine_百度经验](http://jingyan.baidu.com/article/afd8f4de466baf34e286e917.html)
