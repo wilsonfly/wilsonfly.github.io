@@ -2,6 +2,25 @@
 
 
 
+####(0213)有关修改分区
+1. swptable.c 中填写分区信息，在partition分区没有数据或者数据异常导致校验不过的时候会将默认分区信息回写到partition分区中。由于存在partition的回写功能，开始调试时候可能出现更换了fastboot但没有按新分区信息设置bootargs，那就需要手动破坏一下partition。比如partition是这样的话“1         partition    0x000200000     0x000200000”，开机上电ctrl+c进入fastboot，执行 mmc write 0 1ffffc0 1000 1000 来破坏partition分区。  
+    代码：device/hisilicon/bigfish/sdk/source/boot/product/android
+2. BoardConfig.mk，这里有编译sdk时候打镜像的大小，目前我们有了小系统这一机制，版本的镜像都是用小系统打出来的，此文件可以不修改。  
+    代码路径：device/hisilicon/Hi3798MV100，留意330的文件是BoardConfig_8M330.mk
+3. Hi3798MV100-emmc.xml ，分区表文件，一套sdk可能在不同项目上分区信息不一样，这个文件可以不修改，但需要上传小系统platform/on-project/pub/image/  
+    代码路径：device/hisilicon/Hi3798MV100/prebuilts
+4. recovery.emmc.fstab ，这里有分区名称及顺序，不像android4.0一样还有分区大小，如果只改动了分区的大小，此文件可以不修改。  
+    代码路径：bootable/recovery/etc
+5. 小系统中partinfo.conf，编译各个分区的镜像及生产镜像时候都是从这个文件里边读取分区大小。  
+    代码路径：platform/on-project/pub/swproduct/partinfo.conf
+6. fastboot需要编译三个出来：  
+	* 正常编译出来的fastboot.bin 对应小系统platform/on-project/pub/image/loader.bin  
+	* 将build/swfastbootenv/fastboot-8M330-D2048-E4096.env中SW_FORCE_OPEN_CONSOLE 打开（记得重新source环境变量），编译fastboot，此fastboot可以强制打开串口、将adb连接的用户设置为root，此fastboot用于在user版本上开发调试使用，对应platform/on-project/pub/image/loader_ForceOpenConsole.bin  
+	* 关掉SW_FORCE_OPEN_CONSOLE 开关，打开SW_CLOSE_LOADER_KEYED开关（记得重新source环境变量），编译一个禁掉ctrl+c功能的fastboot.bin 用于user版本，对应platform/on-project/pub/image/loader_user.bin  
+7. 验证工作  
+	* Hitool烧写小系统中编译出来的镜像，看各个分区是否都挂载正常  
+	* 升级小系统编译出来的升级包，看升级是否正常  
+	* 用3798_update_product_sign.zip 升级生产镜像，看升级完后能否正常启机，看各个分区是否挂载正常，是否出现要求产测的蓝色界面。  
 
 
   
