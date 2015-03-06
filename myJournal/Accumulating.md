@@ -44,6 +44,13 @@
 测试建议:
   
   
+####(0210)有关data分区剩余空间检测问题
+实现方案：1. 提供apk，动态检测data分区剩余空间，少于阈值50M时候弹框提示用户，并提供清理按钮，可清理掉一些缓存等文件释放空间。如果在清理之前出现data空间剩余过少或者升级后在data新生成文件导致剩余空间过少以至于影响系统上电启动，这个时候rootservice中会在启动之时创建一线程检测launcher是否已起来，如果两分钟内没有检测到launcher或者launcher的pid变化三次及以上，则显示一个提示页面告之用户设备异常正在修复，等五秒后将data分区格式化然后重启。  
+    目前一个apk加rootservice的方案能够满足处理data分区剩余空间不足的问题，此外，swRootService检测launcher的方案还能处理像数据损坏导致启动异常的情况。  
+方案2. 同样提供apk用户检测data分区剩余空间，此外在init启动时候也检测data分区剩余空间情况，小于阈值则去删除部分目录内容，这里包括/data/app/,/data/data/,/data/dalvik-cache。此方案功能略逊色于swRootservice，不过如果没有swRootservice也不失为一种好方法。  
+其中init中检测打他分区空间状况的代码：  
+![pic_030](res/Accumulating/accumulating_030.png)    
+  
 ####(0121)3798M单板待机调试
 1、直接在串口上配置himm 0xf80000bc 0x80510001，看是否能进入待机（不会有suspend的打印，可以量一下电压有没有），是否能唤醒；  
 2、在串口上配置himm 0xf840e520 0x11111111，同样看看是否可以进入待机，是否能唤醒 
