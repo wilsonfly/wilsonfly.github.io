@@ -1,5 +1,80 @@
 
 
+目录
+
+第1章 代码管理  1
+
+1.1 代码仓库及分支  1
+
+1.1.1 大系统部分    1
+
+1.1.2 小系统部分    1
+
+1.2 编译及CI    2
+
+第2章 fastboot  3
+
+2.1 环境变量    3
+
+2.2 相关代码    3
+
+2.3分区变动 3
+
+第3章 recovery  5
+
+3.1 基本功能    5
+
+3.2 有关升级过程中异常  5
+
+3.3 有关更换背景图片    5
+
+3.4 有关recovery的升级  5
+
+第4章 定制功能  6
+
+4.1 HDMI自适应  6
+
+4.2 杜比透传    6
+
+4.3 内置sdcard分区  7
+
+第5章 新添加代码模块    8
+
+5.1 swRootService   8
+
+5.2 swdevinfo   8
+
+5.3 swrecovery_flag 8
+
+5.4 swmakemmcimg    8
+
+第6章 念念碎    9
+
+6.1 有关签名    9
+
+6.2 有关iptv    9
+
+6.3 有关功放    9
+
+6.4 有关产测apk 9
+
+6.5 有关小系统build 9
+
+6.6 有关安全红线之串口  9
+
+6.7 有关给hisi提问题单  10
+
+6.8 有关build.prop的生成    10
+
+6.9 有关小系统修改文件的维护    10
+
+6.10 deviceinfo待修复bug    10
+
+
+
+
+
+
 
 第1章 代码管理
 
@@ -131,27 +206,27 @@ customer_android.c 中除了引用loader目录下的代码之外还有一个比�
 
 分区变动需要做的操作大致如下：
 
-1. swptable.c 中填写分区信息，在partition分区没有数据或者数据异常导致校验不过的时候会将默认分区信息回写到partition分区中。由于存在partition的回写功能，开始调试时候可能出现更换了fastboot但没有按新分区信息设置bootargs，那就需要手动破坏一下partition。比如partition是这样的话“1         partition    0x000200000     0x000200000”，开机上电ctrl+c进入fastboot，执行 mmc write 0 1ffffc0 1000 1000 来破坏partition分区。
+1.swptable.c 中填写分区信息，在partition分区没有数据或者数据异常导致校验不过的时候会将默认分区信息回写到partition分区中。由于存在partition的回写功能，开始调试时候可能出现更换了fastboot但没有按新分区信息设置bootargs，那就需要手动破坏一下partition。比如partition是这样的话“1         partition    0x000200000     0x000200000”，开机上电ctrl+c进入fastboot，执行 mmc write 0 1ffffc0 1000 1000 来破坏partition分区。
 
 代码：device/hisilicon/bigfish/sdk/source/boot/product/android
 
-2. BoardConfig.mk，这里有编译sdk时候打镜像的大小，目前我们有了小系统这一机制，版本的镜像都是用小系统打出来的，此文件可以不修改。
+2.BoardConfig.mk，这里有编译sdk时候打镜像的大小，目前我们有了小系统这一机制，版本的镜像都是用小系统打出来的，此文件可以不修改。
 
 代码路径：device/hisilicon/Hi3798MV100，留意330的文件是BoardConfig_8M330.mk
 
-3. Hi3798MV100-emmc.xml ，分区表文件，一套sdk可能在不同项目上分区信息不一样，这个文件可以不修改，但需要上传小系统platform/on-project/pub/image/
+3.Hi3798MV100-emmc.xml ，分区表文件，一套sdk可能在不同项目上分区信息不一样，这个文件可以不修改，但需要上传小系统platform/on-project/pub/image/
 
 代码路径：device/hisilicon/Hi3798MV100/prebuilts
 
-4. recovery.emmc.fstab ，这里有分区名称及顺序，不像android4.0一样还有分区大小，如果只改动了分区的大小，此文件可以不修改。
+4.recovery.emmc.fstab ，这里有分区名称及顺序，不像android4.0一样还有分区大小，如果只改动了分区的大小，此文件可以不修改。
 
 代码路径：bootable/recovery/etc
 
-5. 小系统中partinfo.conf，编译各个分区的镜像及生产镜像时候都是从这个文件里边读取分区大小。
+5.小系统中partinfo.conf，编译各个分区的镜像及生产镜像时候都是从这个文件里边读取分区大小。
 
 代码路径：platform/on-project/pub/swproduct/partinfo.conf
 
-6. fastboot需要编译三个出来：
+6.fastboot需要编译三个出来：
 
 1) 正常编译出来的fastboot.bin 对应小系统platform/on-project/pub/image/loader.bin
 
@@ -159,7 +234,7 @@ customer_android.c 中除了引用loader目录下的代码之外还有一个比�
 
 3) 关掉SW_FORCE_OPEN_CONSOLE 开关，打开SW_CLOSE_LOADER_KEYED开关（记得重新source环境变量），编译一个禁掉ctrl+c功能的fastboot.bin 用于user版本，对应platform/on-project/pub/image/loader_user.bin
 
-7. 验证工作
+7.验证工作
 
 1) Hitool烧写小系统中编译出来的镜像，看各个分区是否都挂载正常
 
@@ -211,9 +286,9 @@ Recovery界面除了背景图层显示均为图片组成，包括背景、升级
 
 Recovery的升级指的是整个recovery分区的更新，目前有两种方式：
 
-1. 类似fastboot、logo的更新，制作recovery.img在升级时候写入recovery分区 
+1.类似fastboot、logo的更新，制作recovery.img在升级时候写入recovery分区 
 
-2. Android原生方式：在制作升级包的时候根据recovery.img与boot.img的差异制作出差分文件recovery-from-boot.p及脚本install-recovery.sh。开机进入Android系统时候会执行此脚本对recovery分区做校验，如果校验值跟脚本中不一致则会根据boot分区及recovery-from-boot.p制作出recovery数据并更新到recovery分区。
+2.Android原生方式：在制作升级包的时候根据recovery.img与boot.img的差异制作出差分文件recovery-from-boot.p及脚本install-recovery.sh。开机进入Android系统时候会执行此脚本对recovery分区做校验，如果校验值跟脚本中不一致则会根据boot分区及recovery-from-boot.p制作出recovery数据并更新到recovery分区。
 
 更多说明见文档《android_4_0基于Hi3716MV300升级recovery参考文档》
 
@@ -361,7 +436,7 @@ platform/on-project/pub/swproduct/apk_udisk/ 预留了产测apk的上传路径�
 
 有关关串口又出现了两种情况：1. 不能有输出 2. 可以有输出但不能有输入
 
-1.  对于关闭输出，我们在通过读取deviceinfo中参数secureline来修改
+1.对于关闭输出，我们在通过读取deviceinfo中参数secureline来修改
 
 fastboot的bootargs来控制的。详情见代码：
 
@@ -373,7 +448,7 @@ system/core/libsw_deviceinfo_access/
 
 而deviceinfo中secureline的参数是swRootService监测属性persist.sys.secureline的值来做相应配置的。
 
-2.  对于关闭输入，我们是在swRootService中监测属性persist.sys.sw.console的值来做相应配置的。接收输入的其实是个shell，init.rc中可以看到启动/system/bin/sh 作为了一个后台服务console，停掉该服务则不能输入了。而kernel和驱动的一些打印仍然能达到串口上来。
+2.对于关闭输入，我们是在swRootService中监测属性persist.sys.sw.console的值来做相应配置的。接收输入的其实是个shell，init.rc中可以看到启动/system/bin/sh 作为了一个后台服务console，停掉该服务则不能输入了。而kernel和驱动的一些打印仍然能达到串口上来。
 
 我们推荐使用第2种控制方法，因为这种方法不仅可以立即生效不需要重启，还能看到kernel panic和待机的信息，对开发调试和问题定位也有一些帮助。
 
@@ -401,9 +476,9 @@ system/core/libsw_deviceinfo_access/
 
 6.10 deviceinfo待修复bug
 
-static int sw_devinfo_check( devinfo_t *pdevinfo )
+	static int sw_devinfo_check( devinfo_t *pdevinfo )
 
-{
+	{
 
     printf("[%s,%d] start...\n", __FUNCTION__, __LINE__);
 
@@ -447,11 +522,11 @@ static int sw_devinfo_check( devinfo_t *pdevinfo )
 
     return 0;
 
-}
+	}
 
 上述代码存在bug，加粗部分计算需要进行校验的数据大小时候，结构体中间部分数据应该计算其分配空间大小而不应该是实际数据大小。应该修改为如下：
 
-checksum = sw_crc16( (unsigned char *)&pdevinfo->count, sizeof( devinfo_entry_t ) * DEVINFO_COUNT_MAX + sizeof(uint32_t) + HDCP_KEY_MAX_SIZE );
+	checksum = sw_crc16( (unsigned char *)&pdevinfo->count, sizeof( devinfo_entry_t ) * DEVINFO_COUNT_MAX + sizeof(uint32_t) + HDCP_KEY_MAX_SIZE );
 
 由于此代码牵涉校验和回写，在现有项目上修改会导致校验失败而回写deviceinfo分区，从而丢失参数。所以需要在新sdk中修复此bug。
 
