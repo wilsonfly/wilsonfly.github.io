@@ -1,81 +1,5 @@
 
 
-目录
-
-第1章 代码管理  1
-
-1.1 代码仓库及分支  1
-
-1.1.1 大系统部分    1
-
-1.1.2 小系统部分    1
-
-1.2 编译及CI    2
-
-第2章 fastboot  3
-
-2.1 环境变量    3
-
-2.2 相关代码    3
-
-2.3分区变动 3
-
-第3章 recovery  5
-
-3.1 基本功能    5
-
-3.2 有关升级过程中异常  5
-
-3.3 有关更换背景图片    5
-
-3.4 有关recovery的升级  5
-
-第4章 定制功能  6
-
-4.1 HDMI自适应  6
-
-4.2 杜比透传    6
-
-4.3 内置sdcard分区  7
-
-第5章 新添加代码模块    8
-
-5.1 swRootService   8
-
-5.2 swdevinfo   8
-
-5.3 swrecovery_flag 8
-
-5.4 swmakemmcimg    8
-
-第6章 念念碎    9
-
-6.1 有关签名    9
-
-6.2 有关iptv    9
-
-6.3 有关功放    9
-
-6.4 有关产测apk 9
-
-6.5 有关小系统build 9
-
-6.6 有关安全红线之串口  9
-
-6.7 有关给hisi提问题单  10
-
-6.8 有关build.prop的生成    10
-
-6.9 有关小系统修改文件的维护    10
-
-6.10 deviceinfo待修复bug    10
-
-
-
-
-
-
-
 第1章 代码管理
 
 1.1 代码仓库及分支
@@ -324,11 +248,7 @@ device/hisilicon/bigfish/frameworks/himediaplayer/hal/HiMediaPlayer.cpp。
 
 persist.sys.audio.audiorender 取值规则 [7654]为0--HDMI的AUTO模式
 
-HDMI    SPDIF
-
-7   6   5   4   3   2   1   0
-
--   NO-OUTPUT   PASSTHROUGH PCM -   NO-OUTPUT   PASSTHROUGH PCM
+![pic_001](res/Doc_平台开发知识点梳理/doc_platform_001.png)
 
 在3716芯片时代存在约束条件：在HDMI透传时会占用到SPDIF数据通道，所以在HDMI透传时SPDIF只能透传或无输出。在3719及之后的3798已经没有此约束，因此hdmi和spdif可以单独控制。上述属性的取值[7654]与[3210]则可以分别赋值。
 
