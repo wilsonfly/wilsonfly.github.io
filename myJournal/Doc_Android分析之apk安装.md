@@ -83,15 +83,15 @@ installPackageLI中首先调用doRename将/mnt/secure/asec/smdl2tmp1.asec重命�
 
 部分参考内容及补充阅读：
 
-Apk组成：http://blog.csdn.net/freshui/article/details/6440832
+Apk组成：[Android应用程序分析——apk的组成](http://blog.csdn.net/freshui/article/details/6440832)
 
-Apk扫描：http://www.tuicool.com/articles/Vf2my2
+Apk扫描：[Android应用程序包扫描过程源码分析](http://www.tuicool.com/articles/Vf2my2)
 
-Apk安装：http://blog.csdn.net/luoshengyang/article/details/6766010
+Apk安装：[Android应用程序安装过程源代码分析](http://blog.csdn.net/luoshengyang/article/details/6766010)
 
-Loop：http://www.groad.net/bbs/thread-2352-1-1.html
+Loop：[loop 设备 (循环设备)](http://www.groad.net/bbs/thread-2352-1-1.html)
 
-Dm-loop：http://www.ibm.com/developerworks/cn/linux/l-devmapper/index.html
+Dm-loop：[Linux 内核中的 Device Mapper 机制](http://www.ibm.com/developerworks/cn/linux/l-devmapper/index.html)
 
 https://www.sourceware.org/lvm2/wiki/DMLoop
 
