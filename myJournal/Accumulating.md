@@ -139,7 +139,7 @@ KSM全称为 Kernel Shared Memory 或 Kernel Samepage Merging，KSM作为Linux�
 
 
 
-![pic_032]()  
+![pic_032](res/Accumulating/accumulating_032.png)  
 实用举例：
 
 1. 添加时间：logcat -v time
@@ -179,8 +179,8 @@ echo HI_IR=4 >log
 1. 启机失败  
 2. 某些应用异常  
 其中不能启机的盒子，发现SettingsProvider应用的数据库目录变成了管道文件，如图：  
-![pic_031]()  
-busybox mknod aa p
+![pic_031](res/Accumulating/accumulating_031.png)   
+创建管道文件：busybox mknod aa p
 
 ####swRootService 中socket频繁创建影响广播导致启动应用慢
 
