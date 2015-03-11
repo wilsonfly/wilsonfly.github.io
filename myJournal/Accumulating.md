@@ -1,5 +1,8 @@
 
 
+####(0310)Linux下运行windows软件的工具
+wine
+
 ####（0306）data分区剩余空间检测问题
 ![pic_034](res/Accumulating/accumulating_034.png)    
 
