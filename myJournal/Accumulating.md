@@ -137,8 +137,12 @@ KSM全称为 Kernel Shared Memory 或 Kernel Samepage Merging，KSM作为Linux�
 ![pic_006](res/Accumulating/accumulating_006.png)    
 补充阅读见：[KSM(Kernel Samepage Merging) 剖析：Linux 内核中的内存去耦合](http://blog.csdn.net/summer_liuwei/article/details/6013255)
 
+####shell 定义函数问题
+shell function不能空，会导致下面的function使用的时候报not found
 
-
+####有关log（logger驱动、system/core/liblog、system/core/logcat）：
+logger驱动将日志信息写到/dev/log/main events radio  system 设备节点中
+logcat从中读取  
 ![pic_032](res/Accumulating/accumulating_032.png)  
 实用举例：
 
