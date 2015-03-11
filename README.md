@@ -1,6 +1,6 @@
 wilsonfly.github.io
 ===================
 
-One repo for blog
+One repo for blog.
 
-The journals locate in myJournal now.
+The journals are located in **myJournal** now.
