@@ -20,10 +20,10 @@ Android中apk的安装大致分为如下四种方式：系统应用的安装、�
 scanDirLI接口对目录进行完扫描得到apk文件后调用scanPackageLI接口来完成对apk包的解析和信息收集。其中比较关键的操作是调用parsePackage对AndroidManifest.xml文件及assets、res目录下众多文件进行解析和信息收集。 代码见frameworks/base/core/java/android/content/pm/PackageParser.java
 
 安装流程见文档：apk安装之poweron.pdf，即下图：  
-![pic_002](res/Doc_Android分析之apk安装/apk安装之poweron)  
+![pic_002](res/Doc_Android分析之apk安装/apk安装之poweron.jpg)  
 
 普通安装过程见文档：apk安装之common_apk_install.pdf，即下图：  
-![pic_003](res/Doc_Android分析之apk安装/apk安装之common_apk_install)  
+![pic_003](res/Doc_Android分析之apk安装/apk安装之common_apk_install.jpg)  
 
 2.2 网络下载应用安装
 
@@ -56,7 +56,7 @@ installPackageLI中首先调用doRename将/mnt/secure/asec/smdl2tmp1.asec重命�
 系统重启后此类apk依然能够安装的上，在scanAvailableAsecs扫描到之前创建好的镜像文件
 
 安装流程见文档：apk安装之apk_install.pdf,即下图：  
-![pic_001](res/Doc_Android分析之apk安装/apk安装之apk_install)  
+![pic_001](res/Doc_Android分析之apk安装/apk安装之apk_install.jpg)  
 
 
 开机过程中此类apk的安装过程相比较来看少了*.asec文件的创建动作，取而代之的是scanAvailableAsecs找到然后进行挂载。
