@@ -1,6 +1,14 @@
 
 
+####（0306）data分区剩余空间检测问题
+![pic_034](res/Accumulating/accumulating_034.png)    
 
+####（0306）/data/property/xx权限问题
+/data/property/xx 需要600权限才能生效  
+git中上传0600权限的文件，下载下来的是0644  
+target.zip中0600的文件，打出来的升级包中文件权限也会变回0644  
+需要改权限的需要在升级脚本updater-script中升级到盒子上之后再修改  
+![pic_033](res/Accumulating/accumulating_033.png)    
 
 ####(0213)有关修改分区
 1. swptable.c 中填写分区信息，在partition分区没有数据或者数据异常导致校验不过的时候会将默认分区信息回写到partition分区中。由于存在partition的回写功能，开始调试时候可能出现更换了fastboot但没有按新分区信息设置bootargs，那就需要手动破坏一下partition。比如partition是这样的话“1         partition    0x000200000     0x000200000”，开机上电ctrl+c进入fastboot，执行 mmc write 0 1ffffc0 1000 1000 来破坏partition分区。  
