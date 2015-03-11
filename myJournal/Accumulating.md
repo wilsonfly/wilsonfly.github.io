@@ -145,6 +145,10 @@ KSM全称为 Kernel Shared Memory 或 Kernel Samepage Merging，KSM作为Linux�
 属性设置成功：  
 -rw-r--r-- root     root         2909 2014-11-18 18:01 build.prop  
 
+####SecureCRT日志添加时间信息：
+C:\Users\huasheng\Documents\%H_%M_%D_%h_%m_%s.log
+[%Y/%M/%D %h:%m:%s:%t]  
+![pic_029](res/Accumulating/accumulating_029.png)  
 
 ####有关宏的取非
 	#if !defined (SUPPORT_FPGA)
