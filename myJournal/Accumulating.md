@@ -145,6 +145,61 @@ KSM全称为 Kernel Shared Memory 或 Kernel Samepage Merging，KSM作为Linux�
 属性设置成功：  
 -rw-r--r-- root     root         2909 2014-11-18 18:01 build.prop  
 
+
+####有关宏的取非
+	#if !defined (SUPPORT_FPGA)
+	xxx
+	#endif
+
+####有关sem_init
+	#include<semaphore.h>
+	int sem_init (sem_t *sem, int pshared, unsigned int value);
+这个函数的作用是对由sem指定的信号量进行初始化，设置好它的共享选项，并指定一个整数类型的初始值。pshared参数控制着信号量的类型。如果 pshared的值是0，就表示它是当前里程的局部信号量；否则，其它进程就能够共享这个信号量。现在只对不让进程共享的信号量感兴趣。（这个参数受版本影响）， Linux线程目前不支持进程间共享信号量，pshared传递一个非零将会使函数返回ENOSYS错误。
+
+####eclipse格式对齐快捷键ctrl+shift+f失效原因
+原因：此热键被hook住了
+找了好几个常用软件，最终发现罪魁祸首在搜狗拼音，这个的确是个常用软件啊......容易被忽视的
+
+
+####msgfmt命令找不到：
+执行#sudo apt-get install gettext安装msgfmt；
+
+####终端广播：
+	echo "hello" |wall
+	wall  <<zzz
+	>something to send
+	>something more to send
+	>zzz
+
+####非root用户打开root权限文件进行保存：
+在Linux，没有sudo 就直接用vim 编辑/etc/内的文件，等编辑好了之后，使用vim保存时，得到提示说文件无法保存，这时候才发现没权限。针对这种问题，目前有如下几种解决方案。  
+	
+	vi /etc/httpd.conf 保存时，用命令:w !sudo tee %
+    :w - Write a file.
+    !sudo - Call shell sudo command.
+    tee - The output of write (vim :w) command is redirected using tee. The % is nothing but current file name i.e. /etc/httpd.conf. In other words tee command is run as root and it takes standard input and write it to a file represented by %. However, this will prompt to reload file again (hit L to load changes in vim itself).
+强烈推荐这一种用法。不过，首先得保证运行vim的用户有sudo的权限。
+
+####编译出来的驱动版本号跟kernel不一致导致加载失败：
+	修改：linux-3.4.y/scripts/setlocalversion 
+	163 if test "$CONFIG_LOCALVERSION_AUTO" = "y"; then
+	164     # full scm version string
+	165     res="$res$(scm_version)"
+	166 else
+	167     # append a plus sign if the repository is not in a clean
+	168     # annotated or signed tagged state (as git describe only
+	169     # looks at signed or annotated tags - git tag -a/-s) and
+	170     # LOCALVERSION= is not specified
+	171     if test "${LOCALVERSION+set}" != "set"; then
+	172         scm=$(scm_version --short)
+	173         #res="$res${scm:++}" 注释掉这一行
+	174     fi
+	175 fi
+	176
+	177 echo "$res"
+
+
+
 ####查看某个进程内存使用情况：
 procmem  one_pid  
 
