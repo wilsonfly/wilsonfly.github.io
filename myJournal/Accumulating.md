@@ -618,6 +618,130 @@ adb push 驱动文件 /system/lib/modules/
 
 
 
+####flash同步问题：
+	open(mtddevname, O_RDWR|O_SYNC);
+	fflush(f);
+	fsync(fileno(f));
+
+####vi快捷键
+vi中替换快捷键：ctrl+r+r  
+vi删除带有特定字符的行：   :g/\.svn/d
+
+####windows下dns清理：
+1. 清除ARP缓存，arp -d *
+2. 清除NETBT，nbtstat -R
+3. 清除DNS缓存，ipconfig /flushdns
+
+ 
+####有关操作符 “?:”
+`condition ? value_if_true : value_if_false  `  
+C 语言变种[编辑]  
+GNU 允许C 语言省略条件表达式中的表达式2省略, 此时表示表达式2与表达式1相同.例如  
+a = x ? : y;  
+等价于  
+a = x ? x : y;  
+但是如果 x 是一个表达式, 仅求值一次. C#提供了类似的特性  
+a = x ?? y;  
+与"x?:y"的用法不同, ??只判断 x 是否为null, 而不是判断真假.  
+
+####vim中在多行的头部加某字符
+:%s/\n/\r\n##/
+
+####生成ctags
+	find ~/myproject -name “*.h” -o -name “*.c” -o -name “*.cpp” > mytags.files
+	ctags -f tags -L mytags.files
+
+####有关宏define：
+	#ifdef MTD_OLD
+	...
+	#endif
+
+	#if defined(CONFIG_BOOTARGS)
+	...
+	#endif
+
+####结构体数组部分赋值
+	struct envdev_s {
+        char devname[16];               /* Device name */
+        ulong devoff;                   /* Device offset */
+        ulong env_size;                 /* environment size */
+        ulong erase_size;               /* device erase size */
+        ulong env_sectors;              /* number of environment sectors */
+        uint8_t mtd_type;               /* type of the MTD device */
+	};
+	static struct envdev_s envdevices[2] =
+	{
+        {
+                .mtd_type = MTD_ABSENT,
+        }, {
+                .mtd_type = MTD_ABSENT,
+        },
+	};
+
+####各种音视频接口
+[视频输入输出常用接口（TV，AV,S-Video<s端子>,YCbCr/PCbCr<色差分量>,VGA,Scart,DVI/HDMI](http://hi.baidu.com/junlin8848/item/1a8e2bd7fc8b1d312b35c781)
+
+####新接口
+setbuf  
+memstr  
+bzere(void *s, size_t n)  
+
+####grep剔除某个目录名
+grep --exclude-dir=.git  internal_build_id_makefile . -ri
+
+####debug printf
+	62 /*define a swlog interface for debug*/
+	63 #ifdef DEBUG
+	64 #define swlog(format,...) printf("####[%s,%d]" format "\n",__FUNCTION__,__LINE__,##__VA_ARGS__)
+	65 #define swllog(format,...) printf("####[%s,%s,%d]" format "\n",__FILE__,__FUNCTION__,__LINE__,##__VA_ARGS__)
+	66 #else
+	67 #define swlog(format,...) /* can't see me ^o^ */
+	68 #define swllog(format,...) /* can't see me ^o^ */
+	69 #endif  
+
+####dd 转文件
+	dd if=2.ts of=cut4m_2.ts bs=1M skip=4
+	dd if=2.ts of=cut4m_save3m_2.ts bs=1M skip=4 count=3
+
+####代码中定义多个宏进行或/与的判断
+	304 #if !(defined SUPPORT_GUANGDONG || defined SUPPORT_HUAWEI_product)
+	305     else  //其他不规则的参数值，则重置回1080i_50Hz
+	306     {
+	307         fprintf( stderr, "[hd_standard] Not Right! Auto Set 1080i_50Hz\n" );
+	308         sw_parameter_set("hd_standard","1080i_50Hz");
+	309     }
+	310 #endif
+
+ 	118 #if       SiTRACES_FEATURES == SiTRACES_FULL 
+ 	119     FILE *file;
+ 	120 #endif /* SiTRACES_FEATURES == SiTRACES_FULL */
+
+####E2PROM与FLASH
+ flash里存储的是从设置页面能够设置的参数，以及和机顶盒系统相关的固定不变的参数 （不能把以前E2Prom里的参数都写到flash里，因为flash的寿命（擦写次数）远小于E2PROM，且E2PROM是按字节来写的，而 flash是按block来写的，在flash擦写操作的时候断电，其他参数也会丢失），因此flash里存储的参数应该尽量少,做生产版本需要特别注意。
+
+####静态函数调用关系分析工具
+cflow
+
+####内存调试工具
+1. ElectricFence 函数库libefence.a
+2. valgrind
+
+####加载库环境变量
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp
+
+####养成memset习惯
+数组、申请的buf，在用之前来个memset，避免莫名其妙的问题
+ 
+####对齐问题
+（1）自然对界(natural alignment)即默认对齐方式，是指按结构体的成员中 size 最大的成员对齐。  
+（2）指定对界    
+一般地，可以通过下面的方法来改变缺省的对界条件：    
+· 使用伪指令#pragma pack (n)，编译器将按照 n 个字节对齐；   
+· 使用伪指令#pragma pack ()，取消自定义字节对齐方式。  
+注意：如果#pragma pack (n)中指定的 n 大于结构体中最大成员的 size，则其不起作用，结构体仍然按照 size 最大的成员进行对界。  
+（3）另外，通过__attribute((aligned (n)))也可以让所作用的结构体成员对齐在 n 字节边界上，但是它较少被使用，因而不作详细讲解
+
+
 
 ####代码可以完全做到不包含头文件，但出于便于阅读还是写好头文件。详见[C语言的头文件是必须的吗？](http://blog.chinaunix.net/uid-24774106-id-3291005.html)
 
