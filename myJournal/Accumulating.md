@@ -137,6 +137,91 @@ KSM全称为 Kernel Shared Memory 或 Kernel Samepage Merging，KSM作为Linux�
 ![pic_006](res/Accumulating/accumulating_006.png)    
 补充阅读见：[KSM(Kernel Samepage Merging) 剖析：Linux 内核中的内存去耦合](http://blog.csdn.net/summer_liuwei/article/details/6013255)
 
+
+
+![pic_032]()  
+实用举例：
+
+1. 添加时间：logcat -v time
+2. 过滤关系的日志：logcat -s KeyEvent  VPP_DLNA_LOG
+3. 剔除部分不关心的日志：logcat KeyEvent:s  VPP_DLNA_LOG:s 
+4. 日志导入到文件中：
+     1) logcat -f /data/mylog.txt 
+     2) logcat -f /data/c.txt -n5 -r3000   //以3000KB大小为限，最多保留5个文件
+5. 只显示最近的日志：logcat -t 50
+
+####新接口
+	size_t strspn(const char *s, const char *accept); //字符串s 开头连续有n 个字符都是属于字符串accept内的字符
+	size_t strcspn(const char *s, const char * reject);//字符串s 开头连续有n 个字符都不含字符串reject 内的字符
+
+####Android4.4添加键值：
+core/res/res/values/attrs.xml 不添加亦可  
+include/input/KeycodeLabels.h 实际起作用
+
+####ubuntu 安装wxPython:
+	apt-get install python-wxgtk2.8
+	sudo apt-get install python-wxgtk2.8 python-wxtools wx2.8-i18n
+
+####Oop后重启功能：
+在Android系统下，长时间运行下，尤其是达到1个月以上的用户不会插拔电源的，我们是不能够保证不发生 Oop(Kernel panic)的，但可以做到事情发生之后，能够重启；
+添加修改如下；
+init.rc
+	
+	#5s 之后重启
+	write /proc/sys/kernel/panic  5
+	wirte /proc/sys/kernel/panic_on_oops 1
+
+####查看遥控器键值物理码：
+echo HI_IR=4 >log
+
+####data数据异常：
+200台盒子发现4台盒子异常，有这么两种现象：  
+1. 启机失败  
+2. 某些应用异常  
+其中不能启机的盒子，发现SettingsProvider应用的数据库目录变成了管道文件，如图：  
+![pic_031]()  
+busybox mknod aa p
+
+####swRootService 中socket频繁创建影响广播导致启动应用慢
+
+####定义可变参数接口int foo( char* msg, ... );
+va_start/va_arg/va_end 见测试代码origin_c/va_start_20150123，个人感觉还是需要了解参数类型及个数，要不然函数内部没有办法准确取出来使用，能少敲些代码倒是真的，能偷懒的即是好机制。
+
+####awk中赋值：
+eval $(awk '$2=="/mnt/sdcard" {printf("ret=1");}' $FILE)
+eval 下执行可以用printf给变量赋值
+
+####(0123)ART 模式与 Dalvik 模式
+在Dalvik下，应用每次运行的时候，字节码都需要通过即时编译器转换为机器码，这会拖慢应用的运行效率。在ART 环境中，应用在第一次安装的时候，字节码就会预先编译成机器码，使其成为真正的本地应用。这个过程叫做预编译（AOT,Ahead-Of-Time）。这样的话，应用的启动(首次)和执行都会变得更加快速。
+
+####有关mkbootfs
+	${OUT}/build/tool/linux-x86/bin/mkbootfs \
+         ${OUT}/${OUT_DIR}/target/${target_name}/BOOT/RAMDISK | \
+         ${OUT}/build/tool/linux-x86/bin/minigzip > ${OUT}/${OUT_DIR}/obj/ramdisk_for_boot.img
+1. 根据include/private/android_filesystem_config.h 中android_dirs/android_files中预先设计的目录或者文件的mode、uid、gid、capablities（诸如setuid/setgid）配置文件的权限。  
+如果新添加目录或者制作新文件系统镜像需要在此配置相应权限。
+2. _eject接口中将数据写向了stdout，交由minizip进一步处理成img。
+涉及：
+`void qsort(void *base, int nelem, int width, int (*fcmp)(const void *,const void *));`  
+各参数：1 待排序数组首地址 2 数组中待排序元素数量 3 各元素的占用空间大小 4 指向函数的指针  
+其中fcmp可以提供自定义的比较规则。
+
+
+####参数列表的另一种写法：
+	431 int send_probe(seq, ttl)
+	432         int seq, ttl;
+	433 {
+
+	566 int packet_ok(buf, cc, from, seq)
+	567         u_char *buf;
+	568         int cc;
+	569         struct sockaddr_in *from;
+	570         int seq;
+
+####几个硬件问题：
+1. flash电容放电慢会导致上下电太快则盒子起不来
+2. hdmi 信息都正常，某个盒子在某个电视上无输出，问题是输出信号不太好，更换磁珠解决
+
 ####putty作串口工具出现过不能输入情况，换用secreCRT就ok，wtf！
 
 ####build.prop 本身的属性会影响属性的解析
