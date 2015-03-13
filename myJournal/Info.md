@@ -1,5 +1,8 @@
 
 
+####有关教育
+[小学的重点不在成绩，在于阅读](http://edu.qq.com/a/20141117/044106.htm)  
+
 ####知识-技能--才干
 [技巧|如何成为某一领域的高手？](http://mp.weixin.qq.com/s?__biz=MjM5NTg2MTQ2MQ==&amp;mid=203092264&amp;idx=2&amp;sn=eedcaea1467faf474d9aaebd0c1ca48b&amp;scene=1#rd)
 
