@@ -20,7 +20,7 @@
 
 ####搭建github博客（只可惜。。。）
 [使用Github Pages建独立博客](http://beiyuu.com/github-pages/)
-
+[Using Jekyll with Pages](https://help.github.com/articles/using-jekyll-with-pages/)
 ####有关markdown语法及工具
 [Markdown——入门指南](http://www.jianshu.com/p/1e402922ee32/)  
 [Markdown 语法说明 (简体中文版)](http://wowubuntu.com/markdown/)  
