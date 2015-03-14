@@ -22,6 +22,7 @@
 [使用Github Pages建独立博客](http://beiyuu.com/github-pages/)  
 [Using Jekyll with Pages](https://help.github.com/articles/using-jekyll-with-pages/)  
 [搭建一个免费的，无限流量的Blog----github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)  
+[创建GitHub技术博客全攻略](http://blog.csdn.net/renfufei/article/details/37725057)  
 
 ####有关markdown语法及工具
 [Markdown——入门指南](http://www.jianshu.com/p/1e402922ee32/)  
