@@ -3,6 +3,9 @@
 ####项目经理？
 [如何不被程序员（RD）们嫌弃－－写给那些血气方刚的产品经理（PM） | 36氪](http://www.36kr.com/p/212020.html)
 
+####有关献血
+[你很有必要了解这些和所有人都相关的献血常识](http://daily.zhihu.com/story/4333410?utm_campaign=in_app_share&utm_medium=Android&utm_source=Evernote)
+
 ####有关教育
 [小学的重点不在成绩，在于阅读](http://edu.qq.com/a/20141117/044106.htm)  
 
