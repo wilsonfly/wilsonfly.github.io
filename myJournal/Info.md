@@ -7,7 +7,8 @@
 [你很有必要了解这些和所有人都相关的献血常识](http://daily.zhihu.com/story/4333410?utm_campaign=in_app_share&utm_medium=Android&utm_source=Evernote)
 
 ####有关教育
-[小学的重点不在成绩，在于阅读](http://edu.qq.com/a/20141117/044106.htm)  
+[小学的重点不在成绩，在于阅读](http://edu.qq.com/a/20141117/044106.htm)    
+[洋爸爸这样粗养孩子，“无为而治”重在坚持](http://www.3ikids.com/article/12085.shtml)  
 
 ####知识-技能--才干
 [技巧|如何成为某一领域的高手？](http://mp.weixin.qq.com/s?__biz=MjM5NTg2MTQ2MQ==&amp;mid=203092264&amp;idx=2&amp;sn=eedcaea1467faf474d9aaebd0c1ca48b&amp;scene=1#rd)
