@@ -19,8 +19,10 @@
 [Android学习之路](http://stormzhang.com/android/2014/07/07/learn-android-from-rookie/)
 
 ####搭建github博客（只可惜。。。）
-[使用Github Pages建独立博客](http://beiyuu.com/github-pages/)
-[Using Jekyll with Pages](https://help.github.com/articles/using-jekyll-with-pages/)
+[使用Github Pages建独立博客](http://beiyuu.com/github-pages/)  
+[Using Jekyll with Pages](https://help.github.com/articles/using-jekyll-with-pages/)  
+[搭建一个免费的，无限流量的Blog----github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)  
+
 ####有关markdown语法及工具
 [Markdown——入门指南](http://www.jianshu.com/p/1e402922ee32/)  
 [Markdown 语法说明 (简体中文版)](http://wowubuntu.com/markdown/)  
