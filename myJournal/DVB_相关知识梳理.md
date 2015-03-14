@@ -1,6 +1,48 @@
 
 
+####术语
+1. Open Cable 电缆短路
+2. Back Bias（雷击浪涌时的）反馈偏压
+3. RSSI （Received Signal Strength Indication） 接收信号强度
+4. BER （bit error rate）误码率
+5. PER （ packet error rate）误包率
+6. FER （frame error rate）误帧率
+7. RSSI （Received signal strength indication）接收信号强度
+8. SQI （Speech quality index）话音质量指数。SQI 用于表达语音由于无线链路传输造成的失真度，该算法为爱立信的专利算法。该算法考虑诸多的无线参数包括BER 、FER 、切换频率、切换状态、DTX 是否激活以及所用的编码器等。从而给出最终的语音质量评估值SQI，SQI的取值从－20到＋30。这里需要指出的是对于不同的编码器类型，SQI是有上限的。对于半速率编码器而言，SQI的上限为19，而全速率为21，增强型全速率为30。这里因为不同的编码方法对数据的压缩是不同的，从而造成的语音失真也是不同的。通常我们认为当SQI小于0时语音质量为不可接受，当SQI大于0而小于18时，语音质量为可接收，当SQI大于18时语音质量为良好。
 
+####8015 生产测试镜像
+ftp://file.sys.sunniwell.net/producttest/8015/8015_tftp/     
+
+####工厂dvbs码流发射器
+![pic_007](res/DVB_相关知识梳理/dvb_007.png)
+![pic_008](res/DVB_相关知识梳理/dvb_008.png)
+![pic_009](res/DVB_相关知识梳理/dvb_009.png)
+![pic_010](res/DVB_相关知识梳理/dvb_010.png)
+![pic_011](res/DVB_相关知识梳理/dvb_011.png)
+![pic_012](res/DVB_相关知识梳理/dvb_012.png)
+![pic_013](res/DVB_相关知识梳理/dvb_013.png)  
+
+
+####8065新板需要高安的loader，签过名的kernel和fs
+kernel可用基线下的 kernel_linux-2.6.35_hi3716_Hi3716XV100R001C00SPC0A1_CA.img.sig  
+fs可用签名工具对img镜像签名 ./swsign -f rootbox.img_4 -s sunniwell_rsa_priv.txt -t app -e 0
+
+九：新调过角度的锅
+     rf: 12731  sym_rate:30000  vertical
+	##########################blind_result start#######################################################
+	###index= 0###freq=12372##symbol_rate=2400##polarization=0##dvbs2=0##k22hz=0########################
+	###index= 1###freq=12384##symbol_rate=6667##polarization=0##dvbs2=1##k22hz=0########################
+	###index= 2###freq=12411##symbol_rate=11111##polarization=0##dvbs2=0##k22hz=0#######################
+	###index= 3###freq=12420##symbol_rate=2963##polarization=0##dvbs2=0##k22hz=0#######################
+	###index= 4###freq=12425##symbol_rate=4440##polarization=0##dvbs2=0##k22hz=0#######################
+	###index= 5###freq=12308##symbol_rate=3800##polarization=1##dvbs2=0##k22hz=0#######################
+	###index= 6###freq=12431##symbol_rate=29999##polarization=1##dvbs2=0##k22hz=0######################
+	###index= 7###freq=12471##symbol_rate=30000##polarization=1##dvbs2=0##k22hz=0######################
+	##########################blind_result end#####################################################
+
+####8845B使用的lnbh23叠加22k信号
+采用的是demod给出22k信号通过EXTM到lnb，然后lnb叠加。因此按照下面方式设置。
+![pic_006](res/DVB_相关知识梳理/dvb_006.png)  
 
 ####调试环境
 1. B180_TM_3716M项目代码hi3716_tm_ranger.env环境变量
