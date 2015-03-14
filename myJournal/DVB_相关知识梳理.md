@@ -27,17 +27,17 @@ ftp://file.sys.sunniwell.net/producttest/8015/8015_tftp/
 kernel可用基线下的 kernel_linux-2.6.35_hi3716_Hi3716XV100R001C00SPC0A1_CA.img.sig  
 fs可用签名工具对img镜像签名 ./swsign -f rootbox.img_4 -s sunniwell_rsa_priv.txt -t app -e 0
 
-九：新调过角度的锅
-     rf: 12731  sym_rate:30000  vertical
-	##########################blind_result start#######################################################
-	###index= 0###freq=12372##symbol_rate=2400##polarization=0##dvbs2=0##k22hz=0########################
-	###index= 1###freq=12384##symbol_rate=6667##polarization=0##dvbs2=1##k22hz=0########################
-	###index= 2###freq=12411##symbol_rate=11111##polarization=0##dvbs2=0##k22hz=0#######################
-	###index= 3###freq=12420##symbol_rate=2963##polarization=0##dvbs2=0##k22hz=0#######################
-	###index= 4###freq=12425##symbol_rate=4440##polarization=0##dvbs2=0##k22hz=0#######################
-	###index= 5###freq=12308##symbol_rate=3800##polarization=1##dvbs2=0##k22hz=0#######################
-	###index= 6###freq=12431##symbol_rate=29999##polarization=1##dvbs2=0##k22hz=0######################
-	###index= 7###freq=12471##symbol_rate=30000##polarization=1##dvbs2=0##k22hz=0######################
+####新调过角度的锅
+     rf: 12731  sym_rate:30000  vertical  
+	##########################blind_result start#######################################################  
+	###index= 0###freq=12372##symbol_rate=2400##polarization=0##dvbs2=0##k22hz=0########################  
+	###index= 1###freq=12384##symbol_rate=6667##polarization=0##dvbs2=1##k22hz=0########################  
+	###index= 2###freq=12411##symbol_rate=11111##polarization=0##dvbs2=0##k22hz=0#######################  
+	###index= 3###freq=12420##symbol_rate=2963##polarization=0##dvbs2=0##k22hz=0#######################  
+	###index= 4###freq=12425##symbol_rate=4440##polarization=0##dvbs2=0##k22hz=0#######################  
+	###index= 5###freq=12308##symbol_rate=3800##polarization=1##dvbs2=0##k22hz=0#######################  
+	###index= 6###freq=12431##symbol_rate=29999##polarization=1##dvbs2=0##k22hz=0######################  
+	###index= 7###freq=12471##symbol_rate=30000##polarization=1##dvbs2=0##k22hz=0######################  
 	##########################blind_result end#####################################################
 
 ####8845B使用的lnbh23叠加22k信号
