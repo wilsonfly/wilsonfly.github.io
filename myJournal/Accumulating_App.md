@@ -1,7 +1,8 @@
 
 
 
-
+####eclipse快捷键
+[动画讲解Eclipse常用快捷键](http://www.techug.com/eclipse-shortcut-keys)  
 
 ####15. layout 文件不能有大写字母，只能是a-z, 0-9, or _.  
 
