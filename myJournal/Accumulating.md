@@ -900,7 +900,19 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp
 注意：如果#pragma pack (n)中指定的 n 大于结构体中最大成员的 size，则其不起作用，结构体仍然按照 size 最大的成员进行对界。  
 （3）另外，通过__attribute((aligned (n)))也可以让所作用的结构体成员对齐在 n 字节边界上，但是它较少被使用，因而不作详细讲解
 
+####有关find: paths must precede expression
+	#touch {1,2,3,4}.txt
+	#find . -name *.txt
+	find: paths must precede expression: 2.txt
+出现这个提示是因为星号被展开为当前目录下所有的文件  
+想要星号不被展开就需要**加上括号或者反斜杠转义**  
 
+	 # find . -name '*.txt'  
+	 find . -name '*.txt'  
+	 ./4.txt  
+	 ./2.txt  
+	 ./3.txt  
+	 ./1.txt  
 
 ####代码可以完全做到不包含头文件，但出于便于阅读还是写好头文件。详见[C语言的头文件是必须的吗？](http://blog.chinaunix.net/uid-24774106-id-3291005.html)
 
