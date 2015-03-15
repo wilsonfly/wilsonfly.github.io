@@ -1,5 +1,57 @@
 
 
+####有关字符串长度
+	$echo ${#variable}
+	$expr length "$variable"
+	$expr "$variable" : ".*"
+
+	$ x="this is a test"
+	$ echo ${#x}
+	14
+
+	$ x="this is a test"
+	$ expr length "$x"
+	14
+
+	$ x="this is a test"
+	$ expr "$x" : ".*"
+	14
+
+####有关查找字符串子串位置
+	$expr index "$variable" "substring"
+
+	$ x="this is a test"
+	$ expr index "$x" "is"
+	3
+
+	$ expr index "$x" "t"
+	1
+	(ps:如果出现重复,好象只能查到第一个,第二个,第三个,...,怎么查到呢???)
+
+####有关得到字符串子字符串
+	$echo ${variable:position:length}
+	$expr substr "$variable" startposition length
+
+	$ x="this is a test"
+	$ echo ${x:1:5}
+	his i
+
+	$ x="this is a test"
+	$ expr substr "$x" 1 5
+	this
+	(ps:注意方法一和方法二中位置的区别!)
+
+####有关匹配正则表达式之匹配长度
+	$expr match "$x" "string"
+
+	$ x="this is a test"
+	$ expr match "$x" "his"
+	0
+	$ expr match "$x" "this"
+	4
+	$ expr match "$x" "."
+	1
+
 
 ####有关字符串的截取
 1.截取头部/尾部
