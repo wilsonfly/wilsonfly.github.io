@@ -5,4 +5,4 @@ One repo for blog.
 
 The journals are located in **myJournal** now.
 
-整理笔记持续更新中。。。  
+Reorganizing the notes before and updating the journals here...
