@@ -1,8 +1,6 @@
-wilsonfly.github.io
-===================
 
-One repo for blog.
+This is a repo created for blog.
 
-The journals are located in **myJournal** now.
+The journals are located temporarily in **myJournal** now.
 
-Reorganizing the notes before and updating the journals here...
+The notes before are being reorganized and the journals here will be updating constantly...
