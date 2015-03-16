@@ -792,7 +792,8 @@ boot和recovery映像并不是一个完整的文件系统，它们是一种andro
 ** m = (ramdisk_size + page_size - 1) / page_size  
 ** o = (second_size + page_size - 1) / page_size  
 */  
-boot的ramdisk映像是一个最基础的小型文件系统，它包括了初始化系统所需要的全部核心文件，例如:初始化init进程以及init.rc（可以用于设置很多系统的参数）等文件。
+boot的ramdisk映像是一个最基础的小型文件系统，它包括了初始化系统所需要的全部核心文件，例如:初始化init进程以及init.rc（可以用于设置很多系统的参数）等文件。  
+[android rom制作之bootimg的详细介绍和使用](http://www.cnblogs.com/weisenz/archive/2012/03/30/2425452.html)  
 
 ####zygote 入口：
 frameworks/base/cmds/app_process$
