@@ -934,20 +934,20 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp
 ####代码可以完全做到不包含头文件，但出于便于阅读还是写好头文件。详见[C语言的头文件是必须的吗？](http://blog.chinaunix.net/uid-24774106-id-3291005.html)
 
 ####HMS点播发流方法:
-HMS server ip： 172.16.11.90
-login_name:  xx
-password: xx
-1. 找一个可以播放的HMS
-2. 既然可以播放，肯定有一个点播卷，
-   如/home/hms/data/c/vod_pub_c
-3. 将ts文件拷贝到点播卷目录下，
-   如/home/hms/data/c/vod_pub_c/stc_nvod.ts
-4. 调用HMS抽帧工具，对TS进行抽帧
-   cd /home/huawei/mdn2000/es/bin
-   ./ts_get_vod_index /home/hms/data/c/vod_pub_c/stc_nvod.ts
-5. 创建一个mdn文件，为空即可
-   touch /home/hms/data/c/vod_pub_c/stc_nvod.ts.mdn
-6. rtsp://hms_ip/stc_nvod.ts
+HMS server ip： 172.16.11.90  
+login_name:  xx  
+password: xx  
+1. 找一个可以播放的HMS  
+2. 既然可以播放，肯定有一个点播卷，  
+   如/home/hms/data/c/vod_pub_c  
+3. 将ts文件拷贝到点播卷目录下，  
+   如/home/hms/data/c/vod_pub_c/stc_nvod.ts  
+4. 调用HMS抽帧工具，对TS进行抽帧  
+   cd /home/huawei/mdn2000/es/bin  
+   ./ts_get_vod_index /home/hms/data/c/vod_pub_c/stc_nvod.ts  
+5. 创建一个mdn文件，为空即可  
+   touch /home/hms/data/c/vod_pub_c/stc_nvod.ts.mdn  
+6. rtsp://hms_ip/stc_nvod.ts  
 
 ####ttnet：
 开机按遥控器蓝色键进入小系统，按数字键1 进行u盘升级  
