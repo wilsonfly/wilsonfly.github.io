@@ -1,5 +1,22 @@
 
 
+####(0316)有关source环境变量报错找不到文件：-sh: source: bcm7584.env: file not found
+虽然/bin/sh 已经是指向/bin/bash，但修改/etc/password 中sunhuasheng:x:1022:1022::/home/sunhuasheng:/bin/bash 即可
+
+####(0316)有关@SuppressWarnings
+@SuppressWarnings(“”)  
+@SuppressWarnings({})  
+@SuppressWarnings(value={})  
+用于在编译时忽略特定警告  
+@SuppressWarnings("deprecation")表示不显示使用了不赞成使用的类或方法时的警告  
+@SuppressWarnings("unchecked", "deprecation")   
+@SuppressWarnings(value={"unchecked", "deprecation"})   
+
+####(0313) 有关按键音
+音频文件位置：/system/media/audio/ui/，可直接替换   
+接蓝牙音箱会有杂音。小米盒子、手机接蓝牙音箱按键音也会有同样现象。分析来看在蓝牙音箱接到播放信息后启动声音输出的和关闭声音输出的瞬间会有杂音，在按键音这种持续时间特别短的情况下就会比较明显的感觉到杂音的存在。  
+
+
 ####(0310)Linux下运行windows软件的工具
 wine
 
