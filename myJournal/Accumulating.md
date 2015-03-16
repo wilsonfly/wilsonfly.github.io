@@ -362,7 +362,7 @@ iwpriv wlan0 efuse_get mac
 --对应xhci-hcd.ko  
 
 ####Ubuntu编译Android KitKat 4.4出现Chromium gyp HashSet_jni.h报错的解决方法
-[Ubuntu编译Android KitKat 4.4出现Chromium gyp HashSet_jni.h报错的解决方](http://blog.csdn.net/michaelpp/article/details/22184733)
+[Ubuntu编译Android KitKat 4.4出现Chromium gyp HashSet_jni.h报错的解决方法](http://blog.csdn.net/michaelpp/article/details/22184733)
 
 ####网口半双工/全双工配置：
  查询命令：  
