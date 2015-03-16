@@ -112,3 +112,6 @@
 	$ aa="No such file or directory"
 	$ echo ${aa//o/a}
 	Na such file ar directary 
+
+
+####更多实例代码见https://github.com/wilsonfly/test_module/下shell目录
