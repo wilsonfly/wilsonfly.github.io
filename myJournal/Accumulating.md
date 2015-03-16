@@ -774,7 +774,26 @@ echo 8 > /proc/sys/kernel/printk
 ####bootimg制作：
  ../../../host/linux-x86/bin/mkbootfs root_bk | minigzip >ramdisk.img
 ../../../host/linux-x86/bin/mkbootimg --kernel uImage --ramdisk ramdisk.img.gz --cmdline  "mem=335M vmalloc=400M console=ttyAMA0,115200 loglevel=0 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0x9D600000,42M mtdparts=hi_mmc:" --base 0x80000000 --output boot.img
- 
+
+####boot和recovery映像的文件结构
+boot和recovery映像并不是一个完整的文件系统，它们是一种android自定义的文件格式，该格式包括了2K的文件头，后面紧跟着是用gzip压缩过的内核，再后面是一个ramdisk内存盘，然后紧跟着第二阶段的载入器程序（这个载入器程序是可选的，在某些映像中或许没有这部分）。  
+/*  
+** +-----------------+  
+** | boot header    | 1 page  
+** +-----------------+  
+** | kernel              | n pages   
+** +-----------------+  
+** | ramdisk           | m pages   
+** +-----------------+  
+** | second stage  | o pages  
+** +-----------------+  
+**
+** n = (kernel_size + page_size - 1) / page_size   
+** m = (ramdisk_size + page_size - 1) / page_size  
+** o = (second_size + page_size - 1) / page_size  
+*/  
+boot的ramdisk映像是一个最基础的小型文件系统，它包括了初始化系统所需要的全部核心文件，例如:初始化init进程以及init.rc（可以用于设置很多系统的参数）等文件。
+
 ####zygote 入口：
 frameworks/base/cmds/app_process$
 
