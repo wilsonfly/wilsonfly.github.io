@@ -334,6 +334,12 @@ run cts -p android.provider
 logcat |grep -v SettingsProvide  
 grep -v 'Copy_Project_Images_Files\|Rm_unnecessary_files' project_priv.sh
 
+####有关adb的root权限
+user版本默认adb为shell用户，eng版本为root权限。所以需要关心adb用户的则是在user版本，此时不宜修改ro.debuggable。  
+adb.c的main中should_drop_privileges返回true则会成为shell用户，相反则为root权限。用属性实现灵活控制，便于调试：   
+![pic_009](res/Accumulating/accumulating_009.png)  
+
+
 ####安全红线查找权限超规格文件：
 1、adb shell  
 2、busybox find \( -perm -04000 -o -perm -02000 \) -exec busybox ls -ld {} \; > /data/finds.txt  
