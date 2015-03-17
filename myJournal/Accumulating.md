@@ -330,6 +330,14 @@ C:\Users\huasheng\Documents\%H_%M_%D_%h_%m_%s.log
 	2）查看是否设置正常，输入：cat /proc/msp/log  
 	3）抓取驱动日志：cat /proc/ksmg
 
+####有关IR键值
+红外协议：nec simple uPD6121G  
+协议及键值波形如下图：  
+wifi信号在盒子内经反射以及日光灯照射均会对红外信号造成干扰，表现在波形上就是出现一些低电平的毛刺，优化思路就是将不规则信号保存并相加，拼凑出bit0或者bit1.  
+![pic_010](res/Accumulating/accumulating_010.png)  
+![pic_011](res/Accumulating/accumulating_011.png)  
+
+
 ####查看某个进程内存使用情况：
 procmem  one_pid  
 
