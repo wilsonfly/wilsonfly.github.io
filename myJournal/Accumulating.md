@@ -319,7 +319,16 @@ C:\Users\huasheng\Documents\%H_%M_%D_%h_%m_%s.log
 	176
 	177 echo "$res"
 
-
+####有关HDMI问题定位信息
+1. 抓取日志  
+从开机上电开始抓取，一直到复现问题。
+2. 抓取PROC信息  
+在串口系统命令行下运行并保存：
+`cat /proc/msp/hdmi;cat /proc/msp/disp1;`
+3. 抓取驱动信息：  
+	1）先在串口下输入：echo hdmi=3 >/proc/msp/log  
+	2）查看是否设置正常，输入：cat /proc/msp/log  
+	3）抓取驱动日志：cat /proc/ksmg
 
 ####查看某个进程内存使用情况：
 procmem  one_pid  
