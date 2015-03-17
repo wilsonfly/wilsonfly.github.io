@@ -341,6 +341,33 @@ wifi信号在盒子内经反射以及日光灯照射均会对红外信号造成�
 ![pic_010](res/Accumulating/accumulating_010.png)  
 ![pic_011](res/Accumulating/accumulating_011.png)  
 
+####雅马哈功放配置攻略
+一：HDMI接入方式配置  
+1.HDMI线接入后面板【HDMI】【IN】（有1/2/3/4/可用）  
+2.选择【QUICK SELECT】【1】，此时面板中央显示[DVD]  
+>DVD下放的[STEREO] [ROCK ARENA] [JAZZ CLUB].. 表示风格，可通过【SELECT/ENTER】切换，不影响音频输出与否。 
+ 
+3.按【MENU】进入[ Input Setup ]（进入后可用【^】【v】查找）  
+>按【SELECT/ENTER】进入[ Assign ]（进入后可用【^】【v】查找）  
+按【SELECT/ENTER】进入[ HDMI ]输入配置页面  
+旋转【SELECT/ENTER】选择第1步骤中HDMI线接入的接口  
+按【SELECT/ENTER】进行确认  
+按【MENU】退出配置页面  
+  
+4.此时已经完成HDMI接入方式的配置  
+
+二：SPDIF 接入方式配置  
+1.SPDIF线接入前面板【OPTICAL-3】或者后面板【OPTICAL-1】【OPTICAL-2】  
+2.选择【QUICK SELECT】【2】，此时面板中央显示[TV/CBL]  
+3.按【MENU】进入[ Input Setup ]（进入后可用【^】【v】查找）  
+>按【SELECT/ENTER】进入[ Assign ]（进入后可用【^】【v】查找）  
+按【SELECT/ENTER】进入[ HDMI ]输入配置页面，进入后用【^】【v】查找到[Digital]输入配置页面  
+旋转【SELECT/ENTER】选择第1步骤中SPDIF线接入的接口[OPT3]或者[OPT1]/[OPT2]  
+按【SELECT/ENTER】进行确认  
+按【MENU】退出配置页面  
+
+4.此时已经完成SPDIF接入方式的配置  
+
 
 ####查看某个进程内存使用情况：
 procmem  one_pid  
