@@ -1,7 +1,10 @@
 
 
 
-
+####分支日志异常，看到的是其他分支内容
+git log --graph可以查看历史记录   
+配置  merge no-fastforward (如下命令），这样在合并的时候，会产生一个merge commit的日志记录。但这个方法也只是在增加了日志，不能从根本上避免，还是需要操作的时候小心谨慎，pull 之前一定要看看当前分支是不是要pull的分支。  
+`git config  --global merge.ff false`   
 
 ####git提交日志格式定制：  
 git config commit.template .gitmessage.txt  //配置commit格式模板  
