@@ -1,5 +1,13 @@
 
 
+
+
+####(0202)am启动apk
+am start -n [component] ,此处的component类似于代码里边的包名加类名，不过此处类名可以是完整的类名也可以是简写  
+am start -n net.sunniwell.app.swsettings/.SWSettingsActivity  
+am start -n net.sunniwell.app.swsettings/net.sunniwell.app.swsettings.SWSettingsActivity  
+
+
 ####有关@Override
 @Override是伪代码,表示重写(当然不写也可以)，不过写上有如下好处:   
 1、可以当注释用,方便阅读  
