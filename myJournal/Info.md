@@ -7,14 +7,14 @@
 [你很有必要了解这些和所有人都相关的献血常识](http://daily.zhihu.com/story/4333410?utm_campaign=in_app_share&utm_medium=Android&utm_source=Evernote)
 
 ####有关教育
-[小学的重点不在成绩，在于阅读](http://edu.qq.com/a/20141117/044106.htm)    
+[小学的重点不在成绩，在于阅读](http://mp.weixin.qq.com/s?__biz=MzA3MDA2MDczMA==&mid=202270466&idx=1&sn=44f4141b472e6768122ccb18ea5b2a0f&scene=4#wechat_redirect)    
 [洋爸爸这样粗养孩子，“无为而治”重在坚持](http://www.3ikids.com/article/12085.shtml)  
 
 ####知识-技能--才干
 [技巧|如何成为某一领域的高手？](http://mp.weixin.qq.com/s?__biz=MjM5NTg2MTQ2MQ==&amp;mid=203092264&amp;idx=2&amp;sn=eedcaea1467faf474d9aaebd0c1ca48b&amp;scene=1#rd)
 
 ####不是你之前了解的那样
-[有短板的木桶，真如大家所深信的装不了那么多水吗？](http://daily.zhihu.com/story/4520359)  
+[有短板的木桶，真如大家所深信的装不了那么多水吗？](http://daily.zhihu.com/story/4520359?utm_campaign=in_app_share&utm_medium=Android&utm_source=Evernote)  
 
 ####Android进阶学习书籍及资料介绍
 [Android学习之路](http://stormzhang.com/android/2014/07/07/learn-android-from-rookie/)
