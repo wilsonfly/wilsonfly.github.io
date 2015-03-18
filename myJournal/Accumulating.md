@@ -165,6 +165,11 @@ KSM全称为 Kernel Shared Memory 或 Kernel Samepage Merging，KSM作为Linux�
 ![pic_006](res/Accumulating/accumulating_006.png)    
 补充阅读见：[KSM(Kernel Samepage Merging) 剖析：Linux 内核中的内存去耦合](http://blog.csdn.net/summer_liuwei/article/details/6013255)
 
+####键值上抛及待机流程
+![pic_014](res/Accumulating/accumulating_014.jpg)    
+![pic_015](res/Accumulating/accumulating_015.jpg)    
+
+
 ####shell 定义函数问题
 shell function不能空，会导致下面的function使用的时候报not found
 
