@@ -259,6 +259,18 @@ eval 下执行可以用printf给变量赋值
 其中fcmp可以提供自定义的比较规则。
 
 
+####有关recovery中shell环境
+user版本的busybox 将sh裁减掉的，所以调试时候一种方式是替换完整的busybox，另一种方式则是启动mksh。mksh代码在external/mksh，需要修改Android.mk链接静态libc。  
+
+    service console /sbin/busybox sh
+        console
+
+修改为 
+ 
+    service console /sbin/mksh
+        console
+
+
 ####参数列表的另一种写法：
 	431 int send_probe(seq, ttl)
 	432         int seq, ttl;
