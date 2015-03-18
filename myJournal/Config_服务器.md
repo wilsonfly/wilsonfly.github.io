@@ -1,7 +1,12 @@
 
 
 ####nfs配置：
-/etc/exports
+sudo apt-get install nfs-kernel-server  
+sudo /etc/init.d/nfs-kernel-server restart  
+netstat 查看nfs端口是否已经打开，nfs端口（2049）及SUNRPC端口（111）处于监听状态  
+配置/etc/exports  
+/nfs/sunhuasheng/  *(rw,no_root_squash,sync)
+
 
 ####source找不到问题：-sh: source: bcm7584.env: file not found
 ---- usermod -s /bin/bash xinxian    
