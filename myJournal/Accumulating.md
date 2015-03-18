@@ -170,6 +170,21 @@ KSM全称为 Kernel Shared Memory 或 Kernel Samepage Merging，KSM作为Linux�
 ![pic_015](res/Accumulating/accumulating_015.jpg)    
 
 
+####添加遥控器键值
+1. frameworks/base/core/java/android/view/KeyEvent.java 添加KEYCODE  
+`     public static final int KEYCODE_MYAPP           = 1192;`
+2. frameworks/base/core/res/res/values/attrs.xml 添加KEYCODE  
+`	<enum name="KEYCODE_MYAPP"  value="1192" />`
+3. frameworks/base/data/keyboards/Generic.kl 添加LinuxCode  
+`	key 157   MYAPP`
+4. frameworks/native/include/android/keycodes.h  
+`    AKEYCODE_MYAPP              = 1192,`
+5. frameworks/native/include/input/KeycodeLabels.h  
+`    { "MYAPP"        ,1192},`
+6. device/hisilicon/bigfish/prebuilts/Vendor_0001_Product_0001.kl  
+`    key 157   MYAPP             FUNCTION`
+
+
 ####shell 定义函数问题
 shell function不能空，会导致下面的function使用的时候报not found
 
