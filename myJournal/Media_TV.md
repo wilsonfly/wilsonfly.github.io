@@ -17,11 +17,16 @@ CBR（Constants Bit Rate）即固定码率，就是静态（恒定）比特率�
 ####mosaic播放流程
 ![pic_001](res/Media_TV/media_001.jpg)  
 ![pic_002](res/Media_TV/media_002.jpg)  
+![pic_008](res/Media_TV/media_008.jpg)  
 
 ####组播播放流程
 ![pic_003](res/Media_TV/media_003.jpg)  
 ![pic_004](res/Media_TV/media_004.jpg)  
 ![pic_005](res/Media_TV/media_005.jpg)  
 
+####PVR流程
+![pic_006](res/Media_TV/media_006.jpg)  
 
+####ts包解析之PAT/PMT
+![pic_007](res/Media_TV/media_007.jpg)  
 
