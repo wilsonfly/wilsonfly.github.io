@@ -1325,3 +1325,8 @@ setenv bootargs 'mem=128M console=ttyAMA0,115200  root=/dev/romblock3 rootfstype
 VMware Tools installation cannot be started manually while Easy Install is in progress.  
 如下修改，重启即可  
 ![pic_005](res/Accumulating/accumulating_005.png)  
+
+
+####vim 进阶
+![pic_016](res/Accumulating/accumulating_016.jpg)  
+![pic_017](res/Accumulating/accumulating_017.jpg)  
