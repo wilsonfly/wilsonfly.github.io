@@ -1,5 +1,11 @@
 
 
+####DVBS控制流程
+![pic_015](res/DVB_相关知识梳理/dvb_015.png)
+![pic_016](res/DVB_相关知识梳理/dvb_016.png)
+![pic_017](res/DVB_相关知识梳理/dvb_017.png)
+
+
 ####术语
 1. Open Cable 电缆短路
 2. Back Bias（雷击浪涌时的）反馈偏压
