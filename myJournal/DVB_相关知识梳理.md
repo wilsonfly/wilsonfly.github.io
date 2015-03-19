@@ -1,9 +1,9 @@
 
 
 ####DVBS控制流程
-![pic_015](res/DVB_相关知识梳理/dvb_015.png)
-![pic_016](res/DVB_相关知识梳理/dvb_016.png)
-![pic_017](res/DVB_相关知识梳理/dvb_017.png)
+![pic_015](res/DVB_相关知识梳理/dvb_015.jpg)
+![pic_016](res/DVB_相关知识梳理/dvb_016.jpg)
+![pic_017](res/DVB_相关知识梳理/dvb_017.jpg)
 
 
 ####术语
