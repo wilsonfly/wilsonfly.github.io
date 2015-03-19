@@ -166,6 +166,14 @@ KSM全称为 Kernel Shared Memory 或 Kernel Samepage Merging，KSM作为Linux�
 补充阅读见：[KSM(Kernel Samepage Merging) 剖析：Linux 内核中的内存去耦合](http://blog.csdn.net/summer_liuwei/article/details/6013255)
 
 ####键值上抛及待机流程
+相关代码：  
+policy/src/com/android/internal/policy/impl/PhoneWindowManager.java  
+services/input/EventHub.cpp  
+services/input/InputDispatcher.cpp  
+services/input/InputReader.cpp  
+services/java/com/android/server/power/PowerManagerService.java  
+services/jni/com_android_server_input_InputManagerService.cpp  
+流程：  
 ![pic_014](res/Accumulating/accumulating_014.jpg)    
 ![pic_015](res/Accumulating/accumulating_015.jpg)    
 
