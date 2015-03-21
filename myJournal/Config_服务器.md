@@ -1,5 +1,15 @@
 
 
+####java环境搭建
+1. oracle官网下载对应的jdk包：jdk-8u40-linux-i586.gz
+2. 解压到指定的某个目录，比如：/usr/jdk1.8.0_40/
+3. 修改环境变量，在~/.bashrc中添加：  
+    export JAVA_HOME=/usr/jdk1.8.0_40  
+    export JRE_HOME=${JAVA_HOME}/jre  
+    export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib  
+    export PATH=$PATH:$JAVA_HOME/bin:/$JAVA_HOME/jre/bin  
+4. 重新登录或者source .bashrc 
+
 ####nfs配置：
 sudo apt-get install nfs-kernel-server  
 sudo /etc/init.d/nfs-kernel-server restart  
