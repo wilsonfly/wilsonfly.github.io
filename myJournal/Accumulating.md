@@ -12,6 +12,22 @@
 @SuppressWarnings("unchecked", "deprecation")   
 @SuppressWarnings(value={"unchecked", "deprecation"})   
 
+
+####键值上抛及待机流程
+相关代码：  
+policy/src/com/android/internal/policy/impl/PhoneWindowManager.java  
+services/input/EventHub.cpp  
+services/input/InputDispatcher.cpp  
+services/input/InputReader.cpp  
+services/java/com/android/server/power/PowerManagerService.java  
+services/jni/com_android_server_input_InputManagerService.cpp  
+有关inotify：  
+[linux 监视文件系统inotify 测试](http://blog.csdn.net/hepeng597/article/details/7792565)  
+流程：  
+![pic_014](res/Accumulating/accumulating_014.jpg)    
+![pic_015](res/Accumulating/accumulating_015.jpg)    
+
+
 ####(0313) 有关按键音
 音频文件位置：/system/media/audio/ui/，可直接替换   
 接蓝牙音箱会有杂音。小米盒子、手机接蓝牙音箱按键音也会有同样现象。分析来看在蓝牙音箱接到播放信息后启动声音输出的和关闭声音输出的瞬间会有杂音，在按键音这种持续时间特别短的情况下就会比较明显的感觉到杂音的存在。  
@@ -164,18 +180,6 @@ export PYTHONSTARTUP=~/.pythonstartup.py
 KSM全称为 Kernel Shared Memory 或 Kernel Samepage Merging，KSM作为Linux内核中的守护进程（称为ksmd）存在，它定期执行页面扫描，识别副本页面并合并副本，释放这些页面以供它用。  
 ![pic_006](res/Accumulating/accumulating_006.png)    
 补充阅读见：[KSM(Kernel Samepage Merging) 剖析：Linux 内核中的内存去耦合](http://blog.csdn.net/summer_liuwei/article/details/6013255)
-
-####键值上抛及待机流程
-相关代码：  
-policy/src/com/android/internal/policy/impl/PhoneWindowManager.java  
-services/input/EventHub.cpp  
-services/input/InputDispatcher.cpp  
-services/input/InputReader.cpp  
-services/java/com/android/server/power/PowerManagerService.java  
-services/jni/com_android_server_input_InputManagerService.cpp  
-流程：  
-![pic_014](res/Accumulating/accumulating_014.jpg)    
-![pic_015](res/Accumulating/accumulating_015.jpg)    
 
 
 ####添加遥控器键值
