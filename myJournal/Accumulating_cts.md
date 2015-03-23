@@ -22,7 +22,7 @@ run cts -c 测试类名 -m 测试的方法名，如：要测试的类名为： l
 
 ####有关java版本
 可以不用1.6版本，修改cts-tradefed不退出  
-![pic_001][res/Accumulating_cts/cts_001.png]  
+![pic_001](res/Accumulating_cts/cts_001.png])  
 
 ####有关输入法
 删掉system/app/VIME*，及自己的输入法apk。  
