@@ -867,6 +867,10 @@ echo 8 > /proc/sys/kernel/printk
 3、优化Android启动脚本，  
   把Android init.rc脚本优化，去掉不必要运行脚本命令。  
 
+####有关Nand Flash高温数据跳变
+一般Nand Flash特别是MLC对温度都有一定的要求，在机顶盒生产贴片过炉的过程中，温度较高，可能会使Flash的一些bit位发生跳变，导致机顶盒里的版本数据状态不可控。  
+为了降低这种风险，不再使用贴片前将整个镜像烧录到flash中，而是采用二次升级的方式来完成版本写入。基本思路是，制作生产版本时，我们提供一个镜像一个升级包，镜像包括loader、misc、recovery，升级包包括logo、kernel、system。生产时先使用编程器烧录镜像，高温过炉贴片后，机顶盒接u盘进行一次升级，完成整个机顶盒版本的烧录。
+
 ####bootimg制作：
  ../../../host/linux-x86/bin/mkbootfs root_bk | minigzip >ramdisk.img
 ../../../host/linux-x86/bin/mkbootimg --kernel uImage --ramdisk ramdisk.img.gz --cmdline  "mem=335M vmalloc=400M console=ttyAMA0,115200 loglevel=0 lpj=5996758 mtddev=blackbox androidboot.console=ttyAMA0 mmz=ddr,0,0x9D600000,42M mtdparts=hi_mmc:" --base 0x80000000 --output boot.img
