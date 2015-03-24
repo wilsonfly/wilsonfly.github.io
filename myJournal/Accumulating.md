@@ -1347,6 +1347,9 @@ VMware Tools installation cannot be started manually while Easy Install is in pr
 如下修改，重启即可  
 ![pic_005](res/Accumulating/accumulating_005.png)  
 
+####运算符优先级
+![pic_018](res/Accumulating/accumulating_018.png)  
+
 
 ####vim 进阶
 ![pic_016](res/Accumulating/accumulating_016.jpg)  
