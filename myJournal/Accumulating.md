@@ -937,7 +937,14 @@ vi删除带有特定字符的行：   :g/\.svn/d
 2. 清除NETBT，nbtstat -R
 3. 清除DNS缓存，ipconfig /flushdns
 
- 
+####有关svn仓库上传sdk代码
+重要：sdk打补丁，需要svn st一下，以便发现新添加的目录及文件，svn st -u -q只能发现有改动的文件
+
+####低级错误、后果严重（from陶安然）
+     gcc xx.c -o xx.c
+
+####全局变量重名不报错，隐性危险，可能导致段错误
+
 ####有关操作符 “?:”
 `condition ? value_if_true : value_if_false  `  
 C 语言变种[编辑]  
