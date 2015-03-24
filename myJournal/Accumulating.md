@@ -1351,3 +1351,5 @@ VMware Tools installation cannot be started manually while Easy Install is in pr
 ####vim 进阶
 ![pic_016](res/Accumulating/accumulating_016.jpg)  
 ![pic_017](res/Accumulating/accumulating_017.jpg)  
+[手把手教你把Vim改装成一个IDE编程环境(图文)](http://blog.csdn.net/wooin/article/details/1858917)  
+
