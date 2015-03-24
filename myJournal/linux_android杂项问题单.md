@@ -126,7 +126,7 @@ kernel
 浏览器对图片进行了处理，采用了一种快速模式，改用正常模式即可。浏览器有自己的jpeg库对图片进行解码，海思解码器有hijpeg库进行所谓应解码。
 
 8. hi_gpioi2c.ko 因与华为kernel不匹配插入失败问题：
-![pic_]()  
+![pic_004](res/linux_android杂项问题单/linux_android_004.png)   
 `cp .config ./arch/arm/configs/hi3716m_defconfig`   
 `make linux ;make ecs`  
 重新编译新版hi_gpioi2c.ko  
@@ -161,9 +161,6 @@ kernel
 1. 上海百事通项目有用户反应hdmi自适应版本有盒子不能启机  
     ----查看loader三处问题  
     ----出问题的电视edid部分数据是无效的，解析代码容错处理。  
-
-
-
 
 
 2. dts 播放无声音  
