@@ -1100,6 +1100,11 @@ swboot/swboot_nmp.c
 -#endif  
 +//#endif  
 
+####宽高比显示效果
+![pic_014](res/Accumulating/accumulating_014.png)  
+![pic_015](res/Accumulating/accumulating_015.png)  
+![pic_016](res/Accumulating/accumulating_016.png)  
+
 
 ####广东v3版本安全红线关闭：
 export SUPPORT_SECURELINE=n  
@@ -1114,6 +1119,7 @@ mksquashfs rootfs/ rootfs.img
 setenv bootargs 'mem=306M vmalloc=600M console=ttyMTD,blackbox console=ttyAMA0,115200 androidboot.console=ttyAMA0 hardwareID=8840A pcie0_sel=x1  initrd=0x82500000,0x2800000 mmz=ddr,0,0x93200000,110M root=/dev/ram'  
 mmc read 0 0x82000000 18800 2800;mmc read 0 0x82500000 1b000 14000;bootm 0x82000000  
 mmc read 0 0x82000000 18800 18000;mmc read 0 0x82500000 1b000 14000;bootm 0x82000000  
+
 
 ####DNS server调试
 dig -t NS .   
