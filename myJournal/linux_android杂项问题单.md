@@ -69,6 +69,70 @@ setprop net.dhcpc.standard  TMIPTVOTTDHCP
 ####Linux
 
 
+20. vga 配置  
+一个是dac配置，一个是vesa的高清制式
+
+
+19. 四会地区报v200板子cvbs声音异常
+静音电路`gpio12_5`的复用寄存器设置有问题，一直以来恰巧静音管脚出来的电压是关静音需要的，也就是说一直以来没有真正静音过。  
+另外两个批次的cpu在静音管脚的电压控制能力上不同，恰巧不能提供所需的电压，结果电压半高不低出现声音异常问题。也正因为不同批次cpu导致完全相同版本软件在不同盒子上出现正常异常两种现象。       
+B180中的swsys解决过这个问题，b500上用的swsys库从swapi20编译而来，丢失了这部分改动  
+引申一个问题：`sfc_cs0_gpio`: 偏移地址0x13C，寄存器设置1配置成`gpio12_5`模式。`tsi0_vi0_gpio`，偏移地址0x158，寄存器设置成3配置成`gpio12_5`模式。用的是al32 pin脚对应`tsi0_vi0_gpio`，所以需要将0x158设置3为`gpio12_5`，与此同时0x13C不能是1为`gpio12_5`模式，否则会有冲突。
+
+
+18. 用tftp pull盒子文件出来，tftp  Pull  Local/Remote_file  filename   host_ip 
+`# tftp -p -l swnetwork 172.16.6.115 `  
+`swnetwork            100% |*******************************| 83456  --:--:-- ETA`  
+`#`  
+`# tftp -p -r swnetwork 172.16.6.115`  
+`swnetwork            100% |*******************************| 83456  --:--:-- ETA`  
+`# `  
+
+17. 基线上抛事件到中间件
+设置回调
+sw_app_init(swapp.c)  
+     --sw_media_init(modules/src/common/swmedia/swmedia.c) >>>(sw_evtdispatcher_on_event)  
+          --sw_player_set_callback(media/swplayer/wraper/swplayer.c)  
+               --player_set_callback(media/swplayer/player/player.c)  
+回调回溯  
+vdec->callback ==>on_avsevent(media/swplayer/player/player.c)  
+     --on_mediaevent(media/swplayer/wraper/swplayer.c)  
+          --sw_evtdispatcher_on_event(modules/src/common/swevtdispacther/swevtdispatcher.c)  
+
+
+16. chipid获取时候有个小端转大端的操作，hisi sdk中没有说明
+
+15. 8845B之A1_C  
+kernel   
+`[*] Initial RAM filesystem and RAM disk (initramfs/initrd) support`  
+需要选择ram大小, 下面是选择了40M  
+`<*>   RAM block device support                                    `                                                                   
+`│ │                  (16)    Default number of RAM disks (NEW)    `                                                                                        
+`│ │                  (40960)  Default RAM disk size (kbytes) (NEW)`
+选择 squashfs文件系统支持  
+`Fs->misecellaneous fs->squashfs support……`
+
+14. cgms/a 设置cgms的同时还有wss的设置
+
+13. 基线中middleware，modules也需要/pub/media/include中的头文件，更新头文件时格外注意需要统一更新
+
+12. set_contentmode, set_aspect 接口都是对宽高比，及实现宽高比的方式进行设置的动作，所以两者冲突，几个不同窗口间切换需要的效果又不同，需要根据不同需求对应设置
+
+11. ptcl项目设置宽高比没有反应问题，设置WinAttr.enAspectRatio的同时也需要设置WinAttr.enAspectCvrs
+
+10. 对比度、饱和度、色调没有真正设置，据说会影响cvbs硬件指标
+
+9. 四川项目epg打开小分辨率图片锯齿严重问题  
+浏览器对图片进行了处理，采用了一种快速模式，改用正常模式即可。浏览器有自己的jpeg库对图片进行解码，海思解码器有hijpeg库进行所谓应解码。
+
+8. hi_gpioi2c.ko 因与华为kernel不匹配插入失败问题：
+![pic_]()  
+`cp .config ./arch/arm/configs/hi3716m_defconfig`   
+`make linux ;make ecs`  
+重新编译新版hi_gpioi2c.ko  
+最终解决方法：make hiloader_build编译小系统及对应的驱动，不用手动去做修改  
+8841c采用了大小两套文件系统，一个普通的，一个精简的。两者内核不同，驱动文件不能通用.
+
 
 7. HDCP字段经讨论为了tr135模块不和中间件耦合，还是在swdisplay模块增加接口获取。
 定义接口bool sw_display_get_hdcp_state()，使能了HDCP返回true，未使能HDCP返回false。  
