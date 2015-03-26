@@ -1061,6 +1061,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp
 	#include <stdio.h>
 	#define NDEBUG
 	#include <assert.h>
+注意不能使用改变环境的语句,因为ASSERT只在DEBUG时生效,如果这么做,会使用程序关掉DEBUG后真正运行时遇到问题
 
 ####有关find: paths must precede expression
 	#touch {1,2,3,4}.txt
