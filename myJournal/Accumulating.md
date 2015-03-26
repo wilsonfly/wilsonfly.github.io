@@ -1053,6 +1053,15 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp
 注意：如果#pragma pack (n)中指定的 n 大于结构体中最大成员的 size，则其不起作用，结构体仍然按照 size 最大的成员进行对界。  
 （3）另外，通过__attribute((aligned (n)))也可以让所作用的结构体成员对齐在 n 字节边界上，但是它较少被使用，因而不作详细讲解
 
+####有关assert
+使用assert的缺点是，频繁的调用会极大的影响程序的性能，增加额外的开销。所以在调
+试结束后，可以通过在包含#include <assert.h>的语句之前插入 #define NDEBUG 来
+禁用 assert 调用，示例代码如下：
+	
+	#include <stdio.h>
+	#define NDEBUG
+	#include <assert.h>
+
 ####有关find: paths must precede expression
 	#touch {1,2,3,4}.txt
 	#find . -name *.txt
