@@ -1,6 +1,21 @@
 
 
 
+####android 中不允许图片资源的文件名中出现大写字母，且不能以数字开头。
+
+####res\xml\oneXmlFile.xml: Invalid file name: must contain only [a-z0-9_.]
+
+####快捷键
+ctrl+F11 运行apk  
+ctrl+o 列出当前类中的方法列表  
+ctrl+m 放大缩小当前窗口  
+ctrl+PageDown/PageUp 切换选项卡，即切换不同文件  
+crtl+shift+t 查找当前工程中的方法  
+crtl+shift+r 查找当前工程中的文件  
+ctrl+shift+o 导入包  
+
+####handler 负责发送消息，Looper负责接收handler发送的消息，并直接把消息回传给handler自己。
+
 
 ####(0202)am启动apk
 am start -n [component] ,此处的component类似于代码里边的包名加类名，不过此处类名可以是完整的类名也可以是简写  
