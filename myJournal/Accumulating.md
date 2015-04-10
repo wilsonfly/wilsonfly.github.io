@@ -1,5 +1,36 @@
 
 
+
+
+####修改鼠标移动速度，需要更新数据库才能起作用及需要恢复出厂设置一下
+packages/SettingsProvider/res/values/defaults.xml
+![pic_019](res/Accumulating/accumulating_019.jpg)    
+/data/data/com.android.providers.settings/databases
+select * from system;
+update system set value='-2' where name='pointer_speed';
+
+####VirtualBox Host-Only Network 导致虚拟机ping不通网关
+装genymotion时候装了virtualbox，在网络和共享中心可以看到VirtualBox Host-Only Network，在虚拟机中ping网关都不通，显示icmp_seq=2 Destination Host Unreachable。将virtualbox那个禁用就ok了，WTF!
+
+####删除路由
+sudo route del -net link-local netmask 255.255.0.0  
+sudo route del -net 172.16.6.0 netmask 255.255.255.0
+
+####新接口
+int faccessat(int dirfd, const char *pathname, int mode, int flags);  // 查看文件pathname 是否在目录diffd中  
+配合int dirfd = open(dir, O_DIRECTORY); 使用
+
+####模拟的内置sdcard分区
+不再单独划分sdcard分区，占用flash空间，利用率低。将其合并到data分区中。
+sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated ，使用fuse机制，创建挂载点，其内容最终放在/data/media目录。  
+mount 信息：/dev/fuse /mnt/shell/emulated fuse rw,nosuid,nodev,relatime,user_id=1023,group_id=1023,default_permissions,allow_other 0 0  
+此外创建一些链接，供不同应用使用内置sdcard。  
+/storage/emulated/0 ->/mnt/shell/emulated/0  
+/mnt/sdcard -> /storage/emulated/0  
+/sdcard -> /mnt/sdcard
+
+
+
 ####(0316)有关source环境变量报错找不到文件：-sh: source: bcm7584.env: file not found
 虽然/bin/sh 已经是指向/bin/bash，但修改/etc/password 中sunhuasheng:x:1022:1022::/home/sunhuasheng:/bin/bash 即可
 
