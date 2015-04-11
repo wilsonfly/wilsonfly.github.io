@@ -1,6 +1,10 @@
 
 
 
+
+####Can't create handler inside thread that has not called Looper.prepare()   
+子线程中handler需要跟looper一起使用
+
 ####android 中不允许图片资源的文件名中出现大写字母，且不能以数字开头。
 
 ####res\xml\oneXmlFile.xml: Invalid file name: must contain only [a-z0-9_.]
