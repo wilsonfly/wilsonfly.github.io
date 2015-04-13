@@ -1,5 +1,16 @@
 
 
+####LayoutInflater
+LayoutInflater这个类的作用类似于findViewById(),  
+不同点：   
+LayoutInflater是用来找layout下xml布局文件的,而且它会实例化   
+findViewById()是找具体xml布局文件下的具体widget控件，比如：Button按钮    
+
+####Debug快捷键
+F5 进入方法  
+F6 逐行追踪  
+F7 跳出方法  
+F8 下一个断电或是结束Debug  
 
 
 ####Can't create handler inside thread that has not called Looper.prepare()   
