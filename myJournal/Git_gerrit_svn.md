@@ -1,6 +1,15 @@
 
 
 
+####新技巧
+//清除未受仓库管理的文件及目录
+git clean -df
+//查看当前分支对应远端哪个分支
+git br -vv
+// git commit 之后git push之前追加log信息
+git commit --amend
+
+
 ####分支日志异常，看到的是其他分支内容
 git log --graph可以查看历史记录   
 配置  merge no-fastforward (如下命令），这样在合并的时候，会产生一个merge commit的日志记录。但这个方法也只是在增加了日志，不能从根本上避免，还是需要操作的时候小心谨慎，pull 之前一定要看看当前分支是不是要pull的分支。  
