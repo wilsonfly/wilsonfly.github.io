@@ -2,12 +2,12 @@
 
 
 ####新技巧
-//清除未受仓库管理的文件及目录
-git clean -df
-//查看当前分支对应远端哪个分支
-git br -vv
-// git commit 之后git push之前追加log信息
-git commit --amend
+//清除未受仓库管理的文件及目录  
+git clean -df  
+//查看当前分支对应远端哪个分支   
+git br -vv  
+// git commit 之后git push之前追加log信息  
+git commit --amend  
 
 
 ####分支日志异常，看到的是其他分支内容
