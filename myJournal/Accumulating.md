@@ -4,7 +4,7 @@
 
 ####修改鼠标移动速度，需要更新数据库才能起作用及需要恢复出厂设置一下
 packages/SettingsProvider/res/values/defaults.xml
-![pic_019](res/Accumulating/accumulating_019.jpg)    
+![pic_019](res/Accumulating/accumulating_019.png)    
 /data/data/com.android.providers.settings/databases
 select * from system;
 update system set value='-2' where name='pointer_speed';
