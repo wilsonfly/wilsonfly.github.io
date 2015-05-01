@@ -210,8 +210,8 @@ export PYTHONSTARTUP=~/.pythonstartup.py
 ####(1105)利用KSM机制优化内存
 KSM全称为 Kernel Shared Memory 或 Kernel Samepage Merging，KSM作为Linux内核中的守护进程（称为ksmd）存在，它定期执行页面扫描，识别副本页面并合并副本，释放这些页面以供它用。  
 ![pic_006](res/Accumulating/accumulating_006.png)    
-补充阅读见：[KSM(Kernel Samepage Merging) 剖析：Linux 内核中的内存去耦合](http://blog.csdn.net/summer_liuwei/article/details/6013255)
-
+补充阅读见：[KSM(Kernel Samepage Merging) 剖析：Linux 内核中的内存去耦合](http://blog.csdn.net/summer_liuwei/article/details/6013255)  
+[pmem and cma](http://blog.csdn.net/ryder001/article/details/7794515)  
 
 ####添加遥控器键值
 1. frameworks/base/core/java/android/view/KeyEvent.java 添加KEYCODE  
