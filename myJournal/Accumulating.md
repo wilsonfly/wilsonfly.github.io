@@ -976,6 +976,11 @@ vi删除带有特定字符的行：   :g/\.svn/d
 
 ####全局变量重名不报错，隐性危险，可能导致段错误
 
+####sticky bit--rwxrwxrwt中t位
+如何才能使一个目录既可以让任何用户写入文件，又不让用户删除这个目录下他人的文件，sticky就是能起到这个作用。stciky一般只用在目录上，用在文件上起不到什么作用。  
+如果某个目录设置了sticky bit（是在other用户的权限上设置的，设置后可执行位从x变成了t），那么用户在该目录下可以创建文件（当然前提是用户具有写权限和可执行权限，如果具有可执行权限，设置sticky bit后是t；如果没有可执行权限的话，设置sticky bit后是T），而且可以删除自己创建的文件，但是，不能删除其他用户创建的文件，这样就起到了一种保护作用了。  
+更多详情见：[linux sticky bit 目录权限 rwt权限](http://blog.csdn.net/fly542/article/details/7108037)  
+
 ####有关操作符 “?:”
 `condition ? value_if_true : value_if_false  `  
 C 语言变种[编辑]  
