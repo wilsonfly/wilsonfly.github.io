@@ -1,6 +1,10 @@
 
 
 
+####有关git使用内存问题
+下载代码失败，报错信息：fatal: Out of memory, malloc failed，可以通过调整git config --global pack.windowMemory 50m来解决。
+更多详情见：[fatal: Out of memory, malloc failed问题的解决 ](http://www.360doc.com/content/13/1025/17/10058718_324160325.shtml)  
+
 ####新技巧
 //清除未受仓库管理的文件及目录  
 git clean -df  
