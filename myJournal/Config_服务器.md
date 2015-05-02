@@ -47,6 +47,7 @@ root@ubuntu:/# sudo iscsiadm -m node --targetname iqn.2001-05.com.equallogic:0-a
 Logging in to [iface: default, target: iqn.2001-05.com.equallogic:0-af1ff6-ae29e38d1-24600000034525c0-build-1, portal: 192.17.2.250,3260]
 Login to [iface: default, target: iqn.2001-05.com.equallogic:0-af1ff6-ae29e38d1-24600000034525c0-build-1, portal: 192.17.2.250,3260]: successful
 root@ubuntu:/# mount /dev/sdb1  /exdata -t ext3  
+更多详情见：[ubuntu 12.04中iscsi target和initiator的安装和使用-liujunwei1234-ChinaUnix博客](http://blog.chinaunix.net/uid-20940095-id-3487049.html)  
 
 ####源：
 /etc/apt/source.list  
