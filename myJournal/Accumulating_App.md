@@ -109,6 +109,9 @@ ctrl+e   打开的文件列表，切换文件
 ####linux下安装sdk
 详情见[RedHat Linux下安装jdk-6u45-linux-x64.bin](http://www.linuxidc.com/Linux/2014-01/95202.htm)   
 
+####WIN7下jdk安装及环境配置
+[JDK安装与环境变量配置](http://jingyan.baidu.com/article/6dad5075d1dc40a123e36ea3.html)  
+
 ####eclipse sdk Manager更新问题  
 由于墙的原因，基本就是无法更新，可以设置一下http代理，在Android sdk manager-->settings中配置http proxy:http://mirrors.neusoft.edu.cn 端口：80,并且选中【Force https://... sources to be fetched using http://...】  
 更多详情见：[AndroidDevTools简介](http://www.androiddevtools.cn/)
