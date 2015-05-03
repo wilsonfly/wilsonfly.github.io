@@ -1085,6 +1085,9 @@ cflow
 1. ElectricFence 函数库libefence.a
 2. valgrind
 
+####清除ftp之前已保存的用户名和密码
+[清除ftp的登录用户名密码](http://hi.baidu.com/niceyou/item/6bd3d73ba5c52187b611db5b)
+
 ####加载库环境变量
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp
 
