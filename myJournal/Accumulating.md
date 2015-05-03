@@ -1067,6 +1067,17 @@ grep --exclude-dir=.git  internal_build_id_makefile . -ri
 ####E2PROM与FLASH
  flash里存储的是从设置页面能够设置的参数，以及和机顶盒系统相关的固定不变的参数 （不能把以前E2Prom里的参数都写到flash里，因为flash的寿命（擦写次数）远小于E2PROM，且E2PROM是按字节来写的，而 flash是按block来写的，在flash擦写操作的时候断电，其他参数也会丢失），因此flash里存储的参数应该尽量少,做生产版本需要特别注意。
 
+####有关UBIfs
+mkfs.ubifs -r rootfs -m 2048 -e 129024 -c 812 -o ubifs.img  
+-r：制定文件内容的位置  
+    -m：页面大小  
+    -e：逻辑擦除块大小  
+    -p：物理擦除块大小  
+    -c：最大的逻辑擦除块数量  
+    对我们这种情况，文件系统最多可以访问卷上的129024*812=100M空间  
+    -s：最小的硬件输入输出页面大小，如：k9f1208为256(上下半页访问)  
+更多详情见[UBI文件系统](http://www.cnblogs.com/leaven/archive/2011/04/19/2021388.html)  
+
 ####静态函数调用关系分析工具
 cflow
 
