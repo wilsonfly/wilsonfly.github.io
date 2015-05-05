@@ -551,6 +551,10 @@ umount  /mnt/sdb/sdb1
 ####串口修改misc：
 echo "boot-recovery" >/dev/block/platform/hi_mci.1/by-name/misc
 
+####盒子上挂载分区
+ll /dev/block/platform/hi_mci.1/by-name/  
+busybox mount   /dev/block/mmcblk0p17 /swdb   
+
 ####生产测试之Wifi:
 iwconfig  
 ping -I wlan0 192.168.1.1  
