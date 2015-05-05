@@ -1,6 +1,16 @@
 
 
 
+####(0506)有关mac
+zsh详细配置过程见[终极 Shell——ZSH](http://zhuanlan.zhihu.com/mactalk/19556676)    
+brew安装过程见[Mac OS X 中安装 brew](http://webmedia.blog.163.com/blog/static/416695020123261226695/)  
+cmd+shift+3 截全屏  
+cmd+shift+4 截任意范围屏  
+cmd+shift+4+space 捕获某个应用程序的窗口  
+fn+delete  从光标往后删除  
+cmd+shift+f  全屏/退出全屏  
+cmd+w 关闭窗口  
+cmd+q 退出程序  
 
 ####修改鼠标移动速度，需要更新数据库才能起作用及需要恢复出厂设置一下
 packages/SettingsProvider/res/values/defaults.xml
