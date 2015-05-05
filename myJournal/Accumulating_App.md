@@ -106,6 +106,9 @@ ctrl+e   打开的文件列表，切换文件
 ####0. 运行eclipse报错Fail to create the java Virtual Machine
 见[解决Fail to create the java Virtual Machine_百度经验](http://jingyan.baidu.com/article/afd8f4de466baf34e286e917.html)
 
+####adt/sdk/sudio下载地址
+详情见[Android开发环境的官网下载地址](http://www.cnblogs.com/tc310/p/3938353.html)  
+
 ####linux下安装sdk
 详情见[RedHat Linux下安装jdk-6u45-linux-x64.bin](http://www.linuxidc.com/Linux/2014-01/95202.htm)   
 
