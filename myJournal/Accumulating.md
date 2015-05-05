@@ -267,7 +267,8 @@ init.rc
 	wirte /proc/sys/kernel/panic_on_oops 1
 
 ####查看遥控器键值物理码：
-echo HI_IR=4 >log
+调整日志级别打印物理码：echo HI_IR=4 >/proc/msp/log   
+调整日志级别到默认情况：echo HI_IR=1 >/proc/msp/log   
 
 ####data数据异常：
 200台盒子发现4台盒子异常，有这么两种现象：  
