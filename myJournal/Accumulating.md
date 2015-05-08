@@ -1169,7 +1169,7 @@ nm的几个结论：
 7. readelf 主要用来查看头信息，其大部分功能objdump都有。例：readelf -h a.out
 8. size 工具也很简单,就是列程序文件中各段的大小。
 9. strings 用于查看我们的程序文件中的可显示字符。strings 看到的信息都是放在.data 段(或是.rdata)中的,比如,我们在 C/C++程序中使用__FILE__ 宏时,就会在.rdata 段中生成函数名字符串。也就是说,即使你用 strip 将程序文件中的调试信息都 去掉,你仍然可以通过 strings 看到这些信息。
-10. strip 主要用于去除程序文件中的调试信息以便减小文件的大小。
+10. strip 主要用于去除程序文件中的调试信息以便减小文件的大小。  
 更多详情见 熟悉binutils工具集.pdf
 
 ####有关Makefile
@@ -1260,6 +1260,7 @@ make: Leaving directory '/home/hchen/gnu/make'
 	prog : prog.o foo.o bar.o
 	$(gcc) $(CFLAGS) prog.o foo.o bar.o
 
+更多详情见 Makefile_中的常用函数及实例分析.pdf
 
 ####HMS点播发流方法:
 HMS server ip： 172.16.11.90  
