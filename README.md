@@ -1,6 +1,5 @@
 
-This is a repo created for blog.
+####这是一个记录个人工作和学习笔记的日志仓库
 
-The journals are located temporarily in **myJournal** now.
 
-The notes before are being reorganized and the journals here will be updated constantly...
+####具体记录文件记录在*myJournal*目录下，部分之前的笔记仍在整理阶段，此日志将持续更新。
