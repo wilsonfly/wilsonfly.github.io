@@ -1160,15 +1160,17 @@ c++中允许重载，那就回有一些函数重名，c++编译器会对每一�
 2. ar是用来管理档案文件的，主要用来管理静态库。打包静态库：ar crx libab.a a.o b.o  解压静态库：ar x libab.a
 3. nm用来列出程序文件中的符号，包括函数名、变量名。例：nm -n a.out 会列出三列数据，分别为符号对应的地址，符号所在的段，符号名称。  
 其中符号所在的段采用的符号对应关系如下：  
+![pic_021](res/Accumulating/accumulating_021.png)  
 nm的几个结论：  
-
+![pic_022](res/Accumulating/accumulating_022.png)  
 4. objdump 可以用来查看目标程序中的段信息和调试信息,也可以用来对目标程序进行反汇编。例：objdump -d a.out 采用-d 选项可以显示程序文件的汇编代码;objdump -W a.out 参数-W可以显示 C/C++源程序和与之对应的汇编代码；objdump -f a.out 参数-f 选项可以显示目标文件的头信息。
 5. objcopy 可以对已经生成的程序文件进行一系列编辑，例objcopy -j .txt a.out onlytext.file 或者objcopy -j .txt -j .data a.out text_data.file 参数-j可以指定需要抽取的哪一段；objcopy -R .txt a.out notext.file 参数-R用来指定需要删除的段；objcopy --strip-debug a.out 还有strip功能。
 6. ranlib 用于在档案文件中生成文件索引。ar中的s参数也是具有同样的功能。当档案文件增加了索引后,对于其中文件的存取速度将更快。如果档案文件是一个静态库,那么我们在使用静态库进行连接时,其速度将会有所加快。
 7. readelf 主要用来查看头信息，其大部分功能objdump都有。例：readelf -h a.out
 8. size 工具也很简单,就是列程序文件中各段的大小。
 9. strings 用于查看我们的程序文件中的可显示字符。strings 看到的信息都是放在.data 段(或是.rdata)中的,比如,我们在 C/C++程序中使用__FILE__ 宏时,就会在.rdata 段中生成函数名字符串。也就是说,即使你用 strip 将程序文件中的调试信息都 去掉,你仍然可以通过 strings 看到这些信息。
-10. strip 主要用于去除程序文件中的调试信息以便减小文件的大小。
+10. strip 主要用于去除程序文件中的调试信息以便减小文件的大小。  
+更多详情见 熟悉binutils工具集.pdf
 
 ####有关Makefile
 0.变量赋值  
@@ -1258,6 +1260,7 @@ make: Leaving directory '/home/hchen/gnu/make'
 	prog : prog.o foo.o bar.o
 	$(gcc) $(CFLAGS) prog.o foo.o bar.o
 
+更多详情见 Makefile_中的常用函数及实例分析.pdf
 
 ####HMS点播发流方法:
 HMS server ip： 172.16.11.90  
