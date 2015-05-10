@@ -1148,8 +1148,8 @@ c++中允许重载，那就回有一些函数重名，c++编译器会对每一�
 其中符号所在的段采用的符号对应关系如下：  
 ![pic_021](res/Accumulating/accumulating_021.png)   
 新写测试结果如下，全局未初始化变量测试结果略有不同：  
-![pic_022](res/Accumulating/accumulating_022.png)   
 ![pic_023](res/Accumulating/accumulating_023.png)   
+![pic_024](res/Accumulating/accumulating_024.png)   
 
 nm的几个结论：  
 ![pic_022](res/Accumulating/accumulating_022.png)  
