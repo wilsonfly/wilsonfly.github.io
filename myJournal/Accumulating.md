@@ -1146,7 +1146,11 @@ c++中允许重载，那就回有一些函数重名，c++编译器会对每一�
 2. ar是用来管理档案文件的，主要用来管理静态库。打包静态库：ar crx libab.a a.o b.o  解压静态库：ar x libab.a
 3. nm用来列出程序文件中的符号，包括函数名、变量名。例：nm -n a.out 会列出三列数据，分别为符号对应的地址，符号所在的段，符号名称。  
 其中符号所在的段采用的符号对应关系如下：  
-![pic_021](res/Accumulating/accumulating_021.png)  
+![pic_021](res/Accumulating/accumulating_021.png)   
+新写测试结果如下，全局未初始化变量测试结果略有不同：  
+![pic_022](res/Accumulating/accumulating_022.png)   
+![pic_023](res/Accumulating/accumulating_023.png)   
+
 nm的几个结论：  
 ![pic_022](res/Accumulating/accumulating_022.png)  
 4. objdump 可以用来查看目标程序中的段信息和调试信息,也可以用来对目标程序进行反汇编。例：objdump -d a.out 采用-d 选项可以显示程序文件的汇编代码;objdump -W a.out 参数-W可以显示 C/C++源程序和与之对应的汇编代码；objdump -f a.out 参数-f 选项可以显示目标文件的头信息。
