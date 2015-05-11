@@ -8,6 +8,7 @@
 ![pic_007](res/linux_c_笔记/linux_c_07.jpg)  
 ![pic_008](res/linux_c_笔记/linux_c_08.jpg)  
 ![pic_009](res/linux_c_笔记/linux_c_09.jpg)  
+![pic_010](res/linux_c_笔记/linux_c_10.jpg)  
 ![pic_010](res/linux_c_笔记/linux_c_11.jpg)  
 ![pic_010](res/linux_c_笔记/linux_c_12.jpg)  
 ![pic_010](res/linux_c_笔记/linux_c_13.jpg)  
@@ -55,4 +56,3 @@
 ![pic_010](res/linux_c_笔记/linux_c_55.jpg)  
 ![pic_010](res/linux_c_笔记/linux_c_56.jpg)  
 ![pic_010](res/linux_c_笔记/linux_c_57.jpg)  
-![pic_010](res/linux_c_笔记/linux_c_58.jpg)  
