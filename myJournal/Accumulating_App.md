@@ -65,12 +65,15 @@ F8 下一个断电或是结束Debug
 
 ####res\xml\oneXmlFile.xml: Invalid file name: must contain only [a-z0-9_.]
 
-####快捷键
+####mac下快捷键
+comman+shift+f 格式化对齐  
+command+Fn+F11 运行apk  
 command+shift+o导包操作，推荐用这个，不仅可以导入需要的包，还能删掉多余的包  
 command+alt+上/下  复制当前行到上面/下面  
 alt+上/下   移动当前行到上面/下面  
 command+alt+左/右 前一个/后一个编辑的页面  
-ctrl+Fn+F11 切换模拟器的横竖屏  
+command+Fn+F11 切换模拟器的横竖屏(genymotion也支持)  
+
 
 ####handler 负责发送消息，Looper负责接收handler发送的消息，并直接把消息回传给handler自己。
 
