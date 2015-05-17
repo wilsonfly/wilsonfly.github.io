@@ -66,13 +66,11 @@ F8 下一个断电或是结束Debug
 ####res\xml\oneXmlFile.xml: Invalid file name: must contain only [a-z0-9_.]
 
 ####快捷键
-ctrl+F11 运行apk  
-ctrl+o 列出当前类中的方法列表  
-ctrl+m 放大缩小当前窗口  
-ctrl+PageDown/PageUp 切换选项卡，即切换不同文件  
-crtl+shift+t 查找当前工程中的方法  
-crtl+shift+r 查找当前工程中的文件  
-ctrl+shift+o 导入包  
+command+shift+o导包操作，推荐用这个，不仅可以导入需要的包，还能删掉多余的包  
+command+alt+上/下  复制当前行到上面/下面  
+alt+上/下   移动当前行到上面/下面  
+command+alt+左/右 前一个/后一个编辑的页面  
+ctrl+Fn+F11 切换模拟器的横竖屏  
 
 ####handler 负责发送消息，Looper负责接收handler发送的消息，并直接把消息回传给handler自己。
 
@@ -119,6 +117,13 @@ alt+s+f  文件格式化对齐
 ctrl+1    弹出报错信息，其中比较好用的是强制类型转换Add cast  
 ctrl+/    添加注释及取消注释  
 ctrl+e   打开的文件列表，切换文件  
+ctrl+F11 运行apk  
+ctrl+o 列出当前类中的方法列表  
+ctrl+m 放大缩小当前窗口  
+ctrl+PageDown/PageUp 切换选项卡，即切换不同文件  
+crtl+shift+t 查找当前工程中的方法  
+crtl+shift+r 查找当前工程中的文件  
+ctrl+shift+o 导入包  
 
 ####8. 像RadioGroup/checkbox这样有相同名字listener方法的组件，在import方法的时候会冲突，这个时候在new listenser接口的时候在前面加上包名限定，如：  
           sex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
