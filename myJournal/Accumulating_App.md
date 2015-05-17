@@ -3,9 +3,7 @@
 
 ####broadcast Reciever机制运行效率是比较低的，所以不能用于发送高频率或者发数据的场景。
 
-####使用bindService时候需要在service类中实现继承Binder的内部类，然后在onBind方法中返回该内部类的对象。否则在绑定service的时候没有onServiceConnected回调。
-
-####一个service只会有一个实例，多次绑定不会调用多次onCreate。service的整个生命周期有系统控制，所以不能通过new的方式来获取service的实例，需要通过bindService的形式获取。在一个activity中调用startService创建了服务，在该activity退出的时候服务不会被销毁；调用bindService创建的服务，在activity退出的时候服务会被销毁。
+使用bindService时候需要在service类中实现继承Binder的内部类，然后在onBind方法中返回该内部类的对象。否则在绑定service的时候没有onServiceConnected回调。
 
 ####startActivity方式打开音频、视频、图片、txt、word、网址、电话、短信、邮箱等等各种文件或组件
 
@@ -13,6 +11,8 @@
      Uri uri = Uri.fromFile(new File("/mnt/sdcard/ice.avi")); 
      intent.setDataAndType (uri, "video/*"); 
      this.startActivity(intent);  
+
+一个service只会有一个实例，多次绑定不会调用多次onCreate。service的整个生命周期有系统控制，所以不能通过new的方式来获取service的实例，需要通过bindService的形式获取。在一个activity中调用startService创建了服务，在该activity退出的时候服务不会被销毁；调用bindService创建的服务，在activity退出的时候服务会被销毁。
 
 ####Android推荐使用SparseArray代替HashMap，性能方面会有改善。
 
