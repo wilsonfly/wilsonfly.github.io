@@ -1,5 +1,50 @@
 
 
+
+
+####硬件feature
+android是默认设备带有触摸屏的，所以像在机顶盒、电视允许的系统中允许的话，就可以在AndroidManifest中配置不需要触摸屏：<uses-feature android:name="android.hardware.touchscreen" android:required="false">，运行时检测功能可用性可以用接口getPackageManager().hasSystemFeature("android.hardware.telephony")
+
+####framelayout使用场景
+framelayout 不需要调整的时候使用，效率比较高
+
+####scrollview
+scrollview 把原来layout中LinearLayout之类的字段替换成ScrollView，再将其中的内容用LinearLayout包裹一下即可
+
+res中资源名字不能用数字打头，而且不能大写
+
+####intent.setDataAndType
+intent.setdata settype互斥，可以看下代码在设置一个的时候将另外一个置空了，所以需要两个都设置的时候调用intent.setDataAndType
+
+####intent-filter
+AndroidManifests.xml中给一个Activity指定的intent-filter可以有多个，intent-filter中的action、category、data也可以有多个。intent中设置的action只能有一个。
+
+
+
+####eclipse创建android项目时，预览layout.xml文件时提示： This version of the rendering library is more recent than your version of ADT plug-in. Please update ADT plug-in，导致无法正常预览布局文件。
+问题根源：SDK版本过高，ADT版本过低。可以调节预览页面右上角的android versiont to use when rendering layouts in eclipse，选择较低版本的api。如果不想每次手动调节这个东西，一则按照网上攻略选择help—>install new software升级tools(反正我是没有升级成功，翻墙状态下都根本刷不出来)，二则直接删掉较新的sdk，只留下document即可(删掉后出现了appcompat_v7报错的情况，删之，随便新建个工程即可附带重新生成)。
+
+####用默认配置生成的工程会报错：R cannot be resolved to a variable
+查看是没有R.java生成的，将appcompat_v7工程打开。将此工程关闭后采用默认配置生成的工程会立即出现报错。
+
+
+####broadcast Reciever机制运行效率是比较低的，所以不能用于发送高频率或者发数据的场景。
+
+使用bindService时候需要在service类中实现继承Binder的内部类，然后在onBind方法中返回该内部类的对象。否则在绑定service的时候没有onServiceConnected回调。
+
+####startActivity方式打开音频、视频、图片、txt、word、网址、电话、短信、邮箱等等各种文件或组件
+
+     实例：
+     Uri uri = Uri.fromFile(new File("/mnt/sdcard/ice.avi")); 
+     intent.setDataAndType (uri, "video/*"); 
+     this.startActivity(intent);  
+
+一个service只会有一个实例，多次绑定不会调用多次onCreate。service的整个生命周期有系统控制，所以不能通过new的方式来获取service的实例，需要通过bindService的形式获取。在一个activity中调用startService创建了服务，在该activity退出的时候服务不会被销毁；调用bindService创建的服务，在activity退出的时候服务会被销毁。
+
+####Android推荐使用SparseArray代替HashMap，性能方面会有改善。
+
+
+
 ####LayoutInflater
 LayoutInflater这个类的作用类似于findViewById(),  
 不同点：   
@@ -20,14 +65,15 @@ F8 下一个断电或是结束Debug
 
 ####res\xml\oneXmlFile.xml: Invalid file name: must contain only [a-z0-9_.]
 
-####快捷键
-ctrl+F11 运行apk  
-ctrl+o 列出当前类中的方法列表  
-ctrl+m 放大缩小当前窗口  
-ctrl+PageDown/PageUp 切换选项卡，即切换不同文件  
-crtl+shift+t 查找当前工程中的方法  
-crtl+shift+r 查找当前工程中的文件  
-ctrl+shift+o 导入包  
+####mac下快捷键
+comman+shift+f 格式化对齐  
+command+Fn+F11 运行apk  
+command+shift+o导包操作，推荐用这个，不仅可以导入需要的包，还能删掉多余的包  
+command+alt+上/下  复制当前行到上面/下面  
+alt+上/下   移动当前行到上面/下面  
+command+alt+左/右 前一个/后一个编辑的页面  
+command+Fn+F11 切换模拟器的横竖屏(genymotion也支持)  
+
 
 ####handler 负责发送消息，Looper负责接收handler发送的消息，并直接把消息回传给handler自己。
 
@@ -74,6 +120,13 @@ alt+s+f  文件格式化对齐
 ctrl+1    弹出报错信息，其中比较好用的是强制类型转换Add cast  
 ctrl+/    添加注释及取消注释  
 ctrl+e   打开的文件列表，切换文件  
+ctrl+F11 运行apk  
+ctrl+o 列出当前类中的方法列表  
+ctrl+m 放大缩小当前窗口  
+ctrl+PageDown/PageUp 切换选项卡，即切换不同文件  
+crtl+shift+t 查找当前工程中的方法  
+crtl+shift+r 查找当前工程中的文件  
+ctrl+shift+o 导入包  
 
 ####8. 像RadioGroup/checkbox这样有相同名字listener方法的组件，在import方法的时候会冲突，这个时候在new listenser接口的时候在前面加上包名限定，如：  
           sex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
