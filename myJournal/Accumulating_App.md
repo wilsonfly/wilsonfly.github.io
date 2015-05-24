@@ -1,5 +1,16 @@
 
 
+####有关耗电
+耗电状态切换时间：
+![app_005](res/Accumulating_App/app_005.png)
+
+1. 尽可能的将数据放在一起，减少建立链接的次数
+2. 使用数据缓存机制，一般来说，每2到5分钟读取一次数据，每次1到5M是最佳选择；避免下载重复数据
+3. 使用GCM(Google Cloud Messaging for Android)推送App的更新通知，这样不需要单独建立网络连接进行更新
+4. 设置核实的轮询频率，最好允许用户修改轮询的频率
+5. 使用HttpURLConnection 的Cache
+6. 使用wifi，大多数情况下，wifi对电量的消耗要小于移动网络
+7. 使用更高的带宽，使数据尽快下载或上传完，缩短耗电高枫的时间。ConnectivityManager.TYPE_WIFI/TYPE_MOBILE。
 
 
 ####硬件feature
