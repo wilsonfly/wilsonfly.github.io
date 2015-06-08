@@ -1,5 +1,32 @@
 
 
+
+
+####安全篇
+1. 概述
+![app_010](res/Accumulating_App/app_010.png)  
+2. 对称加密
+置换加密、转置加密、乘积加密
+DES/AES
+高效、密钥交换的问题、不如RSA加密的安全程度高，但256bit的AES足够绝大多数安全领域
+3. 非对称加密
+RSA
+安全性足够高、没有密钥交换的问题、效率低，对大数据加密很慢
+4. 密钥交换
+非对称加密方式交换密钥 
+Diffi e-Hellman密钥交换协议
+5. HASH(哈希、散列、数字摘要、数字指纹、MD),变长输入变换成哼定长输出  
+常见hash算法：MD5、SHA1  
+易变性：即使原数据发生1bit的变化，hash的输出将发现不可预知的巨大变化  
+不可逆：通过hash结果构造出输入信息是不可能的或者说极其困难  
+应用场景：防篡改、防损坏、认证  
+HMAC(Hash-based Message Authentication Code)，使用key对原始信息进行变换后再进行HASH。解决：1.尾部直接附带消息摘要的问题(篡改内容的同时篡改消息摘要)2.直接对密码做HASH传输的认证问题(重放攻击，不用破解，截获或直接使用。(预防重放攻击，还可以从server端先发送随机码，client段将密码和随机码拼接然后做HASH))。
+6. 数字签名
+![app_011](res/Accumulating_App/app_011.png)  
+7. 证书
+可完成公钥的存储和交换
+
+
 ####Effective UID/ Real UID
 Linux中，父子进程间UID的世袭原则：身份世袭二权利不世袭，及子进程可以继承Real UID,不能继承Effective UID。表现为子进程的Real UID=子进程的Effective UID=父进程的Real UID。  
 典型的实例:passwd, 运行时候Effective UID被提升为root，但RUID不会变。su，EUID和RUID均会改变。
