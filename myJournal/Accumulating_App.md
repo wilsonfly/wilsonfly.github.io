@@ -1,6 +1,12 @@
 
 
-
+####Effective UID/ Real UID
+Linux中，父子进程间UID的世袭原则：身份世袭二权利不世袭，及子进程可以继承Real UID,不能继承Effective UID。表现为子进程的Real UID=子进程的Effective UID=父进程的Real UID。  
+典型的实例:passwd, 运行时候Effective UID被提升为root，但RUID不会变。su，EUID和RUID均会改变。
+有了setuid 还有setgid及对应的Effective GID、Real GID。  
+android_filesystem_capability.h中定义了capability的描述。
+![app_007](res/Accumulating_App/app_008.png)  
+![app_007](res/Accumulating_App/app_009.png)  
 
 
 ####FLAG_ACTIVITY_CLEAR_TOP
