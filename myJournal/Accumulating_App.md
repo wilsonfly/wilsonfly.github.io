@@ -2,6 +2,17 @@
 
 
 
+
+
+
+####layout_gravity/gravity/padding/margin
+layout_gravity：描述该view与父view间位置关系，即view的布局描述  
+gravity：描述该view与其内容的位置关系，比如EditText/Button中的文字位置  
+需要注意的是，垂直布局中，描述左右方向的位置描述生效，垂直方向比如top、bottom不生效；水平布局类推。
+padding：描述该view与其内容的距离关系  
+margin：描述该view与邻居view的距离关系
+
+
 ####代码混淆
 可以用sdk/tools下的混淆工具：proguard  
 更方便的是在工程文件project.properties中打开这行的注释，使用默认的配置文件：proguard.config=${sdk.dir}/tools/proguard/proguard-android.txt:proguard-project.txt
@@ -53,12 +64,12 @@ long free = Runtime.getRuntime().freeMemory(); //剩余内存
 2. 限制屏幕尺寸：在AndroidManifestxml中通过<compatible-screens>或者<supports-screens>标签来限制屏幕尺寸。在GooglePlay或者其他App市场上来过滤。
 为不同的屏幕尺寸提供不同的布局：屏幕尺寸分为4个等级：small(标准120dpi-240*320)/normal(标准160dpi-320*480)/large(标准240dpi-480*800)/xlarge(320dpi-)，相应的布局资源目录layout-small/layout-normal/layout-large/layout-xlarge
 3. 为不同的屏幕密度提供不同分辨率的图像资源（区分界限模糊）：低、中、高密度屏幕对应drawable-ldpi(版本不同可能是drawable)/drawable-mdpi/drawable-hdpi
-4. 每一种屏幕尺寸都有要求的最小屏幕长宽尺寸，这些最小长宽尺寸使用与屏幕密度无关的单位dp，4种泛化的屏幕尺寸对应的最小屏幕长宽尺寸如下：
-xlarge: 960dp * 720 dp
-large: 640dp * 480dp
-normal: 470dp * 320dp
-small: 426dp * 320dp
-
+4. 每一种屏幕尺寸都有要求的最小屏幕长宽尺寸，这些最小长宽尺寸使用与屏幕密度无关的单位dp，4种泛化的屏幕尺寸对应的最小屏幕长宽尺寸如下：  
+xlarge: 960dp * 720 dp  
+large: 640dp * 480dp  
+normal: 470dp * 320dp  
+small: 426dp * 320dp  
+![app_007]((res/Accumulating_App/app_007.png)  
 
 ####有关数据库_id
 Android对数据库表有一个约定，就是每张表都应该至少有_id这列。listview在适配cursor的时候，会默认的获取 _id 这列的值，如果建的表没有 _id这列的话，会报错。
