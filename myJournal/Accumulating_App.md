@@ -1,5 +1,70 @@
 
 
+
+
+####代码混淆
+可以用sdk/tools下的混淆工具：proguard  
+更方便的是在工程文件project.properties中打开这行的注释，使用默认的配置文件：proguard.config=${sdk.dir}/tools/proguard/proguard-android.txt:proguard-project.txt
+
+####ZIP对齐对apk优化
+签名之后进行此优化
+	
+	zipalign -v 4 src.apk dest.apk // -v像是详细输出，4字节对齐
+	zipalgin -c -v 4 dest.apk   //-c检查对齐
+
+####自动化测试工具：Monkey
+monkey -p pkg_name  -v event_times
+
+####性能分析工具：traceview
+	Debug.startMethodTracing("activity_trace");
+	test1();
+	test2();
+	Debug.stoipMethodTracing();
+会在sd卡根目录生产一个activity_trace.trace文件，然后traceview  activity_trace.trace出现分析界面。
+
+####内存消耗测试
+long total = Runtime.getRuntime().totalMemory();//系统总内存
+long free = Runtime.getRuntime().freeMemory(); //剩余内存
+
+####ANR的处理思路
+将耗资源的操作(比如下载文件，复杂计算)放到其他线程。
+
+####Listview 的优化
+1. 利用convertView，convertView相当于一个缓存，convertView会指向上下滑动list时候最近被遮挡的一个view。如果它不为空可直接拿这个view来使用，只需要重新更新相应的数据即可，而不需要重新new出一个view。
+2. 定义一个ViewHolder类，存放需要findViewById查找的控件，然后使用setTag方法将ViewHolder对象与View绑定。在getView方法中convertView不为空的时候即可通过getTag方法重新得到view相应的控件，减少了消耗性能的findViewById操作的使用。
+更多详情见：[Android ListView使用BaseAdapter与ListView的优化](http://www.open-open.com/lib/view/open1339485728006.html)
+
+
+####组件所在进程
+组件运行在哪个进程中可以在AndroidManifest中配置，其中Activity/Service/receiver/provider都有一个process属性来指定该组件运行所在进程。
+
+####内存回收
+针对像bitmap这样占用空间比较大的对象，如下方式提醒系统及时回收是个好习惯。
+
+	if(bitmapObjec.isRecycled() == false){
+		bitmapObject.recycle();
+		system.gc();//提醒系统及时回收
+	}
+
+
+
+####屏幕适配
+1. 涉及 屏幕尺寸、屏幕密度、屏幕方向、屏幕分辨率、独立于屏幕密度的像素(dp/sp)
+2. 限制屏幕尺寸：在AndroidManifestxml中通过<compatible-screens>或者<supports-screens>标签来限制屏幕尺寸。在GooglePlay或者其他App市场上来过滤。
+为不同的屏幕尺寸提供不同的布局：屏幕尺寸分为4个等级：small(标准120dpi-240*320)/normal(标准160dpi-320*480)/large(标准240dpi-480*800)/xlarge(320dpi-)，相应的布局资源目录layout-small/layout-normal/layout-large/layout-xlarge
+3. 为不同的屏幕密度提供不同分辨率的图像资源（区分界限模糊）：低、中、高密度屏幕对应drawable-ldpi(版本不同可能是drawable)/drawable-mdpi/drawable-hdpi
+4. 每一种屏幕尺寸都有要求的最小屏幕长宽尺寸，这些最小长宽尺寸使用与屏幕密度无关的单位dp，4种泛化的屏幕尺寸对应的最小屏幕长宽尺寸如下：
+xlarge: 960dp * 720 dp
+large: 640dp * 480dp
+normal: 470dp * 320dp
+small: 426dp * 320dp
+
+
+####有关数据库_id
+Android对数据库表有一个约定，就是每张表都应该至少有_id这列。listview在适配cursor的时候，会默认的获取 _id 这列的值，如果建的表没有 _id这列的话，会报错。
+如果不是用在listview中，创建表的时候可以不加 _id，但是查询的时候需要用as _id 。
+
+
 ####有关耗电
 耗电状态切换时间：
 ![app_005](res/Accumulating_App/app_005.png)
