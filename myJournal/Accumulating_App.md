@@ -3,6 +3,32 @@
 
 
 
+####FLAG_ACTIVITY_CLEAR_TOP
+A,B,C,D依次启动了四个Activity，由D到B而且不再需要回到C，则可以在D中启动B的时候加入intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
+引申：由D退出程序，则可以用如上方法启动A，同时配置A为android:launchMode="singleTop"，这时启动A就不会调用oncreate(),而是响应onNewIntent()，在A中重写onNewIntent()添加finish动作，这时将会退出整个程序。  
+更多详情见：[ActivityGroup相关--getLocalActivityManager() 以及intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)用法](http://blog.csdn.net/getchance/article/details/8444589)
+
+
+####定制控件几种方式
+1. 继承其他空间类(EidtText、Button)
+2. 组合方式。当前空间类从容器里继承，并将若干控件添加到当前的容器中
+3. 绘制控件，也就是空间类从View继承，并从onDraw方法中从零绘制控件。
+编写控件类的时应将可能变化的值通过属性设置，而不是直接固化在控件类中。
+
+####getApplicationContext与this
+对于一般的Android应用，通常有两种Context，即Activity和Application。  
+getApplicationContext() 返回应用的上下文，生命周期是整个应用，应用摧毁它才摧毁。  
+Activity.this 返回当前activity的上下文，生命周期只是它所在的Activity，activity 摧毁它就摧毁。
+如果是在匿名内部类中，this通常就是不能用的，因为内部类所new出来的对象的生命周期比较短。  
+
+
+####layout_gravity/gravity/padding/margin
+layout_gravity：描述该view与父view间位置关系，即view的布局描述   
+gravity：描述该view与其内容的位置关系，比如EditText/Button中的文字位置  
+需要注意的是，垂直布局中，描述左右方向的位置描述生效，垂直方向比如top、bottom不生效；水平布局类推。  
+padding：描述该view与其内容的距离关系  
+margin：描述该view与邻居view的距离关系  
+
 
 
 ####layout_gravity/gravity/padding/margin
