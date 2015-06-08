@@ -69,7 +69,7 @@ xlarge: 960dp * 720 dp
 large: 640dp * 480dp  
 normal: 470dp * 320dp  
 small: 426dp * 320dp  
-![app_007]((res/Accumulating_App/app_007.png)  
+![app_007](res/Accumulating_App/app_007.png)  
 
 ####有关数据库_id
 Android对数据库表有一个约定，就是每张表都应该至少有_id这列。listview在适配cursor的时候，会默认的获取 _id 这列的值，如果建的表没有 _id这列的话，会报错。
