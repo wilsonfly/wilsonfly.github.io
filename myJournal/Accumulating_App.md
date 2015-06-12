@@ -3,6 +3,31 @@
 
 
 
+####setImageDrawable与setImageResource
+ImageView 使用：
+imageview1.setImageDrawable(getResources().getDrawable(R.drawable.shoe_default));
+ImageSwitcher使用：  
+private int[] imageId = new int[] { R.drawable.img01, R.drawable.img02};
+imageSwitcher.setImageResource(imageId[index]);
+
+####scrollview与listview
+ScrollView继承自FrameLayout，是一个Layout！可以滚动显示一个占据的空间大于物理显示的视图列表。scrollview只能包含一个子视图或试图组，在实际使用中通常包含的是一个垂直的LinearLayout。在页面展示后，scrollview中的所有内容都加载到了内存中，当数据量大时会比较耗资源。与之对应的还有个HorizontalScrollView，可以在水平方向滚动视图。  
+ListView 继承自AbsListView，是一个可以在垂直方式滚动显示view视图的列表。只有在滑动到显示界面才会加载之前没有显示的内容，数据量大的时候性能方面优势比较明显。可以精确到其中每一个item的点击事件。使用ListView有两种方式，一种是通过一个继承了ListActivity的Activity，在其中设定ListAdapter，对于这种方式，比较适用于整个页面就是一个ListView；第二种方式就是直接使用ListView控件。
+
+####空进程
+运行这些进程的唯一原因是作为一个缓存，缩短下次程序需要重新使用的启动时间。系统经常中止这些进程，以调节程序缓存和系统缓存的平衡  
+更多有关进程分类、进程生命周期、Android内存管理信息见：  
+[Android 进程生命周期 Process Lifecycle](http://www.cnblogs.com/mengdd/p/3139934.html)   
+[Android内存管理机制详解](http://blog.csdn.net/chaihuasong/article/details/8289367)  
+
+####软引用
+如果一个对象只具有软引用，则内存空间足够，垃圾回收器就不会回收它；如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。软引用可用来实现内存敏感的高速缓存。  
+其特点是它的一个实例保存对一个对象的软引用，该软引用的存在不妨碍垃圾收集线程对该Java对象的回收。也就是说，一旦SoftReference保存了对一个Java对象的软引用后，在垃圾线程对这个Java对象回收前，SoftReference类所提供的get()方法返回Java对象的强引用。另外，一旦垃圾线程回收该Java对象之后，get()方法将返回null。   
+更多有关软引用及强引用、弱引用、虚引用见：  
+[android使用软引用构建缓存](http://blog.csdn.net/hbzh2008/article/details/9038029)   
+[android 解决图片大量上载：软引用必须懂4点](http://www.educity.cn/wenda/176212.html)  
+
+
 ####有关listActivity的id
 如果只是普通的文本内容的listview，完全可以不定义layout。如果需要定制布局，在布局文件中添加listview的时候需要将其id设置为android:id="@android:id/list"，或者android:id="@id/android:list”，否则会有这种报错：Your content mush have a listView whose id attribute is 'android.R.id.list'
 
