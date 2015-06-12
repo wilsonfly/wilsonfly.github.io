@@ -2,6 +2,19 @@
 
 
 
+
+####有关listActivity的id
+如果只是普通的文本内容的listview，完全可以不定义layout。如果需要定制布局，在布局文件中添加listview的时候需要将其id设置为android:id="@android:id/list"，或者android:id="@id/android:list”，否则会有这种报错：Your content mush have a listView whose id attribute is 'android.R.id.list'
+
+####raw中命名文件不能有大写，asset中文件名可以有大写，什么破规矩！
+
+####有关Java内部类引用外部变量需要定义为final
+根据创建位置，内部类可以分为成员的、方法的、匿名的、接口的。
+对于成员内部类来说，会持有一份外部类当前对象的引用：Out.this。这样就可以调用外部类可见的方法及成员变量，调用方法是通过持有的外部类当前对象的引用。  
+对于方法内部类来说，通过外部类当前对象的引用访问不到所在方法中的局部变量。Java设计的解决办法是：将局部变量复制一份给内部类使用。方法则是在内部类初始化的时候通过构造方法传值的方式。这样引出一个问题就是，**方法中变量与内部类中变量副本的一致性问题**。解决此问题的方法就是需要将方法中的局部变量定义为final！  
+更多详情见：[Java内部类与final关键字详解](http://blog.csdn.net/ygj281583295/article/details/9059737)  
+
+
 ####安全篇
 1. 概述  
 ![app_010](res/Accumulating_App/app_010.png)  
@@ -61,7 +74,8 @@ gravity：描述该view与其内容的位置关系，比如EditText/Button中的
 需要注意的是，垂直布局中，描述左右方向的位置描述生效，垂直方向比如top、bottom不生效；水平布局类推。  
 padding：描述该view与其内容的距离关系  
 margin：描述该view与邻居view的距离关系  
-
+spacing：gallery中图片间隔  
+android:verticalSpacing/android:horizontalSpacing：gridview中图片上下、左右之间的间隔  
 
 
 ####layout_gravity/gravity/padding/margin
