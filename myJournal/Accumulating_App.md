@@ -2,6 +2,32 @@
 
 
 
+
+
+####ndk
+1. 环境搭建
+    * 下载ndk，地址见[AndroidDevTools简介](http://www.androiddevtools.cn/)  
+    *  chmod a+x android-ndk-r10d-darwin-x86_64.bin; ./android-ndk-r10d-darwin-x86_64.bin
+    * 添加ndk-build所在目录到环境变量PATH
+
+2. 生成头文件  
+终端命令行方式，在工程根目录下：   
+javah -classpath bin/classes -d jni -jni com.wilsonflying.testjni.AccessNative  
+javah -classpath bin/classes -d jni  com.wilsonflying.testjni.AccessNative  
+配置eclipse自动生成头文件：   
+[在eclipse中快速开发JNI，一键生成C头文件.h，以及一键使用NDK交叉编译](http://www.oschina.net/question/1402563_133543)  
+3. ndk-build  
+终端命名行方式，在工程根目录下直接执行：  
+ndk-build  
+配置eclipse自动执行：  
+[在eclipse中快速开发JNI，一键生成C头文件.h，以及一键使用NDK交叉编译](http://www.oschina.net/question/1402563_133543)   
+4. 在preference中没有NDK的配置项的问题  
+目前adt bundle版本是adt-bundle-mac-x86_64-20140702，在preference中没有NDK配置项。打开前不久的旧版本adt-bundle-mac-x86_64-20131030中的eclipse是有NDK配置项的。将~/Applications/adt-bundle-mac-x86_64-20131030/eclipse/plugins/com.android.ide.eclipse.ndk_22.3.0.v201310242005-887826.jar 拷贝到目前版本对应plugins目录，重启eclipse就ok了。
+5. 配置NDK后在.C .CPP文件中仍然不能自动补齐的问题  
+需要在项目开始写jni代码前通过Add Native Support的方式自动生成jni目录及默认的cpp文件和Android.mk。方法是右键工程名称—Android tools—Add Native Support。这个时候在去编辑代码就可以自动补齐，并且能够跟编辑java代码时一样实时检查代码语法错误。  
+
+
+
 ####launchMode
 standard 不管有没有已存在的实例，都生成新的实例  
 singleTop 如果发现有对应的Activity实例正位于栈顶，则重复利用，不再生成新的实例  
