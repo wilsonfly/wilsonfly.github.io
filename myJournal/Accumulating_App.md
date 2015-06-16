@@ -76,7 +76,7 @@ android_filesystem_capability.h中定义了capability的描述。
 
 ####FLAG_ACTIVITY_CLEAR_TOP
 A,B,C,D依次启动了四个Activity，由D到B而且不再需要回到C，则可以在D中启动B的时候加入intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
-引申：由D退出程序，则可以用如上方法启动A，同时配置A为android:launchMode="singleTop"，这时启动A就不会调用oncreate(),而是响应onNewIntent()，在A中重写onNewIntent()添加finish动作，这时将会退出整个程序。  
+引申：由D退出程序，则可以用如上方法启动A，同时配置A为android:launchMode="singleTask"，这时启动A就不会调用oncreate(),而是响应onNewIntent()，在A中重写onNewIntent()添加finish动作，这时将会退出整个程序。  
 更多详情见：[ActivityGroup相关--getLocalActivityManager() 以及intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)用法](http://blog.csdn.net/getchance/article/details/8444589)
 
 
