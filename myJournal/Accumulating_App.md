@@ -4,6 +4,13 @@
 
 
 
+####有关AsyncTask
+1. 需要在UI线程中创建AsyncTask的实例以及调用AsyncTask的execute方法
+2. 重写的四个方法是系统自动调用的，不能手动去调用
+3. 每个AsyncTask只能被执行一次，多次调用会引发异常
+4. 只有doInBackgroud方法是运行在其他线程做异步操作，其他三个方法都是运行在UI线程，也就都可以操作UI
+5. AsyncTask的cancel只是将对应的AyncTask标记为cancel状态，并不是真正的取消线程的执行。需要在doInBackgroud和onProgressUpdate里边检测线程是否isCancelled状态，然后做相应操作。
+
 ####ndk
 1. 环境搭建
     * 下载ndk，地址见[AndroidDevTools简介](http://www.androiddevtools.cn/)  
