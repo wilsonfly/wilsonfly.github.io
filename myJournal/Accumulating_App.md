@@ -32,7 +32,9 @@ ndk-build
 目前adt bundle版本是adt-bundle-mac-x86_64-20140702，在preference中没有NDK配置项。打开前不久的旧版本adt-bundle-mac-x86_64-20131030中的eclipse是有NDK配置项的。将~/Applications/adt-bundle-mac-x86_64-20131030/eclipse/plugins/com.android.ide.eclipse.ndk_22.3.0.v201310242005-887826.jar 拷贝到目前版本对应plugins目录，重启eclipse就ok了。
 5. 配置NDK后在.C .CPP文件中仍然不能自动补齐的问题  
 需要在项目开始写jni代码前通过Add Native Support的方式自动生成jni目录及默认的cpp文件和Android.mk。方法是右键工程名称—Android tools—Add Native Support。这个时候在去编辑代码就可以自动补齐，并且能够跟编辑java代码时一样实时检查代码语法错误。  
-
+6. 在Acitivity中声明native方法来生成头文件的问题  
+javah -classpath bin/classes:/Users/cindy/Applications/adt-bundle-mac-x86_64-20140702/sdk/platforms/android-21/android.jar -d jni com.wilsonflying.testjni2.MainActivity  
+通过在Activity中声明native的方法，也是可以通过javah生成头文件的。只不过需要在制定classpath路径中添加android.jar所在目录，否则会报错提示找不到android.app.Activity的类文件。这样还是太繁琐，而且生成的头文件里边会有非常多没有用的东西，所以还是单独创建一个类，在其中声明native的方法，然后生成头文件。
 
 
 ####launchMode
