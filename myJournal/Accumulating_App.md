@@ -1,12 +1,9 @@
 
 
 
-####Eclipse之sdk manager篇
-如果没有全局的翻墙环境，可以配置sdk manager中代理。Android SDK Manager--tools--options，填写HTTP Proxy Server及Port信息。
-mirrors.neusoft.edu.cn:80 或者 mirrors.opencas.cn:80。  
-更多镜像地址及Android开发工具下载可见：[AndroidDevTools简介](http://www.androiddevtools.cn/)
 
 
+####不能打开包含在apk里边的数据库，如需使用得先写到data相应目录中或者sdcard中
 
 ####有关AsyncTask
 1. 需要在UI线程中创建AsyncTask的实例以及调用AsyncTask的execute方法
@@ -318,6 +315,11 @@ am start -n net.sunniwell.app.swsettings/net.sunniwell.app.swsettings.SWSettings
 @Override是伪代码,表示重写(当然不写也可以)，不过写上有如下好处:   
 1、可以当注释用,方便阅读  
 2、编译器可以给你验证@Override下面的方法名是否是你父类中所有的，如果没有则报错。例如，你如果没写@Override，而你下面的方法名又写错了，这时你的编译器是可以编译通过的，因为编译器以为这个方法是你的子类中自己增加的方法    
+
+####Eclipse之sdk manager篇
+如果没有全局的翻墙环境，可以配置sdk manager中代理。Android SDK Manager--tools--options，填写HTTP Proxy Server及Port信息。
+mirrors.neusoft.edu.cn:80 或者 mirrors.opencas.cn:80。  
+更多镜像地址及Android开发工具下载可见：[AndroidDevTools简介](http://www.androiddevtools.cn/)
 
 ####eclipse快捷键
 [动画讲解Eclipse常用快捷键](http://www.techug.com/eclipse-shortcut-keys)  
