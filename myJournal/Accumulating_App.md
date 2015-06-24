@@ -1,6 +1,10 @@
 
 
 
+####Eclipse之sdk manager篇
+如果没有全局的翻墙环境，可以配置sdk manager中代理。Android SDK Manager--tools--options，填写HTTP Proxy Server及Port信息。
+mirrors.neusoft.edu.cn:80 或者 mirrors.opencas.cn:80。  
+更多镜像地址及Android开发工具下载可见：[AndroidDevTools简介](http://www.androiddevtools.cn/)
 
 
 
