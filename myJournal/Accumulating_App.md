@@ -1,6 +1,20 @@
 
 
 
+####反编译
+反编译：java -jar ~/tools/apktool_2.0.0.jar d myhw/ apks/myhw.apk  
+重新打包：java -jar ~/tools/apktool_2.0.0.jar b myhw/ myhw_new.apk  
+
+反编译：java -jar tools/apktool1.5.2.jar d apks/myhw.apk  apks/myhw  
+出现报错：Could not decode arsc file  
+原因：apktool工具版本太老，更新新版本的apktool  
+sublime工具查看反编译出来的smali  
+重新打包：java -jar tools/apktool1.5.2.jar b apks/myhw new_myhw.apk  
+出现报错：Could not run progress “aapt"  
+原因：需要将adt—sdk—build-tools—21.1.2(获取其他某个版本)—aapt的路径添加到环境变量PATH中  
+对apk签名：java -jar tools/apk-signer-1.8.5.jar   
+选择了待签名apk、key文件进行签名时出现如下乱码，待分析。还是用Linux中签名方式：java -jar $build_path/linux-x86/framework/signapk.jar $build_path/security/platform.x509.pem $build_path/security/platform.pk8  $input_file $output_file   
+![app_012](res/Accumulating_App/app_012.png)  
 
 
 ####不能打开包含在apk里边的数据库，如需使用得先写到data相应目录中或者sdcard中
