@@ -1,6 +1,8 @@
 
 
 
+####内存泄露查找工具LeakCanary
+
 
 ####有关Android studio
 1. 安装篇  
