@@ -1,6 +1,26 @@
 
 
 
+
+####有关Android studio
+1. 安装篇  
+Windows下需要配置支持HAXM，具体参照 [安装Intel HAXM为Android 模拟器加速](http://www.tuicool.com/articles/meQbmmb)，还算比较顺利，只不过在配置BIOS中开启虚拟加速机制的时候找了半天。我这戴尔台式机，位置是Overclocking--CPU Features--Intel Virtualization Tech,选中为Enabled，F10保存退出即可。  
+号称30秒启动的虚拟机，基本没有改善，而且还真真的占用了2G内存。还是上Genymotion，业界良心。  
+2. AndroidStudio+Genymotion  
+装下插件即ok，Settings--Plugins--搜索Genymotion--下方的按钮Browse repositories在线安装--弹出界面选择Install。  
+然后工具栏新出现一个Genymotion Device Manager中配置Genymotion安装路径：D:\Program Files\Genymobile\Genymotion。
+3. 导入之前的项目有可能会报'找不到API 19 sdk platform'的错  
+AS默认只带了API22的platform文件，所有到sdk manager中将常见的api 21/19/17/15安装一下，有关SDK Manager设置代理见之前笔记'Eclipse之sdk manager篇’   
+Mac上安装完后查看sdk Manager居然自动找到了Eclipse下载过的sdk路径，不用重新下载，爽歪歪。  
+4. 导入之前的项目时候，出现如下报错  
+![app_013](res/Accumulating_App/app_013.png)   
+将MyApplication中build.gradle中的android字段删掉即可，记得点击下'Sync Project with Gradle Files'即可生效：
+![app_014](res/Accumulating_App/app_014.png)    
+5. Mac上安装AS，下载sdk阶段一直报错'The following SDK components were not installed: sys-img-x86-addon-google_apis-google-22 and addon-google_apis-google-22’ 
+有全局翻墙环境，但是点击retry仍然一直失败，点击cancel然后就退出了，重新打开AS一路next下来又重复上述问题。  
+直到重新打开AS，在Welcome界面直接点击cancel而不是点击next，则出现了创建Android App工程的界面，终于能用了。
+
+
 ####反编译
 反编译：java -jar ~/tools/apktool_2.0.0.jar d myhw/ apks/myhw.apk  
 重新打包：java -jar ~/tools/apktool_2.0.0.jar b myhw/ myhw_new.apk  
