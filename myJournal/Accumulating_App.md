@@ -1,6 +1,27 @@
 
 
 
+
+
+
+####调用一些sdk中类而找不到的问题
+创建工程默认提供的android.jar可能会有些类没有包含，需要将sdk中的一些jar引入到工程中才能编译过。比如修改静默安装apk问题时候测试代码中 IPackageInstallObserver，IPackageDeleteObserver 解析不到，将sdk中的out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/classes.jar 添加到工程中，而且需要调整优先级比工程中默认提供的android.jar包优先级高，方法Build Path--Configure Build Path--Order and Export中调整。
+
+####静默安装apk篇
+1. 达到静默安装的目的  
+普通安装方式：Intent intent = new Intent(Intent.ACTION_VIEW);intent.setDataAndType(Uri.fromFile(new File(strApk)), "application/vnd.android.package-archive");startActivity(intent);  
+静默安装：调用PackageManger的接口。pm.installPackage(mPackageURI, observer, PackageManager.INSTALL_REPLACE_EXISTING, Intent.EXTRA_INSTALLER_PACKAGE_NAME); 需要实现一个PackageInstallObserver()实例observer。  
+静默卸载：getPackageManager().deletePackage("com.wilsonflying.testframelayout", observer_delete, 0);   
+特殊点：需要系统签名  
+2. 安装apk的调用者一般是应用商城的角色，应用商城需要自身的频繁升级的，如果是第三方发布的话又不能持有系统签名的key。需要支持非系统签名的应用商城的调用installPackage接口。  
+安装流程会走到PackageManagerService的installPackageWithVerificationAndEncryption()方法，其中首先会有个mContext.enforceCallingOrSelfPermission(android.Manifest.permission.INSTALL_PACKAGES, null);这里会根据调用这的pid、uid进行权限的鉴别，如果没有权限抛异常出来，一路传上去到调用安装的apk。  
+    目前在installPackageWithVerificationAndEncryption()中获取调用者的包名，如果在允许范围内则不作上述权限鉴别动作，流程继续走下去能够安装成功。
+
+
+####使用Genymotion调试出现错误INSTALL_FAILED_CPU_ABI_INCOMPATI
+调试极光推送的demo时候，无法启动，报如上错误，下载Genymotion-ARM-Translation.zip拖到Genymotion中即可。
+
+
 ####内存泄露查找工具LeakCanary
 
 
