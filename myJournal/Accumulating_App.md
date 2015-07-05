@@ -1,5 +1,16 @@
 
 
+####fragment篇
+1. 静态加载：在布局文件中定义一个fragement，指定id/tag以及fragment实现类
+2. 动态添加：需要用到Fragment事务(对Fragment进行添加、移除、替换以及执行其他的一些动作，提交给activity的每一套变化成为一个事务)，在Fragment事务中add一个fragment到一个layout中。
+3. 如果需要在按下back按键时返回到前一个fragment状态，调用commit之前需要addToBackStack。
+4. 静态加载一个fragment后，fragment中的控件对activity是可见的，可以通过findViewById的方式找到并操作fragment中控件。
+5. 声明周期：见下图
+6. Fragment与Activity通信
+fragment中调用getActivity获取它所在的activity，activity中通过FragmentManager的findFragmentbyId或者findFragmentByTag获取fragment。    
+Acitivity—>Fragment：在Activity中创建Bundle，作为Fragment的setArguments方法的参数。  
+Fragment—>Activity：在Fragment中定义接口，包含该Fragment的Activity中实现该回调接口，这样在Fragment中可以调用该接口传递数据到Activity。
+
 
 ####AndroidAnnotation篇
 1. eclipse安装插件’Eclipse java development tools’(太特么的慢了，翻墙环境下三个小时以上)，才会在右键--properties—Java Compiler中出现‘Annotation Processing’，详情见[android eclipse 没有Annotation Processin选项](http://blog.csdn.net/caiwenfeng_for_23/article/details/38959685)  
