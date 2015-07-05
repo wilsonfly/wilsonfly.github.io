@@ -1,5 +1,11 @@
 
 
+####有关fingerprint规则
+$(BRAND)/$(PRODUCT)/$(DEVICE):$(VERSION.RELEASE)/$(ID)/$(VERSION.INCREMENTAL):$(TYPE)/$(TAGS)  
+HUAWEI/EC6108V9/HWEC6108V9:4.4.2/HUAWEIEC6108V9/V100R003C30:user/release-keys
+
+
+
 ####假待机篇
 1. PowerManagerService中调用HiDisplay服务，关掉hd、sd输出
 2. 发送ACTION_SCREEN_OFF的广播，通知各个应用尤其是在播放音视频的应用停掉播放
