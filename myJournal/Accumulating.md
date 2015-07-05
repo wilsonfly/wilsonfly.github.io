@@ -27,6 +27,14 @@ cmd+q 退出程序
 浏览多种图片：选中照片后空格，然后用方向键或者command＋A 直接浏览  
 
 
+
+####有关Binder
+1. server端实现TestService类注册服务、完成接口的真正实现；C/CPP单独存在的服务的话还要实现main接口的可执行文件，创建ProcessState并加入线程池。
+2. 实现代理层，BpTestService(继承于BpInterface<ITestService>)， ITestService(继承于IInterface，定义常量数据和虚类)；BnTestService(继承于BnInterface，实现onTransact(又BpTestService端调用过来)，用于调用TestService接口)
+3. client端JAVA使用：ITestService.Stub.asInterface(ServiceManager.getService("TestService"))获取服务， C/CPP使用：defaultServiceManager()->getService("TestService")获取服务，即可调用service提供的接口了。
+
+
+
 ####修改鼠标移动速度，需要更新数据库才能起作用及需要恢复出厂设置一下
 packages/SettingsProvider/res/values/defaults.xml
 ![pic_019](res/Accumulating/accumulating_019.png)    
