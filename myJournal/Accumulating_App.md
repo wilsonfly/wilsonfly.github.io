@@ -1,7 +1,10 @@
 
 
 
-
+####AndroidAnnotation篇
+1. eclipse安装插件’Eclipse java development tools’(太特么的慢了，翻墙环境下三个小时以上)，才会在右键--properties—Java Compiler中出现‘Annotation Processing’，详情见[android eclipse 没有Annotation Processin选项](http://blog.csdn.net/caiwenfeng_for_23/article/details/38959685)  
+2. 由于会继承当前SomeActivity类生成SomeActivity_子类，然后生成本该我们自己写的代码，所以成员变量和成员方法不能定义成private。
+3. 一个app最多支持65536个方法，在大型项目中使用注解框架有可能出出现方法数超限。
 
 
 ####调用一些sdk中类而找不到的问题
