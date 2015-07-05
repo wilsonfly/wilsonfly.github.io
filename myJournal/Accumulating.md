@@ -1,7 +1,14 @@
 
 
+####假待机篇
+1. PowerManagerService中调用HiDisplay服务，关掉hd、sd输出
+2. 发送ACTION_SCREEN_OFF的广播，通知各个应用尤其是在播放音视频的应用停掉播放
+3. nativeSetPowerState，一个native的方法，处理一些状态
+4. 调用swRootService，处理灯的状态
+5. 唤醒时候相应的1-4逆处理
 
-####(0506)有关mac
+
+####有关mac
 zsh详细配置过程见[终极 Shell——ZSH](http://zhuanlan.zhihu.com/mactalk/19556676)    
 brew安装过程见[Mac OS X 中安装 brew](http://webmedia.blog.163.com/blog/static/416695020123261226695/)  
 cmd+shift+3 截全屏  
