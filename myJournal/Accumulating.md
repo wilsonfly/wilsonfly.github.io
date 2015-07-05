@@ -18,6 +18,8 @@ fn+delete  从光标往后删除
 cmd+shift+f  全屏/退出全屏  
 cmd+w 关闭窗口  
 cmd+q 退出程序  
+浏览多种图片：选中照片后空格，然后用方向键或者command＋A 直接浏览  
+
 
 ####修改鼠标移动速度，需要更新数据库才能起作用及需要恢复出厂设置一下
 packages/SettingsProvider/res/values/defaults.xml
