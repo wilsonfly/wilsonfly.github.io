@@ -100,7 +100,8 @@ HUAWEI/EC6108V9/HWEC6108V9:4.4.2/HUAWEIEC6108V9/V100R003C30:user/release-keys
 12. 添加文档Google_TA_检查项_v3.2_EC6108V9.xlsx 要求的一些属性
 13. 更新带有'powered by android'字样的logo
 14. 更新首页带有PlayStore的launcher，gms有测试项需要。launcher需要重新签名，否则cts会有失败项。
-15. cts测试报告'Show Device Information'中有分辨率和Density值，有如下要求。修改baseparam虚拟屏幕大小为1920x1080，dpi修改为320。相应的裁边值也再次相应调整；一些都是针对160dpi设计的apk布局异常需要适配。
+15. cts测试报告'Show Device Information'中有分辨率和Density值，有如下要求。修改baseparam虚拟屏幕大小为1920x1080，dpi修改为320。相应的裁边值也再次相应调整；一些都是针对160dpi设计的apk布局异常需要适配。  
+![pic_002](res/Accumulating_cts/cts_002.png)   
 16. bootargs中添加内存参数，否则mtk的wifi驱动会出现分配内存失败，然后无法正常工作的问题
 17. init.bigfish.rc中添加mtk蓝牙的后台服务
 18. 添加mtk蓝牙驱动，sdk中原来是编译时候copy ko到out目录的，拿到源码后适配hisi sdk的编译环境。
