@@ -1,6 +1,77 @@
 
 
+####fragment篇
+1. 静态加载：在布局文件中定义一个fragement，指定id/tag以及fragment实现类
+2. 动态添加：需要用到Fragment事务(对Fragment进行添加、移除、替换以及执行其他的一些动作，提交给activity的每一套变化成为一个事务)，在Fragment事务中add一个fragment到一个layout中。
+3. 如果需要在按下back按键时返回到前一个fragment状态，调用commit之前需要addToBackStack。
+4. 静态加载一个fragment后，fragment中的控件对activity是可见的，可以通过findViewById的方式找到并操作fragment中控件。
+5. 声明周期：见下图
+6. Fragment与Activity通信
+fragment中调用getActivity获取它所在的activity，activity中通过FragmentManager的findFragmentbyId或者findFragmentByTag获取fragment。    
+Acitivity—>Fragment：在Activity中创建Bundle，作为Fragment的setArguments方法的参数。  
+Fragment—>Activity：在Fragment中定义接口，包含该Fragment的Activity中实现该回调接口，这样在Fragment中可以调用该接口传递数据到Activity。
 
+
+####AndroidAnnotation篇
+1. eclipse安装插件’Eclipse java development tools’(太特么的慢了，翻墙环境下三个小时以上)，才会在右键--properties—Java Compiler中出现‘Annotation Processing’，详情见[android eclipse 没有Annotation Processin选项](http://blog.csdn.net/caiwenfeng_for_23/article/details/38959685)  
+2. 由于会继承当前SomeActivity类生成SomeActivity_子类，然后生成本该我们自己写的代码，所以成员变量和成员方法不能定义成private。
+3. 一个app最多支持65536个方法，在大型项目中使用注解框架有可能出出现方法数超限。
+
+
+####调用一些sdk中类而找不到的问题
+创建工程默认提供的android.jar可能会有些类没有包含，需要将sdk中的一些jar引入到工程中才能编译过。比如修改静默安装apk问题时候测试代码中 IPackageInstallObserver，IPackageDeleteObserver 解析不到，将sdk中的out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/classes.jar 添加到工程中，而且需要调整优先级比工程中默认提供的android.jar包优先级高，方法Build Path--Configure Build Path--Order and Export中调整。
+
+####静默安装apk篇
+1. 达到静默安装的目的  
+普通安装方式：Intent intent = new Intent(Intent.ACTION_VIEW);intent.setDataAndType(Uri.fromFile(new File(strApk)), "application/vnd.android.package-archive");startActivity(intent);  
+静默安装：调用PackageManger的接口。pm.installPackage(mPackageURI, observer, PackageManager.INSTALL_REPLACE_EXISTING, Intent.EXTRA_INSTALLER_PACKAGE_NAME); 需要实现一个PackageInstallObserver()实例observer。  
+静默卸载：getPackageManager().deletePackage("com.wilsonflying.testframelayout", observer_delete, 0);   
+特殊点：需要系统签名  
+2. 安装apk的调用者一般是应用商城的角色，应用商城需要自身的频繁升级的，如果是第三方发布的话又不能持有系统签名的key。需要支持非系统签名的应用商城的调用installPackage接口。  
+安装流程会走到PackageManagerService的installPackageWithVerificationAndEncryption()方法，其中首先会有个mContext.enforceCallingOrSelfPermission(android.Manifest.permission.INSTALL_PACKAGES, null);这里会根据调用这的pid、uid进行权限的鉴别，如果没有权限抛异常出来，一路传上去到调用安装的apk。  
+    目前在installPackageWithVerificationAndEncryption()中获取调用者的包名，如果在允许范围内则不作上述权限鉴别动作，流程继续走下去能够安装成功。
+
+
+####使用Genymotion调试出现错误INSTALL_FAILED_CPU_ABI_INCOMPATI
+调试极光推送的demo时候，无法启动，报如上错误，下载Genymotion-ARM-Translation.zip拖到Genymotion中即可。
+
+
+####内存泄露查找工具LeakCanary
+
+
+####有关Android studio
+1. 安装篇  
+Windows下需要配置支持HAXM，具体参照 [安装Intel HAXM为Android 模拟器加速](http://www.tuicool.com/articles/meQbmmb)，还算比较顺利，只不过在配置BIOS中开启虚拟加速机制的时候找了半天。我这戴尔台式机，位置是Overclocking--CPU Features--Intel Virtualization Tech,选中为Enabled，F10保存退出即可。  
+号称30秒启动的虚拟机，基本没有改善，而且还真真的占用了2G内存。还是上Genymotion，业界良心。  
+2. AndroidStudio+Genymotion  
+装下插件即ok，Settings--Plugins--搜索Genymotion--下方的按钮Browse repositories在线安装--弹出界面选择Install。  
+然后工具栏新出现一个Genymotion Device Manager中配置Genymotion安装路径：D:\Program Files\Genymobile\Genymotion。
+3. 导入之前的项目有可能会报'找不到API 19 sdk platform'的错  
+AS默认只带了API22的platform文件，所有到sdk manager中将常见的api 21/19/17/15安装一下，有关SDK Manager设置代理见之前笔记'Eclipse之sdk manager篇’   
+Mac上安装完后查看sdk Manager居然自动找到了Eclipse下载过的sdk路径，不用重新下载，爽歪歪。  
+4. 导入之前的项目时候，出现如下报错  
+![app_013](res/Accumulating_App/app_013.png)   
+将MyApplication中build.gradle中的android字段删掉即可，记得点击下'Sync Project with Gradle Files'即可生效：
+![app_014](res/Accumulating_App/app_014.png)    
+5. Mac上安装AS，下载sdk阶段一直报错'The following SDK components were not installed: sys-img-x86-addon-google_apis-google-22 and addon-google_apis-google-22’ 
+有全局翻墙环境，但是点击retry仍然一直失败，点击cancel然后就退出了，重新打开AS一路next下来又重复上述问题。  
+直到重新打开AS，在Welcome界面直接点击cancel而不是点击next，则出现了创建Android App工程的界面，终于能用了。
+
+
+####反编译
+反编译：java -jar ~/tools/apktool_2.0.0.jar d myhw/ apks/myhw.apk  
+重新打包：java -jar ~/tools/apktool_2.0.0.jar b myhw/ myhw_new.apk  
+
+反编译：java -jar tools/apktool1.5.2.jar d apks/myhw.apk  apks/myhw  
+出现报错：Could not decode arsc file  
+原因：apktool工具版本太老，更新新版本的apktool  
+sublime工具查看反编译出来的smali  
+重新打包：java -jar tools/apktool1.5.2.jar b apks/myhw new_myhw.apk  
+出现报错：Could not run progress “aapt"  
+原因：需要将adt—sdk—build-tools—21.1.2(获取其他某个版本)—aapt的路径添加到环境变量PATH中  
+对apk签名：java -jar tools/apk-signer-1.8.5.jar   
+选择了待签名apk、key文件进行签名时出现如下乱码，待分析。还是用Linux中签名方式：java -jar $build_path/linux-x86/framework/signapk.jar $build_path/security/platform.x509.pem $build_path/security/platform.pk8  $input_file $output_file   
+![app_012](res/Accumulating_App/app_012.png)  
 
 
 ####不能打开包含在apk里边的数据库，如需使用得先写到data相应目录中或者sdcard中

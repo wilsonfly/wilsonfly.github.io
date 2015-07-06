@@ -1,7 +1,20 @@
 
 
+####有关fingerprint规则
+$(BRAND)/$(PRODUCT)/$(DEVICE):$(VERSION.RELEASE)/$(ID)/$(VERSION.INCREMENTAL):$(TYPE)/$(TAGS)  
+HUAWEI/EC6108V9/HWEC6108V9:4.4.2/HUAWEIEC6108V9/V100R003C30:user/release-keys
 
-####(0506)有关mac
+
+
+####假待机篇
+1. PowerManagerService中调用HiDisplay服务，关掉hd、sd输出
+2. 发送ACTION_SCREEN_OFF的广播，通知各个应用尤其是在播放音视频的应用停掉播放
+3. nativeSetPowerState，一个native的方法，处理一些状态
+4. 调用swRootService，处理灯的状态
+5. 唤醒时候相应的1-4逆处理
+
+
+####有关mac
 zsh详细配置过程见[终极 Shell——ZSH](http://zhuanlan.zhihu.com/mactalk/19556676)    
 brew安装过程见[Mac OS X 中安装 brew](http://webmedia.blog.163.com/blog/static/416695020123261226695/)  
 cmd+shift+3 截全屏  
@@ -11,6 +24,16 @@ fn+delete  从光标往后删除
 cmd+shift+f  全屏/退出全屏  
 cmd+w 关闭窗口  
 cmd+q 退出程序  
+浏览多种图片：选中照片后空格，然后用方向键或者command＋A 直接浏览  
+
+
+
+####有关Binder
+1. server端实现TestService类注册服务、完成接口的真正实现；C/CPP单独存在的服务的话还要实现main接口的可执行文件，创建ProcessState并加入线程池。
+2. 实现代理层，BpTestService(继承于BpInterface<ITestService>)， ITestService(继承于IInterface，定义常量数据和虚类)；BnTestService(继承于BnInterface，实现onTransact(又BpTestService端调用过来)，用于调用TestService接口)
+3. client端JAVA使用：ITestService.Stub.asInterface(ServiceManager.getService("TestService"))获取服务， C/CPP使用：defaultServiceManager()->getService("TestService")获取服务，即可调用service提供的接口了。
+
+
 
 ####修改鼠标移动速度，需要更新数据库才能起作用及需要恢复出厂设置一下
 packages/SettingsProvider/res/values/defaults.xml
