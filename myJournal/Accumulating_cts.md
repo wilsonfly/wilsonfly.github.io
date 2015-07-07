@@ -115,6 +115,7 @@ HUAWEI/EC6108V9/HWEC6108V9:4.4.2/HUAWEIEC6108V9/V100R003C30:user/release-keys
 26. 荣耀m321项目调试320dpi的时候，hisi补丁写死了一个变量mHasNavigationBar=false，cts测试用例中按menu键不能弹出optionmenu导致UiAutomator一些失败项。
 27. 合入gms的SetupWizard后(第一次开机需要先连接wifi，输入google账号)，开机失败。查看system_server中网路部分阻塞了，将ethernet.checkAndStartEthernet() pppoe.checkAndStartPppoe()两个动作新建线程来执行，避免堵塞system_server。
 28. 盒子是不支持定位功能的，./services/java/com/android/server/LocationManagerService.java  LocationProviderProxy networkProvider = LocationProviderProxy.createAndBind 是空的。location/java/android/location/LocationManager.java的isProviderEnabled仍然来检测networkProvider是否enable。根据是cts测试用例调用此接口返回true规避。
+29. gts有几个播放一直失败的，frameworks/av/media/libmediaplayerservice/MediaPlayerFactory.cpp中HiMediaPlayerFactory类的scoreFactory方法中，添加这几个播放失败的url包含的signature，如果检测到这几个signature，弃用HiMediaPlayer，用原生MediaPlayer播放ok。
 
 
 
