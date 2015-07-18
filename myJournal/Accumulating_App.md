@@ -1,5 +1,17 @@
 
 
+
+####多线程之wait/notify
+1. 在任一时刻，对象的控制权智能被一个线程拥有
+2. wait(),notify(),notifyAll()不属于Thread类,而是属于Object基础类,也就是说每个对像都有wait(),notify(),notifyAll()的功能
+3. 要执行wait/notify/nofiyAll这三个方法，须当前线程取得了该对象的控制权，否则会报java.lang.IllegalMonitorStateException
+4. 线程要取得对象的控制权方法有三：1) 执行对象的某个同步实例方法 2) 执行对象的对应类的同步静态方法 3) 执行对该对象加同步锁的代码块。
+5. 在调用wait的时候，线程自动释放其占有的对象锁，同时不会去申请对象锁。当线程被唤醒的时候，它才再次获得了去获得对象锁的权利。调用完wait，该线程就已经不是currentthread了。
+6. 当B调用notify/notifyAll的时候，B正持有obj锁，因此，A1,A2,A3虽被唤醒，但是仍无法获得obj锁。直到B退出synchronized块，释放obj锁后，A1,A2,A3中的一个才有机会获得锁继续执行。
+7. notify():唤醒一个处于等待状态的线程，注意的是在调用此方法的时候，并不能确切的唤醒某一个等待状态的线程，而是由JVM确定唤醒哪个线程，而且不是按优先级。notifyAll():唤醒所有处入等待状态的线程，注意并不是给所有唤醒线程一个对象的锁，而是让它们竞争。
+8. 同步分为类级别和对象级别，分别对应着类锁和对象锁。类锁是每个类只有一个，如果static的方法被synchronized关键字修饰，则在这个方法被执行前必须获得类锁；对象锁类同。
+
+
 ####fragment篇
 1. 静态加载：在布局文件中定义一个fragement，指定id/tag以及fragment实现类
 2. 动态添加：需要用到Fragment事务(对Fragment进行添加、移除、替换以及执行其他的一些动作，提交给activity的每一套变化成为一个事务)，在Fragment事务中add一个fragment到一个layout中。
