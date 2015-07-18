@@ -385,6 +385,8 @@ command+alt+上/下  复制当前行到上面/下面
 alt+上/下   移动当前行到上面/下面  
 command+alt+左/右 前一个/后一个编辑的页面  
 command+Fn+F11 切换模拟器的横竖屏(genymotion也支持)  
+ctrl+shit+c 注释/反注释  
+选中一个变量后，ctrl+k定位到下一个  
 
 
 ####handler 负责发送消息，Looper负责接收handler发送的消息，并直接把消息回传给handler自己。
