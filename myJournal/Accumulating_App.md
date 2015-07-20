@@ -2,15 +2,17 @@
 
 
 
+
 ####多线程专题
 1. Runnable方式相较于继承Thread方式创建线程有两个优点：1) Runnable方式可以避免Thread方式由于Java单继承特性带来的缺陷 2) Runnable的代码可以被多个线程共享，适合于多个线程处理同一资源的情况。
 2. 有关线程同步：
 	* synchronized 修饰代码块
 	* synchronized 修饰(普通/静态)方法
 	* volatile 修饰变量，volatile修饰域相当于告诉虚拟机该域可能会被其他线程更新，因此每次使用该域就要重新计算，而不是使用寄存器中的值，volatile不会提供任何原子操作，它也不能用来修饰final类型的变量
-	* 使用ReenreantLock/ReentrantReadWriteLock，new出对象后即可使用lock及unlock方法来获取/释放锁，需要留意及时释放锁，避免出现死锁情况。通常在finally代码释放锁。
+	* 使用ReenreantLock/ReentrantReadWriteLock，new出对象后即可使用lock及unlock方法来获取/释放锁，需要留意及时释放锁，避免出现死锁情况，通常在finally代码释放锁。此外还有trylock/lockInterruptiblynewCondition等细分用法。更多详情见[Lock和Condition](http://luan.iteye.com/blog/1849712)
 	* wait/notify 机制
 	* ThreadLocal 每一个使用该变量的线程都获得该变量的副本， 副本之间相互独立，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响。其存放的值是线程内共享的，线程间互斥的，主要用于线程内共享一些数据，避免通过参数来传递。更多有关get/set/remove/initialValue的使用说明详情参加[Java线程(篇外篇)：线程本地变量ThreadLocal](http://blog.csdn.net/ghsau/article/details/15732053)
+
 
 
 
