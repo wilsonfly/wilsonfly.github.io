@@ -65,6 +65,15 @@ Fragment—>Activity：在Fragment中定义接口，包含该Fragment的Activity
 ####内存泄露查找工具LeakCanary
 
 
+
+####AS快捷键之Windows篇
+F2 定位出错处  
+alt+enter 错误说明   
+ctrl+d 复制行  
+ctrl+y 删除行，可以用ctrl+x (在不选中的情况下为剪切行，可以一举两得 )  
+ctrl+alt+L 格式化代码(会提示格式化了多少行，及ctrl+alt+shift+L 更多格式化场景)  
+
+
 ####有关Android studio
 1. 安装篇  
 Windows下需要配置支持HAXM，具体参照 [安装Intel HAXM为Android 模拟器加速](http://www.tuicool.com/articles/meQbmmb)，还算比较顺利，只不过在配置BIOS中开启虚拟加速机制的时候找了半天。我这戴尔台式机，位置是Overclocking--CPU Features--Intel Virtualization Tech,选中为Enabled，F10保存退出即可。  
