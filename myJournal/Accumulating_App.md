@@ -192,7 +192,9 @@ javah -classpath bin/classes:/Users/cindy/Applications/adt-bundle-mac-x86_64-201
 standard 不管有没有已存在的实例，都生成新的实例  
 singleTop 如果发现有对应的Activity实例正位于栈顶，则重复利用，不再生成新的实例  
 singleTask 如果发现有对应的Activity实例，则使此Activity实例之上的其他Activity实例统统出栈，使此Activity实例成为栈顶对象，显示到幕前  
-singleInstance 这种启动模式比较特殊，因为它会启用一个新的栈结构，将Acitvity放置于这个新的栈结构中，并保证不再有其他Activity实例进入  
+singleInstance 这种启动模式比较特殊，因为它会启用一个新的栈结构，将Acitvity放置于这个新的栈结构中，并保证不再有其他Activity实例进入   
+还有相对应的FLAG详情见：  
+[Activity Intent相关FLAG介绍 ](http://blog.sina.com.cn/s/blog_6f3ff2c90101j50x.html)  
 
 
 ####setImageDrawable与setImageResource
