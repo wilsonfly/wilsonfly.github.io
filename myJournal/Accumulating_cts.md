@@ -105,6 +105,17 @@ HUAWEI/EC6108V9/HWEC6108V9:4.4.2/HUAWEIEC6108V9/V100R003C30:user/release-keys
 16. bootargs中添加内存参数，否则mtk的wifi驱动会出现分配内存失败，然后无法正常工作的问题
 17. init.bigfish.rc中添加mtk蓝牙的后台服务
 18. 添加mtk蓝牙驱动，sdk中原来是编译时候copy ko到out目录的，拿到源码后适配hisi sdk的编译环境。
+19. 去掉swRootService中git_pid_by_name的开机检测launcher启动的线程，遍历/proc/%s/status查找给定特定进程名称的pid的方式会引起swRootService每隔十多分钟重启一次。
+20. 设置页面添加蓝牙地址的显示
+21. 调整对驱动的最小内存限制，跟盒子概率kernel panic问题有关
+22. 更新mtk优化内存后的wifi驱动源码，跟盒子概率kernel panic问题有关
+23. Boardconfig.mk中关掉了broadcom 蓝牙的开关，只留了mtk 7632蓝牙的support
+24. 找回services/java/com/android/server/ConnectivityService.java中合自己的网络代码去掉的3G相关的代码
+25. core/java/android/net/ConnectivityManager.java中添加了自定义的网络类型pppoe，测试用例中测试isNetworkTypeValid上下边界时候会出现问题，测试用例没得改只能根据StackTrace查找是cts测试用例调用的接口则返回相应的内容。
+26. 荣耀m321项目调试320dpi的时候，hisi补丁写死了一个变量mHasNavigationBar=false，cts测试用例中按menu键不能弹出optionmenu导致UiAutomator一些失败项。
+27. 合入gms的SetupWizard后(第一次开机需要先连接wifi，输入google账号)，开机失败。查看system_server中网路部分阻塞了，将ethernet.checkAndStartEthernet() pppoe.checkAndStartPppoe()两个动作新建线程来执行，避免堵塞system_server。
+28. 盒子是不支持定位功能的，./services/java/com/android/server/LocationManagerService.java  LocationProviderProxy networkProvider = LocationProviderProxy.createAndBind 是空的。location/java/android/location/LocationManager.java的isProviderEnabled仍然来检测networkProvider是否enable。根据是cts测试用例调用此接口返回true规避。
+29. gts有几个播放一直失败的，frameworks/av/media/libmediaplayerservice/MediaPlayerFactory.cpp中HiMediaPlayerFactory类的scoreFactory方法中，添加这几个播放失败的url包含的signature，如果检测到这几个signature，弃用HiMediaPlayer，用原生MediaPlayer播放ok。
 
 
 

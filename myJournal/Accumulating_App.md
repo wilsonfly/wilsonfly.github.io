@@ -1,5 +1,47 @@
 
 
+####内存泄露
+1. 判断一个内存空间是否符合垃圾收集标准有两个：一个是给对象赋予了空值null，以下再没有调用过，另一个是给对象赋予了新值，这样重新分配了内存空间。
+2. 导致内存泄露的常见几个场景：
+     * 静态集合类引起的内存泄露：静态变量的生命周期跟应用程序一致，只将加载到集合中的Object赋值为null还不够，需要先从集合中删除；此外也可以直接将集合类赋值为null
+     * 当集合里面的对象属性被修改后，再调用remove方法时不起作用
+     * 监听器的使用：带有监听器的对象释放时候需要删除掉相应的监听器
+     * 各种连接，诸如数据库连接dataSourse.getConnection()、socket连接、io等，需要即时关掉。有关Resultset 和Statement 的更多详情，见下面连接。
+     * 大量临时变量的使用
+     * 内部类的使用容易被忽略掉释放
+     * 外部模块的引用，A类中调用了B类的一个方法，参数中带了B的一个对象，这时B中就保持了对该对象的引用，需要留意B是否提供了相应的方法去除该引用。
+     * 单例模式：单例对象在初始化后将在应用程序的整个生命周期中存在，如果单例对象中持有外部对象的引用，这个对象将一直得不到释放。  
+更多详情见：  
+[Java内存泄露原因详解](http://blog.csdn.net/seelye/article/details/8269705)  
+[Java的内存泄漏](http://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/)  
+
+
+
+####多线程专题
+1. Runnable方式相较于继承Thread方式创建线程有两个优点：1) Runnable方式可以避免Thread方式由于Java单继承特性带来的缺陷 2) Runnable的代码可以被多个线程共享，适合于多个线程处理同一资源的情况。
+2. 有关线程同步：
+	* synchronized 修饰代码块
+	* synchronized 修饰(普通/静态)方法
+	* volatile 修饰变量，volatile修饰域相当于告诉虚拟机该域可能会被其他线程更新，因此每次使用该域就要重新计算，而不是使用寄存器中的值，volatile不会提供任何原子操作，它也不能用来修饰final类型的变量
+	* 使用ReenreantLock/ReentrantReadWriteLock，new出对象后即可使用lock及unlock方法来获取/释放锁，需要留意及时释放锁，避免出现死锁情况，通常在finally代码释放锁。此外还有trylock/lockInterruptiblynewCondition等细分用法。更多详情见[Lock和Condition](http://luan.iteye.com/blog/1849712)
+	* wait/notify 机制
+	* ThreadLocal 每一个使用该变量的线程都获得该变量的副本， 副本之间相互独立，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响。其存放的值是线程内共享的，线程间互斥的，主要用于线程内共享一些数据，避免通过参数来传递。更多有关get/set/remove/initialValue的使用说明详情参加[Java线程(篇外篇)：线程本地变量ThreadLocal](http://blog.csdn.net/ghsau/article/details/15732053)
+
+
+
+
+####多线程之wait/notify
+1. 在任一时刻，对象的控制权智能被一个线程拥有
+2. wait(),notify(),notifyAll()不属于Thread类,而是属于Object基础类,也就是说每个对像都有wait(),notify(),notifyAll()的功能
+3. 要执行wait/notify/nofiyAll这三个方法，须当前线程取得了该对象的控制权，否则会报java.lang.IllegalMonitorStateException
+4. 线程要取得对象的控制权方法有三：1) 执行对象的某个同步实例方法 2) 执行对象的对应类的同步静态方法 3) 执行对该对象加同步锁的代码块。
+5. 在调用wait的时候，线程自动释放其占有的对象锁，同时不会去申请对象锁。当线程被唤醒的时候，它才再次获得了去获得对象锁的权利。调用完wait，该线程就已经不是currentthread了。
+6. 当B调用notify/notifyAll的时候，B正持有obj锁，因此，A1,A2,A3虽被唤醒，但是仍无法获得obj锁。直到B退出synchronized块，释放obj锁后，A1,A2,A3中的一个才有机会获得锁继续执行。
+7. notify():唤醒一个处于等待状态的线程，注意的是在调用此方法的时候，并不能确切的唤醒某一个等待状态的线程，而是由JVM确定唤醒哪个线程，而且不是按优先级。notifyAll():唤醒所有处入等待状态的线程，注意并不是给所有唤醒线程一个对象的锁，而是让它们竞争。
+8. 同步分为类级别和对象级别，分别对应着类锁和对象锁。类锁是每个类只有一个，如果static的方法被synchronized关键字修饰，则在这个方法被执行前必须获得类锁；对象锁类同。
+
+
+
 ####fragment篇
 1. 静态加载：在布局文件中定义一个fragement，指定id/tag以及fragment实现类
 2. 动态添加：需要用到Fragment事务(对Fragment进行添加、移除、替换以及执行其他的一些动作，提交给activity的每一套变化成为一个事务)，在Fragment事务中add一个fragment到一个layout中。
@@ -37,6 +79,15 @@ Fragment—>Activity：在Fragment中定义接口，包含该Fragment的Activity
 
 
 ####内存泄露查找工具LeakCanary
+
+
+
+####AS快捷键之Windows篇
+F2 定位出错处  
+alt+enter 错误说明   
+ctrl+d 复制行  
+ctrl+y 删除行，可以用ctrl+x (在不选中的情况下为剪切行，可以一举两得 )  
+ctrl+alt+L 格式化代码(会提示格式化了多少行，及ctrl+alt+shift+L 更多格式化场景)  
 
 
 ####有关Android studio
@@ -82,6 +133,12 @@ sublime工具查看反编译出来的smali
 3. 每个AsyncTask只能被执行一次，多次调用会引发异常
 4. 只有doInBackgroud方法是运行在其他线程做异步操作，其他三个方法都是运行在UI线程，也就都可以操作UI
 5. AsyncTask的cancel只是将对应的AyncTask标记为cancel状态，并不是真正的取消线程的执行。需要在doInBackgroud和onProgressUpdate里边检测线程是否isCancelled状态，然后做相应操作。
+
+
+####多继承
+1. Java中是否支持多继承是个语言描述问题。Java中只支持类的单继承，接口之间的继承同样也是使用extends关键字，但是接口之间是支持多继承的
+2. 如果在两个父接口中分别定义了名称和参数都相同，而返回结果却不同的方法，这时会出现编译问题。方法的重载只能是相同的方法名，不同的输入参数；如果两个方法具有相同的方法名，相同的输入参数，只是不同的返回参数，是不能作为重载方法的，所以对于编译器来说，这里是一个方法的重复定义，明显是不能通过编译的。这样的问题也存在于一个类同时实现多个接口的情况，所以，在这些情况下，我们必须注意一点，就是具有相同方法名，相同输入参数的方法，是不能出现在同一个类或接口中的。
+
 
 ####ndk
 1. 环境搭建
@@ -318,6 +375,8 @@ intent.setdata settype互斥，可以看下代码在设置一个的时候将另�
 AndroidManifests.xml中给一个Activity指定的intent-filter可以有多个，intent-filter中的action、category、data也可以有多个。intent中设置的action只能有一个。
 
 
+####"xxxx" is not translated in "en" (English)及"xxx" is translated here but not found in default locale问题
+确实是在res/values/strings.xml中定义的一些值在values-en中没有定义，不过如果想忽略的话，可以在windows-preferencs--Android--Lint Error Checking--missing translation 有fetal改成warning即可；后一个问题相应的修改Extra Translation由fetal到warning即可。
 
 ####eclipse创建android项目时，预览layout.xml文件时提示： This version of the rendering library is more recent than your version of ADT plug-in. Please update ADT plug-in，导致无法正常预览布局文件。
 问题根源：SDK版本过高，ADT版本过低。可以调节预览页面右上角的android versiont to use when rendering layouts in eclipse，选择较低版本的api。如果不想每次手动调节这个东西，一则按照网上攻略选择help—>install new software升级tools(反正我是没有升级成功，翻墙状态下都根本刷不出来)，二则直接删掉较新的sdk，只留下document即可(删掉后出现了appcompat_v7报错的情况，删之，随便新建个工程即可附带重新生成)。
@@ -371,6 +430,8 @@ command+alt+上/下  复制当前行到上面/下面
 alt+上/下   移动当前行到上面/下面  
 command+alt+左/右 前一个/后一个编辑的页面  
 command+Fn+F11 切换模拟器的横竖屏(genymotion也支持)  
+ctrl+shit+c 注释/反注释  
+选中一个变量后，ctrl+k定位到下一个  
 
 
 ####handler 负责发送消息，Looper负责接收handler发送的消息，并直接把消息回传给handler自己。
