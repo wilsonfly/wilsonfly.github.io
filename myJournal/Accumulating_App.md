@@ -1,5 +1,27 @@
 
 
+
+
+
+
+####OOM
+1. 即out of memory，使用的内存量超过了vm分配给app的最大值
+2. 多数原因是因为使用了太多bitmap或者分配大数组
+3. 有挂bitmap使用上的优化：
+     * 只加载可见区域的bitmap
+     * 在滑动过程中不加载，滑动停止后再加载
+     * 使用软引用机制，在内存不足的时候允许gc回收bitmap占用的内存
+     * 调用recycle()通知gc尽快回收不再使用的内存
+     * 调整图像大小，手机屏幕尺寸有限，有时图像大小可以做适当调整、对图片进行压缩
+     * 采用低内存占用量的编码方式，比如Bitmap.Config.ARGB_4444
+     * 使用LruCache、DiskLruCache进行缓存
+
+更多详情见：  
+[Android Out Of Memory(OOM) 的详细研究  ](http://www.cnblogs.com/wanqieddy/archive/2012/07/18/2597471.html)  
+[Android处理图片OOM的若干方法小结](http://www.2cto.com/kf/201208/148379.html)   
+[Android OOM 问题的总结](http://my.oschina.net/line926/blog/271175) 
+
+
 ####内存泄露
 1. 判断一个内存空间是否符合垃圾收集标准有两个：一个是给对象赋予了空值null，以下再没有调用过，另一个是给对象赋予了新值，这样重新分配了内存空间。
 2. 导致内存泄露的常见几个场景：
