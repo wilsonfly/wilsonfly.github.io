@@ -76,6 +76,24 @@ Acitivity—>Fragment：在Activity中创建Bundle，作为Fragment的setArgumen
 Fragment—>Activity：在Fragment中定义接口，包含该Fragment的Activity中实现该回调接口，这样在Fragment中可以调用该接口传递数据到Activity。
 
 
+####Handler篇  
+1. 设计Handler机制根本目的是解决更新UI时多线程并发的问题。
+2. Handler：1.发送Message或者Runnable对象 2. 处理接收的消息
+3. Looper：内部包含一个MessageQueue，Handler发送的消息会被加入的MessageQueue中；Looper.loop()方法则是一个死循环，负责从MessageQueue中读取消息进行处理，在处理过程中会调用到Handler的dispatchMessage方法，该方法中没有被Callback截获的话就能调用到Handler的handleMessage方法了。
+4. MessageQueue：一个存储消息的队列，在Looper对象中进行创建
+5. 主线程中创建Handler，该Handler的handleMessage是运行在主线程的，也就不能做一些耗时操作。
+6. 在新建的线程中new Handler的话需要首先调用Looper.prepare()方法来创建Looper及MessageQueue，并在创建Handler之后调用Looper.loop()方法启动循环检测。此Handler的handleMessage将是在所属线程中运行。
+7. Handler的post系列接口，Runnable对象的run方法是在UI线程中运行的；通过removeCallbacks(Runnable r)的方法移除一个消息；在new一个Handler对象时候创建Callback参数，可在该Callback对象中的handleMessage(带boolean返回值)中return true达到截获消息的效果。
+8. 可以在主线程创建Handler的时候传入一个线程的Looper对象作为参数，从而实现子线程中处理消息的目的。在获取一个线程的Looper对象传入Handler时候存在并发问题，因此最好使用HandlerThread来创建这个消息吹线程。
+9. HandlerThread是一个封装了Looper的线程，在getLooper中做了同步处理，可以确保返回的不为null。
+
+####更新UI的几种方式
+1. handler post出来的Runnable对象中更新
+2. handler sendMessage后在handler中的handleMessage方法中更新
+3. runOnUiThread(Runnable action)方法中Runnable对象中更新
+4. view的post(Runnable action)方法中Runnable对象中更新
+
+
 ####AndroidAnnotation篇
 1. eclipse安装插件’Eclipse java development tools’(太特么的慢了，翻墙环境下三个小时以上)，才会在右键--properties—Java Compiler中出现‘Annotation Processing’，详情见[android eclipse 没有Annotation Processin选项](http://blog.csdn.net/caiwenfeng_for_23/article/details/38959685)  
 2. 由于会继承当前SomeActivity类生成SomeActivity_子类，然后生成本该我们自己写的代码，所以成员变量和成员方法不能定义成private。
