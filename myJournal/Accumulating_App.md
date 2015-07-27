@@ -206,6 +206,14 @@ javah -classpath bin/classes:/Users/cindy/Applications/adt-bundle-mac-x86_64-201
 通过在Activity中声明native的方法，也是可以通过javah生成头文件的。只不过需要在制定classpath路径中添加android.jar所在目录，否则会报错提示找不到android.app.Activity的类文件。这样还是太繁琐，而且生成的头文件里边会有非常多没有用的东西，所以还是单独创建一个类，在其中声明native的方法，然后生成头文件。
 
 
+####android:protectionLevel
+normal 表示权限是低风险的，只要申请了就可以使用，安装时不需要用户确认  
+dangerous 表示权限是高风险的，系统将可能要求用户确认，才会授予此权限  
+signature 只有当应用程序所用数字签名与声明此权限的应用程序所有数字签名相同时，才能将权限授给它  
+signatureOrSystem 签名相同，或者申请权限的应用为系统应用  
+另外一个是android:permissionGroup属性，表示一个权限组。可以将权限放在一个组中，但对于自定义权限，应该避免设置此属性。如果确实希望设置此属性，可以使用以下属性代替：android.permission-group.SYSTEM_TOOLS。  
+
+
 ####launchMode
 standard 不管有没有已存在的实例，都生成新的实例  
 singleTop 如果发现有对应的Activity实例正位于栈顶，则重复利用，不再生成新的实例  
