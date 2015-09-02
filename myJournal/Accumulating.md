@@ -359,6 +359,12 @@ eval 下执行可以用printf给变量赋值
 其中fcmp可以提供自定义的比较规则。
 
 
+####recovery的UI定制工具
+recovery_l10n可以定制recovery中显示文字内容，代码在development/tools/recovery_l10n。
+具体使用方法见：  
+[ 实现Recovery模式本地化显示文本定制（recovery_l10n工具的使用）](http://blog.csdn.net/huangyabin001/article/details/44983089)  
+
+
 ####有关recovery中shell环境
 user版本的busybox 将sh裁减掉的，所以调试时候一种方式是替换完整的busybox，另一种方式则是启动mksh。mksh代码在external/mksh，需要修改Android.mk链接静态libc。  
 
