@@ -323,6 +323,17 @@ eval 下执行可以用printf给变量赋值
 ####(0123)ART 模式与 Dalvik 模式
 在Dalvik下，应用每次运行的时候，字节码都需要通过即时编译器转换为机器码，这会拖慢应用的运行效率。在ART 环境中，应用在第一次安装的时候，字节码就会预先编译成机器码，使其成为真正的本地应用。这个过程叫做预编译（AOT,Ahead-Of-Time）。这样的话，应用的启动(首次)和执行都会变得更加快速。
 
+
+####分解ramdisk
+
+	mv ramdisk.img  ramdisk.img.gz
+	gunzip ramdisk.img.gz
+	mkdir tmp; cd tmp
+	cpio -i -F ../ramdisk.img
+更多详情见：  
+[解压与压缩ramdisk.img文件，生成uramdisk.img文件](http://blog.csdn.net/hancunai0017/article/details/6873948)
+
+
 ####有关mkbootfs
 	${OUT}/build/tool/linux-x86/bin/mkbootfs \
          ${OUT}/${OUT_DIR}/target/${target_name}/BOOT/RAMDISK | \
@@ -1109,6 +1120,13 @@ mkfs.ubifs -r rootfs -m 2048 -e 129024 -c 812 -o ubifs.img
     -s：最小的硬件输入输出页面大小，如：k9f1208为256(上下半页访问)  
 更多详情见[UBI文件系统](http://www.cnblogs.com/leaven/archive/2011/04/19/2021388.html)  
 
+
+####vi中去除文件中^M
+windows行尾结束符为\r\n ，而linux文件行尾为\n，所以在linux中打开时在行尾会多显示一个^M  
+只要把\r替换为空就可以了，命令行模式下%s/\r//g
+
+
+
 ####静态函数调用关系分析工具
 cflow
 
@@ -1428,6 +1446,12 @@ write_eeprom 290 6 00 07 69 0B 57 24
 write_eeprom 2d5 1 0       boot1  
 write_eeprom 2d5 1 1       boot2  
 write_eeprom 28a 1 1       app  (1 0 app1) (1 1 app2)  
+
+####手动mount tmp/var分区
+	mount -ttmpfs -o size=100M,mode=0755 tmpfs /var
+	mount -ttmpfs -o remount,size=200M,mode=0755 tmpfs /mnt/var
+
+
 
 ####挂载调试
 mount -o nolock 172.16.6.116:/nfs/visionetics/rootfs/usr/   /usr  
