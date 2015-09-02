@@ -220,6 +220,12 @@ offsetof( item ) = min( n, sizeof( item ) )
     sizeof( S5 ); // 结果为1
 
   
+####mutable
+C++中成员变量被mutable修饰，那么它就可以突破const的限制，在被const修饰的函数里面也能被修改。  
+更多详情见：  
+[关键字 mutable (c++)](http://blog.csdn.net/typhoonzb/article/details/4413843)
+
+
 
 ####(1214)python 自动补全
 python可以Tab键补全，可以在启动python后，执行下
@@ -322,6 +328,12 @@ eval 下执行可以用printf给变量赋值
 
 ####(0123)ART 模式与 Dalvik 模式
 在Dalvik下，应用每次运行的时候，字节码都需要通过即时编译器转换为机器码，这会拖慢应用的运行效率。在ART 环境中，应用在第一次安装的时候，字节码就会预先编译成机器码，使其成为真正的本地应用。这个过程叫做预编译（AOT,Ahead-Of-Time）。这样的话，应用的启动(首次)和执行都会变得更加快速。
+
+
+####开机动画bootanimation制作
+主要注意打包的时候不进行压缩  
+更多详情见：  
+[ANDROID开机动画bootanimation.zip的详细制作方法](http://blog.sina.com.cn/s/blog_4960586c0100vu5v.html)
 
 
 ####分解ramdisk
